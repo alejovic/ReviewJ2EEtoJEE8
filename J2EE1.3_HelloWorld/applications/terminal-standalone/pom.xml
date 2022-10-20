@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>root.project.applications</groupId>
+    <artifactId>terminal-standalone</artifactId>
+    <packaging>jar</packaging>
+    <name>terminal-standalone</name>
+    <parent>
+        <groupId>root.project</groupId>
+        <artifactId>applications</artifactId>
+        <version>1.0</version>
+    </parent>
+    <dependencies>
+        <dependency>
+            <groupId>root.project</groupId>
+            <artifactId>ejbs</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>root.project.projects</groupId>
+            <artifactId>client</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>root.project.projects</groupId>
+            <artifactId>bo</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>root.project.projects</groupId>
+            <artifactId>dao</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>root.project.projects</groupId>
+            <artifactId>dto</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>root.project.projects</groupId>
+            <artifactId>util</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>root.project.projects</groupId>
+            <artifactId>logging</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/javax.ejb/ejb-api -->
+        <!--        <dependency>-->
+        <!--            <groupId>javax.ejb</groupId>-->
+        <!--            <artifactId>ejb-api</artifactId>-->
+        <!--            <version>2.0</version>-->
+        <!--            <scope>provided</scope>-->
+        <!--        </dependency>-->
+
+        <!-- https://mvnrepository.com/artifact/javax.ejb/ejb -->
+        <!--        <dependency>-->
+        <!--            <groupId>javax.ejb</groupId>-->
+        <!--            <artifactId>ejb</artifactId>-->
+        <!--            <version>2.1</version>-->
+        <!--            <scope>provided</scope>-->
+        <!--        </dependency>-->
+
+        <!-- https://mvnrepository.com/artifact/javax.ejb/ejb-api -->
+        <dependency>
+            <groupId>javax.ejb</groupId>
+            <artifactId>ejb-api</artifactId>
+            <version>3.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.oracle.oc4j/oc4j-extended -->
+        <dependency>
+            <groupId>com.oracle.oc4j</groupId>
+            <artifactId>oc4j-oc4jclient</artifactId>
+        </dependency>
+
+    </dependencies>
+</project>

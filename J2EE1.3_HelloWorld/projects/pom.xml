@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>root.project</groupId>
+    <version>1.0</version>
+    <artifactId>projects</artifactId>
+    <packaging>pom</packaging>
+    <name>sub projects</name>
+    <parent>
+        <groupId>root</groupId>
+        <artifactId>project</artifactId>
+        <version>1.0</version>
+    </parent>
+    <modules>
+        <module>logging</module>
+        <module>bo</module>
+        <module>dao</module>
+        <module>dto</module>
+        <module>client</module>
+        <module>util</module>
+    </modules>
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/commons-logging/commons-logging -->
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/junit/junit -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/jmock/jmock -->
+        <dependency>
+            <groupId>jmock</groupId>
+            <artifactId>jmock</artifactId>
+        </dependency>
+    </dependencies>
+</project>

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>root</groupId>
+    <version>1.0</version>
+    <properties>
+        <maven.compiler.source>1.4</maven.compiler.source>
+        <maven.compiler.target>1.4</maven.compiler.target>
+        <skipTests>false</skipTests>
+    </properties>
+    <artifactId>project</artifactId>
+    <packaging>pom</packaging>
+    <name>project</name>
+    <modules>
+        <module>projects</module>
+        <module>applications</module>
+        <module>ejbs</module>
+        <module>ear</module>
+    </modules>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>root.project.projects</groupId>
+                <artifactId>client</artifactId>
+                <version>1.0</version>
+            </dependency>
+            <dependency>
+                <groupId>root.project.projects</groupId>
+                <artifactId>bo</artifactId>
+                <version>1.0</version>
+            </dependency>
+            <dependency>
+                <groupId>root.project.projects</groupId>
+                <artifactId>dao</artifactId>
+                <version>1.0</version>
+            </dependency>
+            <dependency>
+                <groupId>root.project.projects</groupId>
+                <artifactId>dto</artifactId>
+                <version>1.0</version>
+            </dependency>
+            <dependency>
+                <groupId>root.project.projects</groupId>
+                <artifactId>util</artifactId>
+                <version>1.0</version>
+            </dependency>
+            <dependency>
+                <groupId>root.project.projects</groupId>
+                <artifactId>logging</artifactId>
+                <version>1.0</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/commons-logging/commons-logging -->
+            <dependency>
+                <groupId>commons-logging</groupId>
+                <artifactId>commons-logging</artifactId>
+                <version>1.1.1</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/com.oracle.oc4j/oc4j-extended -->
+            <!--        <dependency>-->
+            <!--            <groupId>com.oracle.oc4j</groupId>-->
+            <!--            <artifactId>oc4j-extended</artifactId>-->
+            <!--            <version>10.1.3.4</version>-->
+            <!--        </dependency>-->
+            <dependency>
+                <groupId>com.oracle.oc4j</groupId>
+                <artifactId>oc4j-oc4jclient</artifactId>
+                <version>10.1.3.5</version>
+                <scope>system</scope>
+                <systemPath>
+                    /mnt/data/workspace/DEV/ReviewJ2EEtoJEE8/J2EE1.3_HelloWorld/ear/lib/oc4jclient.jar
+                </systemPath>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/com.oracle.oc4j/com.springsource.oracle.classloader -->
+            <!--        <dependency>-->
+            <!--            <groupId>com.oracle.oc4j</groupId>-->
+            <!--            <artifactId>com.springsource.oracle.classloader</artifactId>-->
+            <!--            <version>10.1.3.1</version>-->
+            <!--        </dependency>-->
+
+            <!-- https://mvnrepository.com/artifact/junit/junit -->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>3.8.2</version>
+                <scope>test</scope>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/jmock/jmock -->
+            <dependency>
+                <groupId>jmock</groupId>
+                <artifactId>jmock</artifactId>
+                <version>1.2.0</version>
+                <scope>test</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>2.0.2</version>
+                    <executions>
+                        <execution>
+                            <!-- <id>java-1.4-compile</id>-->
+                            <id>default-compile</id>
+                            <phase>compile</phase>
+                            <goals>
+                                <goal>compile</goal>
+                            </goals>
+                            <configuration>
+                                <source>1.4</source>
+                                <target>1.4</target>
+                            </configuration>
+                        </execution>
+                        <!-- https://uberconf.com/blog/john_smart/2010/08/testing_jdk_1_4_production_code_using_java_5_tests_in_maven -->
+                        <execution>
+                            <id>java-1.5-compile</id>
+                            <phase>process-test-sources</phase>
+                            <goals>
+                                <goal>testCompile</goal>
+                            </goals>
+                            <configuration>
+                                <source>1.5</source>
+                                <target>1.5</target>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>animal-sniffer-maven-plugin</artifactId>
+                    <version>1.6</version>
+                    <configuration>
+                        <signature>
+                            <groupId>org.codehaus.mojo.signature</groupId>
+                            <artifactId>java14</artifactId>
+                            <version>1.0</version>
+                        </signature>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <phase>test</phase>
+                            <goals>
+                                <goal>check</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>3.0.0-M7</version>
+                    <configuration>
+                        <skipTests>${skipTests}</skipTests>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+</project>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>root.project.applications</groupId>
+    <artifactId>web-jsp</artifactId>
+    <packaging>war</packaging>
+    <name>web-jsp</name>
+    <parent>
+        <groupId>root.project</groupId>
+        <artifactId>applications</artifactId>
+        <version>1.0</version>
+    </parent>
+    <dependencies>
+        <dependency>
+            <groupId>root.project.projects</groupId>
+            <artifactId>dto</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+</project>

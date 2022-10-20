@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>root.project</groupId>
+    <artifactId>ejbs</artifactId>
+    <packaging>ejb</packaging>
+    <version>1.0</version>
+    <name>enterprise java beans</name>
+    <parent>
+        <groupId>root</groupId>
+        <artifactId>project</artifactId>
+        <version>1.0</version>
+    </parent>
+    <dependencies>
+        <dependency>
+            <groupId>root.project.projects</groupId>
+            <artifactId>bo</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>root.project.projects</groupId>
+            <artifactId>dao</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>root.project.projects</groupId>
+            <artifactId>dto</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>root.project.projects</groupId>
+            <artifactId>util</artifactId>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/commons-logging/commons-logging -->
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/javax.ejb/ejb-api -->
+        <!--        <dependency>-->
+        <!--            <groupId>javax.ejb</groupId>-->
+        <!--            <artifactId>ejb-api</artifactId>-->
+        <!--            <version>2.0</version>-->
+        <!--            <scope>provided</scope>-->
+        <!--        </dependency>-->
+
+        <!-- https://mvnrepository.com/artifact/javax.ejb/ejb -->
+        <!--        <dependency>-->
+        <!--            <groupId>javax.ejb</groupId>-->
+        <!--            <artifactId>ejb</artifactId>-->
+        <!--            <version>2.1</version>-->
+        <!--            <scope>provided</scope>-->
+        <!--        </dependency>-->
+
+        <!-- https://mvnrepository.com/artifact/javax.ejb/ejb-api -->
+        <dependency>
+            <groupId>javax.ejb</groupId>
+            <artifactId>ejb-api</artifactId>
+            <version>3.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.oracle.oc4j/oc4j-extended -->
+        <dependency>
+            <groupId>com.oracle.oc4j</groupId>
+            <artifactId>oc4j-oc4jclient</artifactId>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/junit/junit -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/jmock/jmock -->
+        <dependency>
+            <groupId>jmock</groupId>
+            <artifactId>jmock</artifactId>
+        </dependency>
+
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-ejb-plugin</artifactId>
+                <version>2.3</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+        "http://java.sun.com/dtd/web-app_2_3.dtd">
+<web-app id="WebApp_ID-JSF">
+    <display-name>web-jsf</display-name>
+
+    <context-param>
+        <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
+        <param-value>resources.application</param-value>
+    </context-param>
+    <context-param>
+        <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+        <param-value>client</param-value>
+        <description>
+            State saving method: 'client' or 'server' (=default). See JSF Specification 2.5.2
+        </description>
+    </context-param>
+    <context-param>
+        <param-name>javax.faces.DEFAULT_SUFFIX</param-name>
+        <param-value>.jsp</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>com.avg.parameters.parameter</param-name>
+        <param-value>avg_parameter_value</param-value>
+        <description>Custom parameter</description>
+    </context-param>
+
+    <listener>
+        <listener-class>com.sun.faces.config.ConfigureListener</listener-class>
+    </listener>
+
+    <listener>
+        <listener-class>com.avg.j2ee13.web.helloworld.listeners.AppContextListener</listener-class>
+    </listener>
+
+    <servlet>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <!-- OC4j: Troubleshooting -->
+    <servlet>
+        <servlet-name>jsp</servlet-name>
+        <servlet-class>oracle.jsp.runtimev2.JspServlet</servlet-class>
+        <init-param>
+            <param-name>debug_mode</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <init-param>
+            <param-name>developer_mode</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <init-param>
+            <param-name>encode_to_java</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <init-param>
+            <param-name>emit_debuginfo</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </servlet>
+
+    <servlet>
+        <servlet-name>hello</servlet-name>
+        <servlet-class>com.avg.j2ee13.web.helloworld.servlets.HelloServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+<!--        <url-pattern>/faces/*</url-pattern>-->
+        <url-pattern>*.jsp</url-pattern>
+    </servlet-mapping>
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>jsp</servlet-name>-->
+<!--        <url-pattern>*.jsf</url-pattern>-->
+<!--    </servlet-mapping>-->
+    <servlet-mapping>
+        <servlet-name>hello</servlet-name>
+        <url-pattern>/hello</url-pattern>
+    </servlet-mapping>
+
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+</web-app>
