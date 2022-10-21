@@ -26,8 +26,7 @@ public class ServiceLocator {
     private static final String ROOT_APPLICATION_PROPERTY = "app";
 
     public static final String FILE_APP_CONFIGURATION = ROOT_APPLICATION_PROPERTY + ".configuration.properties";
-    public static final String P_APP_DATASOURCE = ROOT_APPLICATION_PROPERTY + ".bd.datasource";
-
+    private static final String P_APP_DATASOURCE = ROOT_APPLICATION_PROPERTY + ".bd.datasource";
     private static final String P_APP_EJB_CONFIGURATION = ROOT_APPLICATION_PROPERTY + ".jndi.file";
 
     private static final String P_INITIAL_CONTEXT_FACTORY = ROOT_APPLICATION_PROPERTY + "." + Context.INITIAL_CONTEXT_FACTORY;
@@ -168,6 +167,12 @@ public class ServiceLocator {
         return home;
     }
 
+    /**
+     * @since 1.4+
+     * @See https://mvnrepository.com/artifact/javax.sql/jdbc-stdext
+     * @return
+     * @throws LocalizationException
+     */
     public DataSource getDataSource() throws LocalizationException {
         try {
             DataSource ds = (DataSource) services.get(P_APP_DATASOURCE);

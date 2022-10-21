@@ -44,7 +44,7 @@ public class HelloWorldDelegateTest extends MockObjectTestCase {
             test.setUp();
             test._test_HelloWorldDelegate_sayHello();
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 

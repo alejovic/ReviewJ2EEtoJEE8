@@ -17,7 +17,7 @@ public class HelloWorldAction extends Action {
 
     public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
         logger.info("HelloWorldAction.execute start");
-        MessageResources messages = getResources(request);
+        //MessageResources messages = getResources(request);
 
         HelloWorldForm helloWorldForm = (HelloWorldForm) form;
         logger.info("HelloWorldAction.HelloWorldForm -> " + helloWorldForm.getMessage());
@@ -28,15 +28,20 @@ public class HelloWorldAction extends Action {
         String badPerson = "Atilla the Hun";
 
         if (message.equals(badPerson)) {
-            ActionErrors errors = new ActionErrors();
-            errors.add("message", new ActionMessage("app.message.failure", message));
-            saveErrors(request, errors);
+            ActionErrors actionErrors = new ActionErrors();
+            actionErrors.add("message", new ActionMessage("app.message.failure", message));
+            saveErrors(request, actionErrors);
             logger.warn("HelloWorldAction.ActionError -> " + mapping.getInput());
             return (new ActionForward(mapping.getInput()));
         }
         // invoke delegate
 
-         request.setAttribute( "bean.HelloWorld", helloWorldForm);
+
+        ActionMessages actionMessages = new ActionMessages();
+        actionMessages.add("message", new ActionMessage("app.message.success", message));
+        saveMessages(request, actionMessages);
+        //
+        request.setAttribute("bean.HelloWorld", helloWorldForm);
 
         // Remove the Form Bean - don't need to carry values forward
         request.removeAttribute(mapping.getAttribute());

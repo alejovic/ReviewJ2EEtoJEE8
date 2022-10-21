@@ -1,12 +1,15 @@
 package com.avg.j2ee13.util;
 
-public abstract class BaseException extends Exception {
+import java.io.Serializable;
+
+public abstract class BaseException extends Exception implements Serializable {
 
     private Exception exception;
 
     /**
      * Creates a new LocalizationException wrapping another exception, and with a detail message.
-     * @param message the detail message.
+     *
+     * @param message   the detail message.
      * @param exception the wrapped exception.
      */
     public BaseException(String message, Exception exception) {
@@ -17,6 +20,7 @@ public abstract class BaseException extends Exception {
 
     /**
      * Creates a LocalizationException with the specified detail message.
+     *
      * @param message the detail message.
      */
     public BaseException(String message) {
@@ -26,6 +30,7 @@ public abstract class BaseException extends Exception {
 
     /**
      * Creates a new LocalizationException wrapping another exception, and with no detail message.
+     *
      * @param exception the wrapped exception.
      */
     public BaseException(Exception exception) {

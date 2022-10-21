@@ -17,11 +17,20 @@
             <transaction-type>Container</transaction-type>
             <env-entry>
                 <description>This example uses JNDI</description>
-                <env-entry-name>mailhost</env-entry-name>
+                <env-entry-name>env.entry.mailhost</env-entry-name>
                 <env-entry-type>java.lang.String</env-entry-type>
                 <env-entry-value>smtp.example.com</env-entry-value>
             </env-entry>
+            <!-- Link to Session Service Beans -->
+            <ejb-local-ref>
+                <ejb-ref-name>HelloWorldServiceLocalBean</ejb-ref-name>
+                <ejb-ref-type>Session</ejb-ref-type>
+                <local-home>com.avg.j2ee13.ejb.service.HelloWorldLocalHome</local-home>
+                <local>com.avg.j2ee13.ejb.service.HelloWorldLocal</local>
+                <ejb-link>HelloWorldServiceLocalBean</ejb-link>
+            </ejb-local-ref>
         </session>
+
         <!-- Session Service Beans -->
         <session id="sessionService_HelloWorld">
             <description><![CDATA[An Session Local Service EJB named HelloWorldLocalBean]]></description>
@@ -29,7 +38,7 @@
             <ejb-name>HelloWorldLocalBean</ejb-name>
             <local-home>com.avg.j2ee13.ejb.service.HelloWorldLocalHome</local-home>
             <local>com.avg.j2ee13.ejb.service.HelloWorldLocal</local>
-            <ejb-class>com.avg.j2ee13.ejb.service.HelloWorldSessionLocalBean</ejb-class>
+            <ejb-class>com.avg.j2ee13.ejb.service.HelloWorldServiceLocalBean</ejb-class>
             <session-type>Stateless</session-type>
             <transaction-type>Container</transaction-type>
         </session>

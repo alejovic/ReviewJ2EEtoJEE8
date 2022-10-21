@@ -93,11 +93,11 @@ public class HelloWorldFacadeBeanTest extends MockObjectTestCase  {
             String str =  remoteObject.sayHello("HelloWorldFacadeBeanTest Remote");
             System.out.println(str);
         } catch (NamingException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         } catch (RemoteException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         } catch (CreateException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -107,9 +107,9 @@ public class HelloWorldFacadeBeanTest extends MockObjectTestCase  {
             String str = localObject.storeHello("HelloWorldFacadeBeanTest Local");
             System.out.println(str);
         } catch (NamingException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         } catch (CreateException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 

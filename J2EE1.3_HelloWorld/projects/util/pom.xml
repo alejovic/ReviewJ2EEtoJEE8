@@ -40,5 +40,15 @@
             <groupId>com.oracle.oc4j</groupId>
             <artifactId>oc4j-oc4jclient</artifactId>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/javax.sql/jdbc-stdext -->
+        <dependency>
+            <groupId>javax.sql</groupId>
+            <artifactId>jdbc-stdext</artifactId>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.oracle/classes12 -->
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>classes12</artifactId>
+        </dependency>
     </dependencies>
 </project>

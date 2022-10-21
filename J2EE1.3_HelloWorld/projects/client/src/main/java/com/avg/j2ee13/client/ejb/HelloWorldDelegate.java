@@ -46,7 +46,7 @@ public class HelloWorldDelegate extends GenericDelegate implements IHelloWorldBu
             HelloWorldFacade remoteObject = (HelloWorldFacade) objectRef;
             return remoteObject.sayHello(name);
         } catch (RemoteException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 
@@ -55,7 +55,7 @@ public class HelloWorldDelegate extends GenericDelegate implements IHelloWorldBu
             HelloWorldFacade remoteObject = (HelloWorldFacade) objectRef;
             return remoteObject.sayHello();
         } catch (RemoteException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e.getMessage());
         }
     }
 }

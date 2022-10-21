@@ -5,7 +5,16 @@ import javax.ejb.EJBLocalHome;
 import javax.ejb.EJBLocalObject;
 import javax.ejb.RemoveException;
 
-public class HelloWorldSessionLocalBean extends HelloWorldLocalBean {
+/**
+ * @see ejb-jar.xml
+ * Bean Name="HelloWorldLocalBean"
+ * description="An Session Local Service EJB named HelloWorldLocalBean]"
+ * display-name="HelloWorldLocalBean"
+ * jndi-name="ejbs-1.0_HelloWorldLocalBeanLocal"
+ * type="Stateless"
+ * transaction-type="Container"
+ */
+public class HelloWorldServiceLocalBean extends GenericServiceLocalBean implements HelloWorldLocal {
 
     public String storeHello(String myName) {
         log.info("HelloWorldSessionLocalBean.storeHello started");

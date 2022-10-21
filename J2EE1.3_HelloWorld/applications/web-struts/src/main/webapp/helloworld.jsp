@@ -9,6 +9,9 @@
     </head>
     <body>
     <h2><bean:message key="app.jsp.page"/></h2>
+
+    <html:errors/>
+
     <logic:present name="bean.HelloWorld" scope="request">
         <h2>
             Hello <bean:write name="bean.HelloWorld" property="message"/>!
@@ -22,7 +25,7 @@
         <html:reset/>
     </html:form>
 
-    <html:errors/>
+
     </body>
 </html:html>
 

@@ -66,3 +66,28 @@ Illustrate basic usage of J2EE technology with current best practices, such as:
 
 The "Hello World" example application can be deployed in OC4J [oc4j_extended_101350] and JBoss [3.2.8]
 
+--
+ay que considerar el tamaño de la aplicación para realizar una división por subsistema o directamente dividir por capa la estructura de paquetes de la aplicación. Por lo tanto, Subsistema puede ser opcional.
+
+Donde CAPA:
+
+presentacion
+negocio
+persistencia
+Donde TIPO:
+
+El tipo es variable en función de la capa, así que los paquetes definidos por cada capa son los siguientes:
+
+persistencia.dao: Agrupan las interfaces de los DAO's de la capa de persistencia
+persistencia.dao.impl: Implementación de las interfaces de acceso a datos
+persistencia.entidades: Agrupa a las clases de entidad que dan origen a las tables en la base de datos
+persistencia.interfaces: Agrupa a las interfaces globales (factoría, genérico,...)
+persistencia.util: Agrupa a las clases de apoyo (criteria, etc...)
+negocio.servicios: Agrupa a las interfaces que separan la lógica de negocio
+negocio.servicios.Impl: Agrupa a las clases que implementan las interfaces de lógica de negocio
+negocio.vo: Agrupa a la clases encargadas de transporte de datos entre capas
+negocio.dto: Agrupa a la clases de transporte de datos entre diversas máquinas
+negocio.util: Agrupa a las clases de apoyo (excepciones, autenticación....)
+presentacion.util: Utilidades de apoyo a la capa de presentación (validadores personaliazados, etc...)
+presentacion.controlador: Agrupa a las interfaces de los action que produce JSF
+presentacion.controlador.Impl: Agrupa a las clases de que implementan los action provenientes de JSF
