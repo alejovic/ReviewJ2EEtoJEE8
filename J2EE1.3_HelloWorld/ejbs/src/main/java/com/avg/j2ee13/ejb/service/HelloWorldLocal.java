@@ -1,4 +1,4 @@
-package com.avg.j2ee13.ejb.helloworld;
+package com.avg.j2ee13.ejb.service;
 
 /**
  * Implementing the Local Component Interface
@@ -13,10 +13,7 @@ package com.avg.j2ee13.ejb.helloworld;
 /**
  * Local Component Interface for HelloWorld which define internal Business Methods
  */
-public interface HelloWorldLocalObject extends javax.ejb.EJBLocalObject {
-
-    public String sayHello(String myName);
-
-    public String sayHello();
+public interface HelloWorldLocal extends javax.ejb.EJBLocalObject {
+    public String storeHello(String myName);
 
 }

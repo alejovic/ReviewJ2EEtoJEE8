@@ -10,7 +10,7 @@ public class PropertiesConfiguration {
     private ResourceBundle bundle;
     private Set keys;
 
-    protected PropertiesConfiguration(String fileName) throws Exception {
+    protected PropertiesConfiguration(String fileName) throws LocalizationException {
         try {
             bundle = ResourceBundle.getBundle(fileName);
         } catch (MissingResourceException e) {
@@ -20,7 +20,7 @@ public class PropertiesConfiguration {
                 if (!file.exists()) {
                     file = new File(fileName + ".properties");
                     if (!file.exists()) {
-                        throw new Exception("Properties files not found. -> " + fileName);
+                        throw new LocalizationException("Properties files not found. -> " + fileName);
                     }
                 }
                 is = new FileInputStream(file);
@@ -32,10 +32,10 @@ public class PropertiesConfiguration {
                     try {
                         is.close();
                     } catch (Exception er) {
-                        throw er;
+                        throw new LocalizationException(e);
                     }
                 }
-                throw e0;
+                throw new LocalizationException(e);
             }
         }
     }

@@ -25,12 +25,7 @@ public class ServiceLocatorTest extends MockObjectTestCase {
         ClassLoader classLoader = clazz.getClassLoader();
 
         URL configurationUrl = classLoader.getResource("test.configuration.properties");
-        System.setProperty(ServiceLocator.P_APP_CONFIGURATION, configurationUrl.getFile());
-        PropertiesConfiguration.getInstance(System.getProperty(ServiceLocator.P_APP_CONFIGURATION));
-
-        URL jndiUrl = classLoader.getResource("test.jndi.properties");
-        System.setProperty(ServiceLocator.P_EJB_CONFIGURATION, jndiUrl.getFile());
-        PropertiesConfiguration.getInstance(System.getProperty(ServiceLocator.P_EJB_CONFIGURATION));
+        System.setProperty(ServiceLocator.FILE_APP_CONFIGURATION, configurationUrl.getFile());
 
     }
 
@@ -49,7 +44,7 @@ public class ServiceLocatorTest extends MockObjectTestCase {
                     .withAnyArguments().will(returnValue(expected));
 
             locator = ServiceLocator.getInstance();
-            System.out.println(locator.getConfiguration());
+            System.out.println(locator.getAppConfiguration());
             fail();
         } catch (Exception ex) {
             assertEquals(null, ex.getMessage());

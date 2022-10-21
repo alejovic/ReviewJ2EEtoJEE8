@@ -1,4 +1,4 @@
-package com.avg.j2ee13.ejb.helloworld;
+package com.avg.j2ee13.ejb.facade;
 
 import java.rmi.RemoteException;
 
@@ -24,7 +24,7 @@ import java.rmi.RemoteException;
 /**
  * Remote Component Interface for HelloWorld which defines Business Methods
  */
-public interface HelloWorldRemoteObject extends javax.ejb.EJBObject {
+public interface HelloWorldFacade extends javax.ejb.EJBObject {
 
     public String sayHello(String myName) throws RemoteException;
 

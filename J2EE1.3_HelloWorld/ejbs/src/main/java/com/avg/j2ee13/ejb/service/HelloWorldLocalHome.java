@@ -1,4 +1,4 @@
-package com.avg.j2ee13.ejb.helloworld;
+package com.avg.j2ee13.ejb.service;
 
 import javax.ejb.CreateException;
 
@@ -24,6 +24,6 @@ import javax.ejb.CreateException;
  */
 public interface HelloWorldLocalHome extends javax.ejb.EJBLocalHome {
 
-    public HelloWorldLocalObject create() throws CreateException;
+    public HelloWorldLocal create() throws CreateException;
 
 }

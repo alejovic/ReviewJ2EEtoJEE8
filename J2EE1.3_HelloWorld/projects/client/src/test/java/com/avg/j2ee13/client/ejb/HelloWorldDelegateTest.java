@@ -1,5 +1,6 @@
 package com.avg.j2ee13.client.ejb;
 
+import com.avg.j2ee13.util.localization.PropertiesConfiguration;
 import com.avg.j2ee13.util.localization.ServiceLocator;
 import org.jmock.MockObjectTestCase;
 
@@ -21,8 +22,10 @@ public class HelloWorldDelegateTest extends MockObjectTestCase {
         Class clazz = Class.forName("com.avg.j2ee13.client.ejb.HelloWorldDelegateTest");
         // returns the ClassLoader object associated with this Class.
         ClassLoader classLoader = clazz.getClassLoader();
-        URL url = classLoader.getResource("app.jndi.properties");
-        System.setProperty(ServiceLocator.P_EJB_CONFIGURATION, url.getFile());
+
+        URL configurationUrl = classLoader.getResource("test.configuration.properties");
+        System.setProperty(ServiceLocator.FILE_APP_CONFIGURATION, configurationUrl.getFile());
+        PropertiesConfiguration.getInstance(System.getProperty(ServiceLocator.FILE_APP_CONFIGURATION));
     }
 
     public void test_HelloWorldDelegate_sayHello() {

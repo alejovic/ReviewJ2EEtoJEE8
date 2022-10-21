@@ -1,4 +1,4 @@
-package com.avg.j2ee13.ejb.helloworld;
+package com.avg.j2ee13.ejb.facade;
 
 import javax.ejb.CreateException;
 import java.rmi.RemoteException;
@@ -20,8 +20,8 @@ import java.rmi.RemoteException;
 /**
  * Remote Home Interface for a HelloWorld Stateless Session Bean.
  */
-public interface HelloWorldRemoteHome extends javax.ejb.EJBHome {
+public interface HelloWorldFacadeHome extends javax.ejb.EJBHome {
 
-    public HelloWorldRemoteObject create() throws RemoteException, CreateException;
+    public HelloWorldFacade create() throws RemoteException, CreateException;
 
 }

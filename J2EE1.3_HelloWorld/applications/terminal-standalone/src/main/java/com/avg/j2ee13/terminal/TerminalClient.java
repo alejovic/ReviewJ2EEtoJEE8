@@ -13,8 +13,8 @@ public class TerminalClient {
             Class clazz = Class.forName("com.avg.j2ee13.terminal.TerminalClient");
             // returns the ClassLoader object associated with this Class.
             ClassLoader classLoader = clazz.getClassLoader();
-            URL url = classLoader.getResource("app.jndi.properties");
-            System.setProperty(ServiceLocator.P_EJB_CONFIGURATION, url.getFile());
+            URL configurationUrl = classLoader.getResource("app.configuration.properties");
+            System.setProperty(ServiceLocator.FILE_APP_CONFIGURATION, configurationUrl.getFile());
 
             HelloWorldDelegate delegate = new HelloWorldDelegate();
             System.out.println(delegate.sayHello("terminal-standalone"));

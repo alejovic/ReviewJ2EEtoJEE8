@@ -23,12 +23,13 @@ public class PropertiesConfigurationTest extends MockObjectTestCase {
         ClassLoader classLoader = clazz.getClassLoader();
 
         URL configurationUrl = classLoader.getResource("test.configuration.properties");
-        System.setProperty(ServiceLocator.P_APP_CONFIGURATION, configurationUrl.getFile());
-        appConfiguration = PropertiesConfiguration.getInstance(System.getProperty(ServiceLocator.P_APP_CONFIGURATION));
+        System.setProperty(ServiceLocator.FILE_APP_CONFIGURATION, configurationUrl.getFile());
+        appConfiguration = PropertiesConfiguration.getInstance(System.getProperty(ServiceLocator.FILE_APP_CONFIGURATION));
 
-        URL jndiUrl = classLoader.getResource("test.jndi.properties");
-        System.setProperty(ServiceLocator.P_EJB_CONFIGURATION, jndiUrl.getFile());
-        jndiConfiguration = PropertiesConfiguration.getInstance(System.getProperty(ServiceLocator.P_EJB_CONFIGURATION));
+        String jndiUrl = appConfiguration.getProperty("app.jndi.file");
+        System.setProperty(ServiceLocator.FILE_APP_CONFIGURATION, jndiUrl);
+        jndiConfiguration = PropertiesConfiguration.getInstance(System.getProperty(ServiceLocator.FILE_APP_CONFIGURATION));
+
     }
 
     public void test_Configuration() {
@@ -40,7 +41,7 @@ public class PropertiesConfigurationTest extends MockObjectTestCase {
         System.out.println("appConfiguration::app.property1 -> " + appConfiguration.getProperty("app.property1"));
         assertEquals(appConfiguration.getProperty("app.property1"), "This is a property from the file");
         System.out.println("jndiConfiguration:: app.java.naming.factory.initial - " + jndiConfiguration.getProperty("app.java.naming.factory.initial"));
-        assertEquals(jndiConfiguration.getProperty("app.java.naming.factory.initial"), "com.evermind.server.ApplicationClientInitialContextFactory");
+        assertNotNull(jndiConfiguration.getProperty("app.java.naming.factory.initial"));
     }
 
     public static void main(String[] args) throws Exception {

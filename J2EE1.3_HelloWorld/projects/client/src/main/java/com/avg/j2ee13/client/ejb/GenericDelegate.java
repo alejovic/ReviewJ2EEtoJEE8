@@ -32,11 +32,11 @@ public abstract class GenericDelegate {
         String jndi;
 
         if (isRemote()) {
-            jndi = locator.getConfiguration().getProperty(getEJBRemoteName());
-            ejbHome = (EJBHome) locator.getEJB(jndi);
+            jndi = locator.getJndiConfiguration().getProperty(getJndiEJBRemoteName());
+            ejbHome = locator.getRemoteHome(jndi, getHomeClass());
         } else {
-            jndi = locator.getConfiguration().getProperty(getEJBLocalName());
-            ejbLocalHome = (EJBLocalHome) locator.getEJB(jndi);
+            jndi = locator.getJndiConfiguration().getProperty(getJndiEJBLocalName());
+            ejbLocalHome = locator.getLocalHome(jndi);
         }
         init();
     }
@@ -45,20 +45,21 @@ public abstract class GenericDelegate {
 
     public boolean isRemote() {
         log.debug("GenericDelegate.isRemote");
-        return "remote".equals(locator.getConfiguration().getProperty(getEJBService()));
+        return "remote".equals(locator.getJndiConfiguration().getProperty(getEJBService()));
     }
 
+    public abstract Class getHomeClass();
     public abstract String getEJBName();
 
     public String getEJBService() {
         return getEJBName() + EJB_SERVICE;
     }
 
-    public String getEJBRemoteName() {
+    public String getJndiEJBRemoteName() {
         return getEJBName() + JNDI_EJB_REMOTE;
     }
 
-    public String getEJBLocalName() {
+    public String getJndiEJBLocalName() {
         return getEJBName() + JNDI_EJB_LOCAL;
     }
 

@@ -1,21 +1,22 @@
 package com.avg.j2ee13.client.ejb;
 
 import com.avg.j2ee13.bo.interfaces.IHelloWorldBusiness;
-import com.avg.j2ee13.ejb.helloworld.HelloWorldRemoteHome;
-import com.avg.j2ee13.ejb.helloworld.HelloWorldRemoteObject;
+import com.avg.j2ee13.ejb.facade.HelloWorldFacade;
+import com.avg.j2ee13.ejb.service.HelloWorldLocalHome;
+import com.avg.j2ee13.ejb.facade.HelloWorldFacadeHome;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import javax.ejb.CreateException;
-import javax.rmi.PortableRemoteObject;
 import java.rmi.RemoteException;
 
 public class HelloWorldDelegate extends GenericDelegate implements IHelloWorldBusiness {
 
     protected static final Log log = LogFactory.getLog(HelloWorldDelegate.class);
     private static final String EJB_NAME = "helloWorldBean";
+    private static final Class HOME_CLASS = HelloWorldFacadeHome.class;
 
-    private HelloWorldRemoteObject service;
+    private Object objectRef;
 
     public HelloWorldDelegate() throws Exception {
         super();
@@ -23,12 +24,16 @@ public class HelloWorldDelegate extends GenericDelegate implements IHelloWorldBu
 
     public void init() throws RemoteException, CreateException {
         if (isRemote()) {
-            HelloWorldRemoteHome remoteHome = (HelloWorldRemoteHome) PortableRemoteObject.narrow(getEjbHome(), HelloWorldRemoteHome.class);
-            service = remoteHome.create();
+            HelloWorldFacadeHome remoteHome = (HelloWorldFacadeHome) getEjbHome();
+            objectRef = remoteHome.create();
         } else {
-            HelloWorldRemoteHome remoteHome = (HelloWorldRemoteHome) getEjbHome();
-            service = remoteHome.create();
+            HelloWorldLocalHome localHome = (HelloWorldLocalHome) getEjbLocalHome();
+            objectRef = localHome.create();
         }
+    }
+
+    public Class getHomeClass() {
+        return HOME_CLASS;
     }
 
     public String getEJBName() {
@@ -38,7 +43,8 @@ public class HelloWorldDelegate extends GenericDelegate implements IHelloWorldBu
     public String sayHello(final String name) {
         log.debug("HelloWorldDelegate.sayHello");
         try {
-            return service.sayHello(name);
+            HelloWorldFacade remoteObject = (HelloWorldFacade) objectRef;
+            return remoteObject.sayHello(name);
         } catch (RemoteException e) {
             throw new RuntimeException(e);
         }
@@ -46,7 +52,8 @@ public class HelloWorldDelegate extends GenericDelegate implements IHelloWorldBu
 
     public String sayHello() {
         try {
-            return service.sayHello();
+            HelloWorldFacade remoteObject = (HelloWorldFacade) objectRef;
+            return remoteObject.sayHello();
         } catch (RemoteException e) {
             throw new RuntimeException(e);
         }

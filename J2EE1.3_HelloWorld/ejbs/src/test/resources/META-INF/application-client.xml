@@ -7,15 +7,15 @@ Inc.//DTD J2EE Application Client 1.2//EN"
     <!--    <ejb-ref>-->
     <!--        <ejb-ref-name>HelloWorldBean</ejb-ref-name>-->
     <!--        <ejb-ref-type>Session</ejb-ref-type>-->
-    <!--        <home>com.avg.j2ee13.ejb.helloworld.HelloWorldRemoteHome</home>-->
-    <!--        <remote>com.avg.j2ee13.ejb.helloworld.HelloWorldRemoteObject</remote>-->
+    <!--        <home>com.avg.j2ee13.ejb.facade.HelloWorldFacadeHome</home>-->
+    <!--        <remote>com.avg.j2ee13.ejb.facade.HelloWorldFacade</remote>-->
     <!--    </ejb-ref>-->
 
     <!-- if the client wants to access the local interface of the Hello example, then the client's XML would define the following: -->
     <!--    <ejb-ref>-->
     <!--        <ejb-ref-name>HelloWorldBean</ejb-ref-name>-->
     <!--        <ejb-ref-type>Session</ejb-ref-type>-->
-    <!--        <local-home>com.avg.j2ee13.ejb.helloworld.HelloWorldRemoteHome</local-home>-->
-    <!--        <local>com.avg.j2ee13.ejb.helloworld.HelloWorldRemoteObject</local>-->
+    <!--        <local-home>com.avg.j2ee13.ejb.facade.HelloWorldFacadeHome</local-home>-->
+    <!--        <local>com.avg.j2ee13.ejb.facade.HelloWorldFacade</local>-->
     <!--    </ejb-ref>-->
 </application-client>
