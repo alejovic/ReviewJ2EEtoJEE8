@@ -13,7 +13,7 @@ public class TerminalClient {
             Class clazz = Class.forName("com.avg.j2ee13.terminal.TerminalClient");
             // returns the ClassLoader object associated with this Class.
             ClassLoader classLoader = clazz.getClassLoader();
-            URL configurationUrl = classLoader.getResource("app.configuration.properties");
+            URL configurationUrl = classLoader.getResource("terminal.configuration.properties");
             System.setProperty(ServiceLocator.FILE_APP_CONFIGURATION, configurationUrl.getFile());
 
             HelloWorldDelegate delegate = new HelloWorldDelegate();

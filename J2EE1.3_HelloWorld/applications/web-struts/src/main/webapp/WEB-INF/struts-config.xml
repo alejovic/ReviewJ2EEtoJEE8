@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+        "http://jakarta.apache.org/struts/dtds/struts-config_1_3.dtd">
+<struts-config>
+    <display-name>web-struts</display-name>
+    <description><![CDATA[Struts application]]></description>
+
+    <form-beans>
+        <form-bean name="HelloWorldForm" type="com.avg.j2ee13.web.forms.HelloWorldForm"/>
+    </form-beans>
+
+
+    <global-exceptions></global-exceptions>
+    <global-forwards>
+        <forward name="fwd-helloworld" path="/StartForward.do"/>
+    </global-forwards>
+
+    <action-mappings>
+        <action path="/StartForward" forward="/start.jsp" />
+
+        <action path="/StartAction" type="com.avg.j2ee13.web.actions.StartAction">
+            <forward name="fwd-success" path="/helloworld.jsp"/>
+            <forward name="fwd-failure" path="/failure.jsp"/>
+        </action>
+
+        <action path="/HelloWorld"
+                type="com.avg.j2ee13.web.actions.HelloWorldAction"
+                name="HelloWorldForm" scope="request"
+                validate="true" input="/helloworld.jsp">
+            <forward name="fwd-success" path="/helloworld.jsp"/>
+            <forward name="fwd-failure" path="/failure.jsp"/>
+        </action>
+    </action-mappings>
+
+    <message-resources parameter="helloworld-struts" />
+
+</struts-config>

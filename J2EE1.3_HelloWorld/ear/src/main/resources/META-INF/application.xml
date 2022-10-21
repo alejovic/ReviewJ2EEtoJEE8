@@ -6,32 +6,29 @@
     <module>
         <ejb>ejbs-1.0.jar</ejb>
     </module>
-<!--    <module>-->
-<!--        <web>-->
-<!--            <web-uri>web-jsp-1.0.war</web-uri>-->
-<!--            <context-root>/web-jsp</context-root>-->
-<!--        </web>-->
-<!--    </module>-->
+    <!--    <module>-->
+    <!--        <web>-->
+    <!--            <web-uri>web-jsp-1.0.war</web-uri>-->
+    <!--            <context-root>/web-jsp</context-root>-->
+    <!--        </web>-->
+    <!--    </module>-->
     <module>
         <web>
             <web-uri>web-jsf-1.0.war</web-uri>
             <context-root>/web-jsf</context-root>
         </web>
     </module>
-<!--    <module>-->
-<!--        <web>-->
-<!--            <web-uri>web-myfaces-1.0.war</web-uri>-->
-<!--            <context-root>/web-myfaces</context-root>-->
-<!--        </web>-->
-<!--    </module>-->
-<!--    <module>-->
-<!--        <web>-->
-<!--            <web-uri>web-struts-1.0.war</web-uri>-->
-<!--            <context-root>/web-struts</context-root>-->
-<!--        </web>-->
-<!--    </module>-->
+    <!--    <module>-->
+    <!--        <web>-->
+    <!--            <web-uri>web-myfaces-1.0.war</web-uri>-->
+    <!--            <context-root>/web-myfaces</context-root>-->
+    <!--        </web>-->
+    <!--    </module>-->
+    <module>
+        <web>
+            <web-uri>web-struts-1.0.war</web-uri>
+            <context-root>/web-struts</context-root>
+        </web>
+    </module>
 
-<!--    <module>-->
-<!--        <java>client-1.0.jar</java>-->
-<!--    </module>-->
 </application>
