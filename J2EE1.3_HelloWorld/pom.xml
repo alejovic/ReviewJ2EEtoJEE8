@@ -7,6 +7,7 @@
     <properties>
         <maven.compiler.source>1.5</maven.compiler.source>
         <maven.compiler.target>1.5</maven.compiler.target>
+        <system-lib>/mnt/data/workspace/DEV/ReviewJ2EEtoJEE8/J2EE1.3_HelloWorld/ear/lib</system-lib>
         <skipTests>false</skipTests>
     </properties>
     <artifactId>project</artifactId>
@@ -63,9 +64,7 @@
                 <artifactId>oc4j-oc4jclient</artifactId>
                 <version>10.1.3.5</version>
                 <scope>system</scope>
-                <systemPath>
-                    /mnt/data/workspace/DEV/ReviewJ2EEtoJEE8/J2EE1.3_HelloWorld/ear/lib/oc4jclient.jar
-                </systemPath>
+                <systemPath>${system-lib}/oc4jclient.jar</systemPath>
             </dependency>
 
             <!-- https://mvnrepository.com/artifact/javax.sql/jdbc-stdext -->
@@ -74,19 +73,38 @@
                 <artifactId>jdbc-stdext</artifactId>
                 <version>2.0</version>
                 <scope>system</scope>
-                <systemPath>
-                    /mnt/data/workspace/DEV/ReviewJ2EEtoJEE8/J2EE1.3_HelloWorld/ear/lib/jdbc2_0-stdext.jar
-                </systemPath>
+                <systemPath>${system-lib}/jdbc2_0-stdext.jar</systemPath>
             </dependency>
             <!-- https://mvnrepository.com/artifact/com.oracle/classes12 -->
+            <!--            <dependency>-->
+            <!--                <groupId>com.oracle</groupId>-->
+            <!--                <artifactId>classes12</artifactId>-->
+            <!--                <version>10.2.0.2.0</version>-->
+            <!--                <scope>system</scope>-->
+            <!--                <systemPath>-->
+            <!--                    ${system-lib}/classes12.jar-->
+            <!--                </systemPath>-->
+            <!--            </dependency>-->
+            <!-- https://mvnrepository.com/artifact/com.oracle/ojdbc14 -->
             <dependency>
                 <groupId>com.oracle</groupId>
-                <artifactId>classes12</artifactId>
-                <version>10.2.0.2.0</version>
+                <artifactId>ojdbc14</artifactId>
+                <version>10.1.0.5.0</version>
                 <scope>system</scope>
-                <systemPath>
-                    /mnt/data/workspace/DEV/ReviewJ2EEtoJEE8/J2EE1.3_HelloWorld/ear/lib/classes12.jar
-                </systemPath>
+                <systemPath>${system-lib}/ojdbc14-10.1.0.5.0.jar</systemPath>
+            </dependency>
+            <dependency>
+                <groupId>com.oracle</groupId>
+                <artifactId>dms</artifactId>
+                <version>3.0</version>
+                <scope>system</scope>
+                <systemPath>${system-lib}/ojdbc14-10.1.0.5.0-dms.jar</systemPath>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/postgresql/postgresql -->
+            <dependency>
+                <groupId>postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>8.0-312.jdbc3</version>
             </dependency>
 
             <!-- https://mvnrepository.com/artifact/junit/junit -->
@@ -112,31 +130,31 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>3.10.1</version>
-<!--                    <executions>-->
-<!--                        <execution>-->
-<!--                            <id>java-1.3-compile</id>-->
-<!--                            <phase>compile</phase>-->
-<!--                            <goals>-->
-<!--                                <goal>compile</goal>-->
-<!--                            </goals>-->
-<!--                            <configuration>-->
-<!--                                <source>1.3</source>-->
-<!--                                <target>1.3</target>-->
-<!--                            </configuration>-->
-<!--                        </execution>-->
-<!--                        &lt;!&ndash; https://uberconf.com/blog/john_smart/2010/08/testing_jdk_1_4_production_code_using_java_5_tests_in_maven &ndash;&gt;-->
-<!--                        <execution>-->
-<!--                            <id>java-1.5-compile</id>-->
-<!--                            <phase>process-test-sources</phase>-->
-<!--                            <goals>-->
-<!--                                <goal>testCompile</goal>-->
-<!--                            </goals>-->
-<!--                            <configuration>-->
-<!--                                <source>1.5</source>-->
-<!--                                <target>1.5</target>-->
-<!--                            </configuration>-->
-<!--                        </execution>-->
-<!--                    </executions>-->
+                    <!--                    <executions>-->
+                    <!--                        <execution>-->
+                    <!--                            <id>java-1.3-compile</id>-->
+                    <!--                            <phase>compile</phase>-->
+                    <!--                            <goals>-->
+                    <!--                                <goal>compile</goal>-->
+                    <!--                            </goals>-->
+                    <!--                            <configuration>-->
+                    <!--                                <source>1.3</source>-->
+                    <!--                                <target>1.3</target>-->
+                    <!--                            </configuration>-->
+                    <!--                        </execution>-->
+                    <!--                        &lt;!&ndash; https://uberconf.com/blog/john_smart/2010/08/testing_jdk_1_4_production_code_using_java_5_tests_in_maven &ndash;&gt;-->
+                    <!--                        <execution>-->
+                    <!--                            <id>java-1.5-compile</id>-->
+                    <!--                            <phase>process-test-sources</phase>-->
+                    <!--                            <goals>-->
+                    <!--                                <goal>testCompile</goal>-->
+                    <!--                            </goals>-->
+                    <!--                            <configuration>-->
+                    <!--                                <source>1.5</source>-->
+                    <!--                                <target>1.5</target>-->
+                    <!--                            </configuration>-->
+                    <!--                        </execution>-->
+                    <!--                    </executions>-->
                 </plugin>
 
                 <plugin>

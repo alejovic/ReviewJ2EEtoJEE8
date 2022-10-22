@@ -72,8 +72,18 @@ public class PropertiesConfiguration {
 
     public boolean containsKey(String key) {
         for (Enumeration keys = bundle.getKeys(); keys.hasMoreElements(); ) {
-            String cadena = (String) keys.nextElement();
-            if (cadena.equals(key)) {
+            String strKey = (String) keys.nextElement();
+            if (strKey.equals(key)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean containsValue(String key, String expected) {
+        for (Enumeration keys = bundle.getKeys(); keys.hasMoreElements(); ) {
+            String strKey = (String) keys.nextElement();
+            if (strKey.equals(key) && getProperty(key).equals(expected)) {
                 return true;
             }
         }

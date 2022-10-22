@@ -28,16 +28,29 @@ The J2EE 1.3 Specification lists the following components:
 Compilation jdk1.3.1_20 (Linux x86_64)
 https://stackoverflow.com/questions/9701348/java-libjava-so-file-error
 
+```
 ln -s /usr/lib32/libstdc++.so.6 /usr/lib32/libstdc++-libc6.1-1.so.2
 sudo rm -i libstdc++-libc6.1-1.so.2
+```
 
+```
+To redeploy an application:
+    >java -jar admin_client.jar deployer:oc4j:localhost oc4jadmin <admin_pwd>
+     -redeploy
+     -file <path-to-file>
+     -deploymentName <name>
+     -bindAllWebApps
+     
+```
+
+```
 RUN clear\
 && export PATH="/usr/lib/jvm/java-8-openjdk/bin/:$PATH"\
 && export OC4J_JVM_ARGS="-Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=4000"\
 && export OC4J_JVM_ARGS="-Dapp.configuration.properties=/mnt/data/workspace/DEV/ReviewJ2EEtoJEE8/J2EE1.3_HelloWorld/ear/src/main/resources/app.configuration.properties:$OC4J_JVM_ARGS"\
 && ./oc4j -start
+```
 
-OC4J_JVM_ARGS
 
 Prior to version 5.0 of the application server, the function of data access was provided by a single connection
 manager (CM) architecture. This connection manager architecture remains available to support Java 2 Platform, Enterprise
@@ -90,4 +103,19 @@ https://www.oracle.com/database/technologies/appdev/jdbc-downloads.html
         /mnt/data/workspace/DEV/ReviewJ2EEtoJEE8/J2EE1.3_HelloWorld/ear/lib/oc4jclient.jar
     </systemPath>
 </dependency>
+```
+
+```
+<!-- https://mvnrepository.com/artifact/postgresql/postgresql -->
+<dependency>
+    <groupId>postgresql</groupId>
+    <artifactId>postgresql</artifactId>
+    <version>8.0-312.jdbc3</version>
+</dependency>
+```
+
+```
+<shared-library name="postgresql" version="8.0.312">
+    <code-source path="postgresql-8.0-312.jdbc3.jar"/>
+</shared-library>
 ```

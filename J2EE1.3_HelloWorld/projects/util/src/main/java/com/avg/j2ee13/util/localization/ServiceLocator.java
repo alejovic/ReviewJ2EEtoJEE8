@@ -26,8 +26,7 @@ public class ServiceLocator {
     private static final String ROOT_APPLICATION_PROPERTY = "app";
 
     public static final String FILE_APP_CONFIGURATION = ROOT_APPLICATION_PROPERTY + ".configuration.properties";
-    private static final String P_APP_DATASOURCE = ROOT_APPLICATION_PROPERTY + ".bd.datasource";
-    private static final String P_APP_EJB_CONFIGURATION = ROOT_APPLICATION_PROPERTY + ".jndi.file";
+    private static final String P_FILE_EJB_CONFIGURATION = ROOT_APPLICATION_PROPERTY + ".jndi.file";
 
     private static final String P_INITIAL_CONTEXT_FACTORY = ROOT_APPLICATION_PROPERTY + "." + Context.INITIAL_CONTEXT_FACTORY;
     private static final String P_PROVIDER_URL = ROOT_APPLICATION_PROPERTY + "." + Context.PROVIDER_URL;
@@ -38,6 +37,7 @@ public class ServiceLocator {
 
     private static final String P_COMP_NAME_LOCAL = ROOT_APPLICATION_PROPERTY + "java.naming.prefix.local";
     private static final String P_COMP_NAME_REMOTE = ROOT_APPLICATION_PROPERTY + "java.naming.prefix.remote";
+    private static final String P_APP_DATASOURCE = ROOT_APPLICATION_PROPERTY + ".java.naming.datasource";
 
     private static final String P_DB_USER = ROOT_APPLICATION_PROPERTY + ".bd.user";
     private static final String P_DB_PASSWORD = ROOT_APPLICATION_PROPERTY + ".bd.password";
@@ -53,13 +53,14 @@ public class ServiceLocator {
     private ServiceLocator() throws LocalizationException {
         log.debug("ServiceLocator.start");
         log.info("ServiceLocator.start -> '-D" + FILE_APP_CONFIGURATION + "=" + System.getProperty(FILE_APP_CONFIGURATION) + "'");
-        PropertiesConfiguration appConfiguration = getAppConfiguration();
+        final PropertiesConfiguration appConfiguration = getAppConfiguration();
 
         if (appConfiguration == null) {
             throw new LocalizationException("ServiceLocator.start Set the location for  -> '-D" + FILE_APP_CONFIGURATION + "'");
         }
 
-        if (appConfiguration.getProperty(P_APP_EJB_CONFIGURATION) == null) {
+        final PropertiesConfiguration jndiConfiguration = getJndiConfiguration();
+        if (jndiConfiguration.containsValue(P_INITIAL_CONTEXT_FACTORY, "default")) {
             log.info("The EJB (jndi.properties) configuration is not set. The default Initial Context has been created. ");
             try {
                 initialContext = new InitialContext();
@@ -67,7 +68,13 @@ public class ServiceLocator {
                 throw new LocalizationException(e);
             }
         } else {
-            PropertiesConfiguration jndiConfiguration = getJndiConfiguration();
+
+            if (jndiConfiguration.getProperty(P_INITIAL_CONTEXT_FACTORY) == null) {
+                throw new LocalizationException("ServiceLocator: The property has not been set -> " + P_INITIAL_CONTEXT_FACTORY);
+            }
+            if (jndiConfiguration.getProperty(P_PROVIDER_URL) == null) {
+                throw new LocalizationException("ServiceLocator: The property has not been set -> " + P_PROVIDER_URL);
+            }
 
             final Properties env = new Properties();
             env.put(Context.INITIAL_CONTEXT_FACTORY, jndiConfiguration.getProperty(P_INITIAL_CONTEXT_FACTORY));
@@ -168,17 +175,17 @@ public class ServiceLocator {
     }
 
     /**
-     * @since 1.4+
-     * @See https://mvnrepository.com/artifact/javax.sql/jdbc-stdext
      * @return
      * @throws LocalizationException
+     * @See https://mvnrepository.com/artifact/javax.sql/jdbc-stdext
+     * @since 1.4+
      */
     public DataSource getDataSource() throws LocalizationException {
         try {
             DataSource ds = (DataSource) services.get(P_APP_DATASOURCE);
             if (ds == null) {
-                log.debug("looking for the Datasource -> " + jndiDataSourceName + getJndiConfiguration().getProperty(P_APP_DATASOURCE));
-                Object o = initialContext.lookup(jndiDataSourceName + getJndiConfiguration().getProperty(P_APP_DATASOURCE));
+                log.debug("looking for the Datasource -> " + getJndiConfiguration().getProperty(P_APP_DATASOURCE));
+                Object o = initialContext.lookup(getJndiConfiguration().getProperty(P_APP_DATASOURCE));
                 ds = (DataSource) o;
                 services.put(P_APP_DATASOURCE, ds);
             }
@@ -229,7 +236,7 @@ public class ServiceLocator {
     }
 
     public PropertiesConfiguration getJndiConfiguration() {
-        final String jndiPropertiesFile = getAppConfiguration().getProperty(P_APP_EJB_CONFIGURATION);
+        final String jndiPropertiesFile = getAppConfiguration().getProperty(P_FILE_EJB_CONFIGURATION);
         return PropertiesConfiguration.getInstance(jndiPropertiesFile);
     }
 }
