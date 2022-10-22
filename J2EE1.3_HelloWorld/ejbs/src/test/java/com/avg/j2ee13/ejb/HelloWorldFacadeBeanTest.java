@@ -1,10 +1,10 @@
 package com.avg.j2ee13.ejb;
 
-import com.avg.j2ee13.bo.interfaces.IHelloWorldBusiness;
-import com.avg.j2ee13.ejb.facade.HelloWorldFacadeHome;
-import com.avg.j2ee13.ejb.service.HelloWorldLocalHome;
-import com.avg.j2ee13.ejb.service.HelloWorldLocal;
+import com.avg.j2ee13.dto.HelloDTO;
 import com.avg.j2ee13.ejb.facade.HelloWorldFacade;
+import com.avg.j2ee13.ejb.facade.HelloWorldFacadeHome;
+import com.avg.j2ee13.ejb.service.HelloWorldLocal;
+import com.avg.j2ee13.ejb.service.HelloWorldLocalHome;
 import com.avg.j2ee13.util.localization.PropertiesConfiguration;
 import com.avg.j2ee13.util.localization.ServiceLocator;
 import org.jmock.MockObjectTestCase;
@@ -23,7 +23,7 @@ import java.util.Hashtable;
  * Junit 3.8.2 http://dev.cs.ovgu.de/java/junit/javadoc/junit/framework/TestCase.html
  * jMock 1.2.0 @see http://jmock.org/jmock1-getting-started.html
  */
-public class HelloWorldFacadeBeanTest extends MockObjectTestCase  {
+public class HelloWorldFacadeBeanTest extends MockObjectTestCase {
 
     public static final String JNDI_NAME_REMOTE = "HelloWorldFacadeBean";
     public static final String JNDI_NAME_LOCAL = "ejbs-1.0_HelloWorldLocalBeanLocal";
@@ -31,8 +31,8 @@ public class HelloWorldFacadeBeanTest extends MockObjectTestCase  {
     private InitialContext context;
     private HelloWorldFacade remoteObject;
 
-    public void test_dummy(){
-        assertEquals(1,1);
+    public void test_dummy() {
+        assertEquals(1, 1);
     }
 
     public void setUp() throws Exception {
@@ -90,7 +90,7 @@ public class HelloWorldFacadeBeanTest extends MockObjectTestCase  {
     public void _testEJBRemote() {
         try {
             HelloWorldFacade remoteObject = getRemote();
-            String str =  remoteObject.sayHello("HelloWorldFacadeBeanTest Remote");
+            String str = remoteObject.sayHello("HelloWorldFacadeBeanTest Remote");
             System.out.println(str);
         } catch (NamingException e) {
             throw new RuntimeException(e.getMessage());
@@ -104,8 +104,8 @@ public class HelloWorldFacadeBeanTest extends MockObjectTestCase  {
     public void _testEJBLocal() {
         try {
             HelloWorldLocal localObject = getLocal();
-            String str = localObject.storeHello("HelloWorldFacadeBeanTest Local");
-            System.out.println(str);
+            HelloDTO dto = localObject.storeMessage("HelloWorldFacadeBeanTest Local");
+            System.out.println(dto.getMessage());
         } catch (NamingException e) {
             throw new RuntimeException(e.getMessage());
         } catch (CreateException e) {
@@ -113,7 +113,7 @@ public class HelloWorldFacadeBeanTest extends MockObjectTestCase  {
         }
     }
 
-    public void test_sayHello(){
+    public void test_sayHello() {
         assertEquals(1, 1);
     }
 

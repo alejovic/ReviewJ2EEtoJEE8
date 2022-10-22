@@ -6,11 +6,11 @@ public abstract class BaseDTO implements Serializable {
 
     private long id;
 
-    protected long getId() {
+    public long getId() {
         return id;
     }
 
-    protected void setId(long id) {
+    public void setId(long id) {
         this.id = id;
     }
 }

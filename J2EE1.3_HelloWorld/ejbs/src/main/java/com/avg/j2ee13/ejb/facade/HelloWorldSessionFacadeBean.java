@@ -1,13 +1,13 @@
 package com.avg.j2ee13.ejb.facade;
 
 import com.avg.j2ee13.bo.interfaces.IHelloWorldBusiness;
+import com.avg.j2ee13.dto.HelloDTO;
 import com.avg.j2ee13.ejb.service.HelloWorldLocal;
 import com.avg.j2ee13.ejb.service.HelloWorldLocalHome;
 import com.avg.j2ee13.ejb.service.JNDILocalNames;
 
 import javax.ejb.CreateException;
 import javax.naming.InitialContext;
-import java.util.Properties;
 
 /**
  * @see ejb-jar.xml
@@ -45,12 +45,16 @@ public class HelloWorldSessionFacadeBean extends GenericSessionFacadeBean implem
 
     public String sayHello(String name) {
         log.info("Hello from Session Facade [EJB Remote Service] -> " + name);
-        return service.storeHello(name);
+        HelloDTO dto = service.storeMessage(name);
+
+        HelloDTO dto2 = service.getMessage(1L);
+        return dto2.getMessage();
     }
 
     public String sayHello() {
         log.info("Hello from Session Facade [EJB Remote Service] -> default");
-        return service.storeHello("HelloWorldSessionFacadeBean default");
+        HelloDTO dto = service.getMessage(1L);
+        return dto.getMessage();
     }
 
 }

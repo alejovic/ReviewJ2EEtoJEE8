@@ -114,6 +114,7 @@ public class DataSourceTest extends MockObjectTestCase {
         DataSourceTest test = new DataSourceTest();
         test.setUp();
         test._test_DataSource();
+        test._test_Connection();
     }
 
 }

@@ -10,10 +10,14 @@ package com.avg.j2ee13.ejb.service;
  * You declare the local component interface and its methods as public.
  */
 
+import com.avg.j2ee13.dto.HelloDTO;
+
 /**
  * Local Component Interface for HelloWorld which define internal Business Methods
  */
 public interface HelloWorldLocal extends javax.ejb.EJBLocalObject {
-    public String storeHello(String myName);
+    public HelloDTO storeMessage(String message);
+
+    public HelloDTO getMessage(long id);
 
 }

@@ -1,9 +1,11 @@
 package com.avg.j2ee13.ejb.service;
 
-import javax.ejb.EJBException;
-import javax.ejb.EJBLocalHome;
-import javax.ejb.EJBLocalObject;
-import javax.ejb.RemoveException;
+import com.avg.j2ee13.dto.HelloDTO;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  * @see ejb-jar.xml
@@ -14,26 +16,38 @@ import javax.ejb.RemoveException;
  * type="Stateless"
  * transaction-type="Container"
  */
-public class HelloWorldServiceLocalBean extends GenericServiceLocalBean implements HelloWorldLocal {
+public class HelloWorldServiceLocalBean extends GenericServiceLocalBean {
 
-    public String storeHello(String myName) {
+    public HelloDTO storeMessage(String message) {
         log.info("HelloWorldSessionLocalBean.storeHello started");
-        return "Hello from Application Service [EJB Local Service] -> " + myName;
+        HelloDTO dto = new HelloDTO(message);
+        return dto;
     }
 
-    public EJBLocalHome getEJBLocalHome() throws EJBException {
-        return null;
+    public HelloDTO getMessage(long id) {
+        final String QUERY = "select * from HELLOWORLD where id = ?";
+        HelloDTO dto = null;
+        Connection connection = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            connection = dataSource.getConnection();
+            ps = connection.prepareStatement(QUERY);
+            ps.setInt(1, (int) id);
+
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                dto = new HelloDTO();
+                dto.setId(rs.getInt("ID"));
+                dto.setMessage(rs.getString("MESSAGE"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            closeAll(connection, ps, rs);
+            return dto;
+        }
+
     }
 
-    public Object getPrimaryKey() throws EJBException {
-        return null;
-    }
-
-    public void remove() throws RemoveException, EJBException {
-
-    }
-
-    public boolean isIdentical(EJBLocalObject ejbLocalObject) throws EJBException {
-        return false;
-    }
 }

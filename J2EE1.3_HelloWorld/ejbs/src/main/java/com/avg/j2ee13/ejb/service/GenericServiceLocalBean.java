@@ -9,6 +9,9 @@ import javax.ejb.SessionBean;
 import javax.ejb.SessionContext;
 import javax.sql.DataSource;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public abstract class GenericServiceLocalBean implements SessionBean {
 
@@ -26,6 +29,33 @@ public abstract class GenericServiceLocalBean implements SessionBean {
             log.info("GenericServiceLocalBean.ejbCreate DataSource created -> " + dataSource);
         } catch (Exception e) {
             log.error("GenericServiceLocalBean.ejbCreate ----------> dataSource not found", e);
+        }
+    }
+
+    protected void closeAll(Connection pConnection,
+                            PreparedStatement pStatement, ResultSet pResultSet) {
+        if (pResultSet != null) {
+            try {
+                pResultSet.close();
+            } catch (SQLException e) {
+                log.warn(e);
+            }
+        }
+
+        if (pStatement != null) {
+            try {
+                pStatement.close();
+            } catch (SQLException e) {
+                log.warn(e);
+            }
+        }
+
+        if (pConnection != null) {
+            try {
+                pConnection.close();
+            } catch (SQLException e) {
+                log.warn(e);
+            }
         }
     }
 
