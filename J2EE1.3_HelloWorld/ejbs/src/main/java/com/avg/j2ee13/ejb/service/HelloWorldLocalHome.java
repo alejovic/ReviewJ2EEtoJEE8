@@ -20,7 +20,7 @@ import javax.ejb.CreateException;
  */
 
 /**
- * Local Home Interface for HelloWorld a HelloWorld Stateless Session Bean.
+ * Local Home Interface for HelloWorldLocal Stateless Session Bean.
  */
 public interface HelloWorldLocalHome extends javax.ejb.EJBLocalHome {
 

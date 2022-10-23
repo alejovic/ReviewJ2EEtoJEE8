@@ -13,7 +13,7 @@ package com.avg.j2ee13.ejb.service;
 import com.avg.j2ee13.dto.HelloDTO;
 
 /**
- * Local Component Interface for HelloWorld which define internal Business Methods
+ * Local Component Interface for HelloWorld which defines internal Business Methods
  */
 public interface HelloWorldLocal extends javax.ejb.EJBLocalObject {
     public HelloDTO storeMessage(String message);

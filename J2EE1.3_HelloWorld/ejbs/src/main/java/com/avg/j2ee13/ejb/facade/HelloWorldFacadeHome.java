@@ -21,7 +21,6 @@ import java.rmi.RemoteException;
  * Remote Home Interface for a HelloWorld Stateless Session Bean.
  */
 public interface HelloWorldFacadeHome extends javax.ejb.EJBHome {
-
     public HelloWorldFacade create() throws RemoteException, CreateException;
 
 }
