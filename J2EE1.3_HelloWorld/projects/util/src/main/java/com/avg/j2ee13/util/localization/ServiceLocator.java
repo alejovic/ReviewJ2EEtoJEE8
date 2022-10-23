@@ -23,28 +23,27 @@ public class ServiceLocator {
 
     protected static final Log log = LogFactory.getLog(ServiceLocator.class);
 
-    private static final String ROOT_APPLICATION_PROPERTY = "app";
+    private static final String ROOT_APPLICATION_NAME = "app";
 
-    public static final String FILE_APP_CONFIGURATION = ROOT_APPLICATION_PROPERTY + ".configuration.properties";
-    private static final String P_FILE_EJB_CONFIGURATION = ROOT_APPLICATION_PROPERTY + ".jndi.file";
+    private static final String P_EJB_FILE_CONFIGURATION = ROOT_APPLICATION_NAME + ".jndi.file";
+    private static final String P_EJB_CTX_INITIAL_CONTEXT_FACTORY = ROOT_APPLICATION_NAME + "." + Context.INITIAL_CONTEXT_FACTORY;
+    private static final String P_EJB_CTX_PROVIDER_URL = ROOT_APPLICATION_NAME + "." + Context.PROVIDER_URL;
+    private static final String P_EJB_CTX_SECURITY_PRINCIPAL = ROOT_APPLICATION_NAME + "." + Context.SECURITY_PRINCIPAL;
+    private static final String P_EJB_CTX_SECURITY_CREDENTIALS = ROOT_APPLICATION_NAME + "." + Context.SECURITY_CREDENTIALS;
+    private static final String P_EJB_CTX_SECURITY_AUTHENTICATION = ROOT_APPLICATION_NAME + "." + Context.SECURITY_AUTHENTICATION;
+    private static final String P_EJB_CTX_SECURITY_PROTOCOL = ROOT_APPLICATION_NAME + "." + Context.SECURITY_PROTOCOL;
 
-    private static final String P_INITIAL_CONTEXT_FACTORY = ROOT_APPLICATION_PROPERTY + "." + Context.INITIAL_CONTEXT_FACTORY;
-    private static final String P_PROVIDER_URL = ROOT_APPLICATION_PROPERTY + "." + Context.PROVIDER_URL;
-    private static final String P_SECURITY_PRINCIPAL = ROOT_APPLICATION_PROPERTY + "." + Context.SECURITY_PRINCIPAL;
-    private static final String P_SECURITY_CREDENTIALS = ROOT_APPLICATION_PROPERTY + "." + Context.SECURITY_CREDENTIALS;
-    private static final String P_SECURITY_AUTHENTICATION = ROOT_APPLICATION_PROPERTY + "." + Context.SECURITY_AUTHENTICATION;
-    private static final String P_SECURITY_PROTOCOL = ROOT_APPLICATION_PROPERTY + "." + Context.SECURITY_PROTOCOL;
+    private static final String P_COMP_NAME_LOCAL = ROOT_APPLICATION_NAME + "java.naming.prefix.local";
+    private static final String P_COMP_NAME_REMOTE = ROOT_APPLICATION_NAME + "java.naming.prefix.remote";
+    private static final String P_APP_DATASOURCE = ROOT_APPLICATION_NAME + ".java.naming.datasource";
 
-    private static final String P_COMP_NAME_LOCAL = ROOT_APPLICATION_PROPERTY + "java.naming.prefix.local";
-    private static final String P_COMP_NAME_REMOTE = ROOT_APPLICATION_PROPERTY + "java.naming.prefix.remote";
-    private static final String P_APP_DATASOURCE = ROOT_APPLICATION_PROPERTY + ".java.naming.datasource";
+    private static final String P_DB_USER = ROOT_APPLICATION_NAME + ".bd.user";
+    private static final String P_DB_PASSWORD = ROOT_APPLICATION_NAME + ".bd.password";
+    private static final String P_DB_URL = ROOT_APPLICATION_NAME + ".bd.url";
+    private static final String P_DB_DRIVER = ROOT_APPLICATION_NAME + ".bd.driver";
+    private static final String P_FILE_STORE_LOCATION = ROOT_APPLICATION_NAME + ".filestore.path";
 
-    private static final String P_DB_USER = ROOT_APPLICATION_PROPERTY + ".bd.user";
-    private static final String P_DB_PASSWORD = ROOT_APPLICATION_PROPERTY + ".bd.password";
-    private static final String P_DB_URL = ROOT_APPLICATION_PROPERTY + ".bd.url";
-    private static final String P_DB_DRIVER = ROOT_APPLICATION_PROPERTY + ".bd.driver";
-
-    private static final String jndiDataSourceName = "java:";
+    public static final String FILE_APP_CONFIGURATION = ROOT_APPLICATION_NAME + ".configuration.properties";
 
     private static ServiceLocator instance;
     private HashMap services = new HashMap();
@@ -60,7 +59,7 @@ public class ServiceLocator {
         }
 
         final PropertiesConfiguration jndiConfiguration = getJndiConfiguration();
-        if (jndiConfiguration.containsValue(P_INITIAL_CONTEXT_FACTORY, "default")) {
+        if (jndiConfiguration.containsValue(P_EJB_CTX_INITIAL_CONTEXT_FACTORY, "default")) {
             log.info("The EJB (jndi.properties) configuration is not set. The default Initial Context has been created. ");
             try {
                 initialContext = new InitialContext();
@@ -69,26 +68,26 @@ public class ServiceLocator {
             }
         } else {
 
-            if (jndiConfiguration.getProperty(P_INITIAL_CONTEXT_FACTORY) == null) {
-                throw new LocalizationException("ServiceLocator: The property has not been set -> " + P_INITIAL_CONTEXT_FACTORY);
+            if (jndiConfiguration.getProperty(P_EJB_CTX_INITIAL_CONTEXT_FACTORY) == null) {
+                throw new LocalizationException("ServiceLocator: The property has not been set -> " + P_EJB_CTX_INITIAL_CONTEXT_FACTORY);
             }
-            if (jndiConfiguration.getProperty(P_PROVIDER_URL) == null) {
-                throw new LocalizationException("ServiceLocator: The property has not been set -> " + P_PROVIDER_URL);
+            if (jndiConfiguration.getProperty(P_EJB_CTX_PROVIDER_URL) == null) {
+                throw new LocalizationException("ServiceLocator: The property has not been set -> " + P_EJB_CTX_PROVIDER_URL);
             }
 
             final Properties env = new Properties();
-            env.put(Context.INITIAL_CONTEXT_FACTORY, jndiConfiguration.getProperty(P_INITIAL_CONTEXT_FACTORY));
-            env.put(Context.PROVIDER_URL, jndiConfiguration.getProperty(P_PROVIDER_URL));
+            env.put(Context.INITIAL_CONTEXT_FACTORY, jndiConfiguration.getProperty(P_EJB_CTX_INITIAL_CONTEXT_FACTORY));
+            env.put(Context.PROVIDER_URL, jndiConfiguration.getProperty(P_EJB_CTX_PROVIDER_URL));
 
             String user = null;
             String password = null;
             String authentication = null;
             String protocol = null;
             try {
-                user = jndiConfiguration.getProperty(P_SECURITY_PRINCIPAL);
-                password = jndiConfiguration.getProperty(P_SECURITY_CREDENTIALS);
-                authentication = jndiConfiguration.getProperty(P_SECURITY_AUTHENTICATION);
-                protocol = appConfiguration.getProperty(P_SECURITY_PROTOCOL);
+                user = jndiConfiguration.getProperty(P_EJB_CTX_SECURITY_PRINCIPAL);
+                password = jndiConfiguration.getProperty(P_EJB_CTX_SECURITY_CREDENTIALS);
+                authentication = jndiConfiguration.getProperty(P_EJB_CTX_SECURITY_AUTHENTICATION);
+                protocol = appConfiguration.getProperty(P_EJB_CTX_SECURITY_PROTOCOL);
             } catch (Exception e) {
                 e.printStackTrace();
                 log.error(e.getMessage());
@@ -208,7 +207,7 @@ public class ServiceLocator {
     public Connection getConnection(String database) throws LocalizationException {
         Connection connection = (Connection) services.get(database);
         try {
-            if (connection == null || (connection != null && connection.isClosed())) {
+            if (connection == null) {
                 String userName = getJndiConfiguration().getProperty(P_DB_USER);
                 String password = getJndiConfiguration().getProperty(P_DB_PASSWORD);
                 String url = getJndiConfiguration().getProperty(P_DB_URL);
@@ -236,7 +235,11 @@ public class ServiceLocator {
     }
 
     public PropertiesConfiguration getJndiConfiguration() {
-        final String jndiPropertiesFile = getAppConfiguration().getProperty(P_FILE_EJB_CONFIGURATION);
+        final String jndiPropertiesFile = getAppConfiguration().getProperty(P_EJB_FILE_CONFIGURATION);
         return PropertiesConfiguration.getInstance(jndiPropertiesFile);
+    }
+
+    public String getFileDataSource(){
+        return getAppConfiguration().getProperty(P_FILE_STORE_LOCATION);
     }
 }

@@ -15,20 +15,20 @@ import java.sql.SQLException;
 
 public abstract class GenericServiceLocalBean implements SessionBean {
 
-    protected static final Log log = LogFactory.getLog(GenericServiceLocalBean.class);
+    protected static final Log logger = LogFactory.getLog(GenericServiceLocalBean.class);
 
     protected SessionContext sessionContext;
     protected DataSource dataSource;
     protected ServiceLocator locator;
 
     public void ejbCreate() {
-        log.info("GenericServiceLocalBean.ejbCreate stared.");
+        logger.info("GenericServiceLocalBean.ejbCreate stared.");
         try {
             locator = ServiceLocator.getInstance();
             dataSource = locator.getDataSource();
-            log.info("GenericServiceLocalBean.ejbCreate DataSource created -> " + dataSource);
+            logger.info("GenericServiceLocalBean.ejbCreate DataSource created -> " + dataSource);
         } catch (Exception e) {
-            log.error("GenericServiceLocalBean.ejbCreate ----------> dataSource not found", e);
+            logger.error("GenericServiceLocalBean.ejbCreate ----------> dataSource not found", e);
         }
     }
 
@@ -38,7 +38,7 @@ public abstract class GenericServiceLocalBean implements SessionBean {
             try {
                 pResultSet.close();
             } catch (SQLException e) {
-                log.warn(e);
+                logger.warn(e);
             }
         }
 
@@ -46,7 +46,7 @@ public abstract class GenericServiceLocalBean implements SessionBean {
             try {
                 pStatement.close();
             } catch (SQLException e) {
-                log.warn(e);
+                logger.warn(e);
             }
         }
 
@@ -54,7 +54,7 @@ public abstract class GenericServiceLocalBean implements SessionBean {
             try {
                 pConnection.close();
             } catch (SQLException e) {
-                log.warn(e);
+                logger.warn(e);
             }
         }
     }

@@ -19,7 +19,7 @@ import java.sql.SQLException;
 public class HelloWorldServiceLocalBean extends GenericServiceLocalBean {
 
     public HelloDTO storeMessage(String message) {
-        log.info("HelloWorldSessionLocalBean.storeHello started");
+        logger.info("HelloWorldSessionLocalBean.storeHello started");
         HelloDTO dto = new HelloDTO(message);
         return dto;
     }

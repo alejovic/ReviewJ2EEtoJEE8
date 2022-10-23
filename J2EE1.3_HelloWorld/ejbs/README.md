@@ -7,7 +7,9 @@ JSR 58 specifies J2EE 1.3 and JSR 151 specifies the J2EE 1.4 specification.
 
 **The J2EE 1.3 SDK was first released by Sun as a beta in April 2001**
 
-Tutorial: https://docs.oracle.com/javaee/1.3/tutorial/doc/
+Tutorial: 
+- https://docs.oracle.com/javaee/1.3/tutorial/doc/
+- https://www.oreilly.com/library/view/head-first-ejb/0596005717/ch01s09.html
 
 ---
 

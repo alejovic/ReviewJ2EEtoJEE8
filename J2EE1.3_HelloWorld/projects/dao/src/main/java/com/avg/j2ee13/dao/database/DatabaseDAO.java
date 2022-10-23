@@ -14,7 +14,7 @@ import java.util.HashMap;
 
 public abstract class DatabaseDAO extends GenericAbstractDAO {
 
-    protected static final Log log = LogFactory.getLog(DatabaseDAO.class);
+    protected static final Log logger = LogFactory.getLog(DatabaseDAO.class);
 
     public DatabaseDAO(HashMap parameters) {
         //podria iniciar aqui
@@ -28,7 +28,7 @@ public abstract class DatabaseDAO extends GenericAbstractDAO {
 
             return connection;
         } catch (Exception e) {
-            log.error(e);
+            logger.error(e);
             throw new DAOException(DAOException.ERROR_DAO_01, e.getMessage(), e);
         }
     }
@@ -39,7 +39,7 @@ public abstract class DatabaseDAO extends GenericAbstractDAO {
             try {
                 pResultSet.close();
             } catch (SQLException e) {
-                log.warn(e);
+                logger.warn(e);
             }
         }
 
@@ -47,7 +47,7 @@ public abstract class DatabaseDAO extends GenericAbstractDAO {
             try {
                 pStatement.close();
             } catch (SQLException e) {
-                log.warn(e);
+                logger.warn(e);
             }
         }
 
@@ -55,7 +55,7 @@ public abstract class DatabaseDAO extends GenericAbstractDAO {
             try {
                 pConnection.close();
             } catch (SQLException e) {
-                log.warn(e);
+                logger.warn(e);
             }
         }
     }
