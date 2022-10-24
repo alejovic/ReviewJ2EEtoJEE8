@@ -21,7 +21,7 @@ import java.util.Properties;
  */
 public class ServiceLocator {
 
-    protected static final Log log = LogFactory.getLog(ServiceLocator.class);
+    protected static final Log logger = LogFactory.getLog(ServiceLocator.class);
 
     private static final String ROOT_APPLICATION_NAME = "app";
 
@@ -50,8 +50,8 @@ public class ServiceLocator {
     private InitialContext initialContext;
 
     private ServiceLocator() throws LocalizationException {
-        log.debug("ServiceLocator.start");
-        log.info("ServiceLocator.start -> '-D" + FILE_APP_CONFIGURATION + "=" + System.getProperty(FILE_APP_CONFIGURATION) + "'");
+        logger.debug("ServiceLocator.start");
+        logger.info("ServiceLocator.start -> '-D" + FILE_APP_CONFIGURATION + "=" + System.getProperty(FILE_APP_CONFIGURATION) + "'");
         final PropertiesConfiguration appConfiguration = getAppConfiguration();
 
         if (appConfiguration == null) {
@@ -60,7 +60,7 @@ public class ServiceLocator {
 
         final PropertiesConfiguration jndiConfiguration = getJndiConfiguration();
         if (jndiConfiguration.containsValue(P_EJB_CTX_INITIAL_CONTEXT_FACTORY, "default")) {
-            log.info("The EJB (jndi.properties) configuration is not set. The default Initial Context has been created. ");
+            logger.info("The EJB (jndi.properties) configuration is not set. The default Initial Context has been created. ");
             try {
                 initialContext = new InitialContext();
             } catch (NamingException e) {
@@ -90,7 +90,7 @@ public class ServiceLocator {
                 protocol = appConfiguration.getProperty(P_EJB_CTX_SECURITY_PROTOCOL);
             } catch (Exception e) {
                 e.printStackTrace();
-                log.error(e.getMessage());
+                logger.error(e.getMessage());
             }
 
             if (user != null && user.length() > 0 && password != null && password.length() > 0) {
@@ -112,7 +112,7 @@ public class ServiceLocator {
             }
 
         }
-        log.info("ServiceLocator.start Initial Context has been created.");
+        logger.info("ServiceLocator.start Initial Context has been created.");
     }
 
     public static ServiceLocator getInstance() throws LocalizationException {
@@ -128,13 +128,13 @@ public class ServiceLocator {
             if (services.containsKey(jndiName)) {
                 object = services.get(jndiName);
             } else {
-                log.debug("looking for the resource JNDI -> " + jndiName);
+                logger.debug("looking for the resource JNDI -> " + jndiName);
                 object = initialContext.lookup(jndiName);
-                log.debug("EJB has been found -> " + object);
+                logger.debug("EJB has been found -> " + object);
                 services.put(jndiName, object);
             }
         } catch (Exception e) {
-            log.error(e.getMessage());
+            logger.error(e.getMessage());
             e.printStackTrace();
             throw new LocalizationException("Error when trying to get the resource JNDI ->" + jndiName, e);
         }
@@ -147,9 +147,9 @@ public class ServiceLocator {
         String jndi = prefix + jndiLocalHomeName;
         try {
             home = (EJBLocalHome) lookup(jndi);
-            log.debug("EJBLocalHome has been found -> " + home);
+            logger.debug("EJBLocalHome has been found -> " + home);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            logger.error(e.getMessage());
             e.printStackTrace();
             throw new LocalizationException("Error when trying to get the EJB ->" + jndi, e);
         }
@@ -164,9 +164,9 @@ public class ServiceLocator {
             Object objref = lookup(jndi);
             Object obj = PortableRemoteObject.narrow(objref, className);
             home = (EJBHome) obj;
-            log.debug("EJBHome (Remote) has been found -> " + home);
+            logger.debug("EJBHome (Remote) has been found -> " + home);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            logger.error(e.getMessage());
             e.printStackTrace();
             throw new LocalizationException("Error when trying to get the EJB ->" + jndi, e);
         }
@@ -183,14 +183,14 @@ public class ServiceLocator {
         try {
             DataSource ds = (DataSource) services.get(P_APP_DATASOURCE);
             if (ds == null) {
-                log.debug("looking for the Datasource -> " + getJndiConfiguration().getProperty(P_APP_DATASOURCE));
+                logger.debug("looking for the Datasource -> " + getJndiConfiguration().getProperty(P_APP_DATASOURCE));
                 Object o = initialContext.lookup(getJndiConfiguration().getProperty(P_APP_DATASOURCE));
                 ds = (DataSource) o;
                 services.put(P_APP_DATASOURCE, ds);
             }
             return ds;
         } catch (Exception e) {
-            log.error(e.getMessage());
+            logger.error(e.getMessage());
             e.printStackTrace();
             throw new LocalizationException("Error when trying to get the Datasource", e);
         }

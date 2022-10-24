@@ -12,9 +12,10 @@ public abstract class FileBaseDAO extends GenericAbstractDAO {
 
     protected File dataFile;
 
-    public FileBaseDAO(HashMap parameters) {
+    public FileBaseDAO(HashMap parameters) throws IOException {
         super(parameters);
         dataFile = new File(locator.getFileDataSource() + File.separator + getFileName());
+        dataFile.createNewFile();
     }
 
     public abstract String getFileName();

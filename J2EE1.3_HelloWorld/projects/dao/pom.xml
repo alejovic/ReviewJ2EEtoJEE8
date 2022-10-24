@@ -20,5 +20,57 @@
             <groupId>root.project.projects</groupId>
             <artifactId>util</artifactId>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/javax.ejb/ejb-api -->
+        <!--        <dependency>-->
+        <!--            <groupId>javax.ejb</groupId>-->
+        <!--            <artifactId>ejb-api</artifactId>-->
+        <!--            <version>2.0</version>-->
+        <!--            <scope>provided</scope>-->
+        <!--        </dependency>-->
+
+        <!-- https://mvnrepository.com/artifact/javax.ejb/ejb -->
+        <!--        <dependency>-->
+        <!--            <groupId>javax.ejb</groupId>-->
+        <!--            <artifactId>ejb</artifactId>-->
+        <!--            <version>2.1</version>-->
+        <!--            <scope>provided</scope>-->
+        <!--        </dependency>-->
+
+        <!-- https://mvnrepository.com/artifact/javax.ejb/ejb-api -->
+        <dependency>
+            <groupId>javax.ejb</groupId>
+            <artifactId>ejb-api</artifactId>
+            <version>3.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.oracle.oc4j/oc4j-extended -->
+        <dependency>
+            <groupId>com.oracle.oc4j</groupId>
+            <artifactId>oc4j-oc4jclient</artifactId>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/javax.sql/jdbc-stdext -->
+        <dependency>
+            <groupId>javax.sql</groupId>
+            <artifactId>jdbc-stdext</artifactId>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.oracle/classes12 -->
+        <!--        <dependency>-->
+        <!--            <groupId>com.oracle</groupId>-->
+        <!--            <artifactId>classes12</artifactId>-->
+        <!--        </dependency>-->
+        <!-- https://mvnrepository.com/artifact/com.oracle/ojdbc14 -->
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc14</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>dms</artifactId>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/postgresql/postgresql -->
+        <dependency>
+            <groupId>postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+        </dependency>
     </dependencies>
 </project>

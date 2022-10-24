@@ -4,22 +4,25 @@ import com.avg.j2ee13.dao.DAOException;
 import com.avg.j2ee13.dao.filestore.FileBaseDAO;
 import com.avg.j2ee13.dto.BaseDTO;
 import com.avg.j2ee13.dto.HelloDTO;
+import com.avg.j2ee13.util.DateUtils;
 import com.avg.j2ee13.util.StringUtils;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 public class HelloWorldFileDAOImpl extends FileBaseDAO {
 
     private static final String FILE = "helloworld.txt";
 
 
-    public HelloWorldFileDAOImpl(HashMap parameters) {
+    public HelloWorldFileDAOImpl(HashMap parameters) throws IOException {
         super(parameters);
     }
 
@@ -69,6 +72,8 @@ public class HelloWorldFileDAOImpl extends FileBaseDAO {
 
         } catch (IOException e) {
             throw new DAOException(DAOException.ERROR_DAO_01, e.getMessage(), e);
+        } catch (ParseException e) {
+            throw new DAOException(DAOException.ERROR_DAO_01, e.getMessage(), e);
         } finally {
             closeAll(bufferedReader, fileReader);
         }
@@ -88,12 +93,11 @@ public class HelloWorldFileDAOImpl extends FileBaseDAO {
         return dto;
     }
 
-    private HelloDTO buildDTO(final String[] fields) {
+    private HelloDTO buildDTO(final String[] fields) throws ParseException {
         HelloDTO dto = new HelloDTO();
         dto.setId(Long.parseLong(fields[0]));
         dto.setMessage(fields[1]);
-        //check dateformat util...
-        //helloDTO.setDateOfCreation(fields[2]);
+        dto.setDateOfCreation(DateUtils.toDate(fields[2], Locale.getDefault()));
         return dto;
 
     }
@@ -103,7 +107,7 @@ public class HelloWorldFileDAOImpl extends FileBaseDAO {
         final String DEFAULT_SEPARATOR = ";";
         return dto.getId() + DEFAULT_SEPARATOR
                 + dto.getMessage() + DEFAULT_SEPARATOR
-                + dto.getDateOfCreation() + DEFAULT_SEPARATOR;
+                + DateUtils.getDateTime(dto.getDateOfCreation(), Locale.getDefault()) + DEFAULT_SEPARATOR;
     }
 
     public void syncFile(final List list) throws DAOException {
@@ -112,7 +116,7 @@ public class HelloWorldFileDAOImpl extends FileBaseDAO {
         }
 
         try {
-            final boolean APPEND_FILE = true;
+            final boolean APPEND_FILE = false;
             final FileWriter out = new FileWriter(dataFile.getAbsoluteFile().getPath(), APPEND_FILE);
             for (int index = 0; index < list.size(); index++) {
                 BaseDTO dto = (BaseDTO) list.get(index);

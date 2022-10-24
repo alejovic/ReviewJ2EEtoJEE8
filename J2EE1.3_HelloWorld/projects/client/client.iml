@@ -24,8 +24,6 @@
     </orderEntry>
     <orderEntry type="module" module-name="bo" />
     <orderEntry type="module" module-name="dao" />
-    <orderEntry type="module" module-name="dto" />
-    <orderEntry type="module" module-name="util" />
     <orderEntry type="module-library">
       <library name="Maven: javax.sql:jdbc-stdext:2.0">
         <CLASSES>
@@ -54,6 +52,8 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="Maven: postgresql:postgresql:8.0-312.jdbc3" level="project" />
+    <orderEntry type="module" module-name="dto" />
+    <orderEntry type="module" module-name="util" />
     <orderEntry type="library" name="Maven: javax.ejb:ejb-api:3.0" level="project" />
     <orderEntry type="library" name="Maven: commons-logging:commons-logging:1.1.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:3.8.2" level="project" />
