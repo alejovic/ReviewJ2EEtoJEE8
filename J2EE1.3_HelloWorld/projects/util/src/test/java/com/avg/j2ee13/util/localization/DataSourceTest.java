@@ -19,7 +19,7 @@ import java.sql.Statement;
  */
 public class DataSourceTest extends MockObjectTestCase {
 
-    protected static final Log log = LogFactory.getLog(ServiceLocator.class);
+    protected static final Log logger = LogFactory.getLog(ServiceLocator.class);
     private static final String QUERY_POSTGRESQL = "SELECT 1";
     private static final String QUERY_ORACLE = "SELECT * FROM DUAL";
 
@@ -59,21 +59,21 @@ public class DataSourceTest extends MockObjectTestCase {
             String password = locator.getJndiConfiguration().getProperty("app.bd.password", "Not Defined.");
             String url = locator.getJndiConfiguration().getProperty("app.bd.url", "Not Defined.");
             String driver = locator.getJndiConfiguration().getProperty("app.bd.driver", "Not Defined.");
-            log.info("username -> " + userName);
-            log.info("password -> " + password);
-            log.info("url -> " + url);
-            log.info("driver -> " + driver);
+            logger.info("username -> " + userName);
+            logger.info("password -> " + password);
+            logger.info("url -> " + url);
+            logger.info("driver -> " + driver);
 
             Connection connection = locator.getConnection("HELLOWORLD");
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery(QUERY_ORACLE);
             // Extract data from result set
             while (rs.next()) {
-                log.info("Resultset -> " + rs.getString(1));
+                logger.info("Resultset -> " + rs.getString(1));
             }
 
             String datasource = locator.getJndiConfiguration().getProperty("app.bd.datasource", "Not Defined.");
-            log.info("datasource -> " + datasource);
+            logger.info("datasource -> " + datasource);
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -93,7 +93,7 @@ public class DataSourceTest extends MockObjectTestCase {
             locator = ServiceLocator.getInstance();
 
             String datasource = locator.getJndiConfiguration().getProperty("app.bd.datasource", "Not Defined.");
-            log.info("datasource -> " + datasource);
+            logger.info("datasource -> " + datasource);
 
             DataSource dataSource = locator.getDataSource();
             Connection connection = dataSource.getConnection();
@@ -101,7 +101,7 @@ public class DataSourceTest extends MockObjectTestCase {
             ResultSet rs = stmt.executeQuery(QUERY_ORACLE);
             // Extract data from result set
             while (rs.next()) {
-                log.info("Resultset -> " + rs.getString(1));
+                logger.info("Resultset -> " + rs.getString(1));
             }
 
         } catch (Exception ex) {

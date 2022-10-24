@@ -42,7 +42,7 @@ public class HelloWorldServiceLocalBean extends GenericServiceLocalBean {
                 dto.setMessage(rs.getString("MESSAGE"));
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException();
         } finally {
             closeAll(connection, ps, rs);
             return dto;

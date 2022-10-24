@@ -4,6 +4,7 @@ import com.avg.j2ee13.dao.DAOException;
 import com.avg.j2ee13.dao.filestore.FileBaseDAO;
 import com.avg.j2ee13.dto.BaseDTO;
 import com.avg.j2ee13.dto.HelloDTO;
+import com.avg.j2ee13.util.StringUtils;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -12,7 +13,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.StringTokenizer;
 
 public class HelloWorldFileDAOImpl extends FileBaseDAO {
 
@@ -60,20 +60,9 @@ public class HelloWorldFileDAOImpl extends FileBaseDAO {
             fileReader = new FileReader(dataFile);
             bufferedReader = new BufferedReader(fileReader);
 
-            // read line by line
             String line;
             while ((line = bufferedReader.readLine()) != null) {
-                // public String[] split(String regex) was introduced in Java 1.4
-                // todo: this can be a util method
-                final String DEFAULT_SEPARATOR = ";";
-                final StringTokenizer st = new StringTokenizer(line, DEFAULT_SEPARATOR);
-                final String[] fields = new String[st.countTokens()];
-                int index = 0;
-                while (st.hasMoreTokens()) {
-                    fields[index] = st.nextToken();
-                    index++;
-                }
-
+                final String[] fields = StringUtils.split(line);
                 HelloDTO dto = buildDTO(fields);
                 result.add(dto);
             }
@@ -101,7 +90,7 @@ public class HelloWorldFileDAOImpl extends FileBaseDAO {
 
     private HelloDTO buildDTO(final String[] fields) {
         HelloDTO dto = new HelloDTO();
-        dto.setId(new Long(fields[0]));
+        dto.setId(Long.parseLong(fields[0]));
         dto.setMessage(fields[1]);
         //check dateformat util...
         //helloDTO.setDateOfCreation(fields[2]);
