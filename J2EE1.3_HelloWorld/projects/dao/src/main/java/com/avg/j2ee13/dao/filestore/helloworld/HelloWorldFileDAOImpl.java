@@ -9,7 +9,6 @@ import com.avg.j2ee13.util.StringUtils;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -30,11 +29,19 @@ public class HelloWorldFileDAOImpl extends FileBaseDAO {
         return FILE;
     }
 
+    public String[] getFields() {
+        return new String[]{"id", "message", "dateOfCreation"};
+    }
+
+    public Class getDTOClass() {
+        return HelloDTO.class;
+    }
+
     public BaseDTO insert(BaseDTO baseDTO) throws DAOException {
         boolean existing = false;
-        List list = findAll();
+        final List list = findAll();
         for (int index = 0; index < list.size(); index++) {
-            HelloDTO dto = (HelloDTO) list.get(index);
+            final HelloDTO dto = (HelloDTO) list.get(index);
             if (dto.getId() == baseDTO.getId()) {
                 return dto;
             }
@@ -49,7 +56,31 @@ public class HelloWorldFileDAOImpl extends FileBaseDAO {
     }
 
     public void update(BaseDTO baseDTO) throws DAOException {
+        final List list = findAll();
+        for (int index = 0; index < list.size(); index++) {
+            final HelloDTO dto = (HelloDTO) list.get(index);
+            if (dto.getId() == baseDTO.getId()) {
+                list.set(index, (HelloDTO) baseDTO);
+            }
+        }
+        syncFile(list);
+    }
 
+    public void delete(BaseDTO baseDTO) throws DAOException {
+        boolean existing = false;
+        final List list = findAll();
+        int index = 0;
+        for (; index < list.size(); index++) {
+            HelloDTO dto = (HelloDTO) list.get(index);
+            if (dto.getId() == baseDTO.getId()) {
+                existing = true;
+                break;
+            }
+        }
+        if (existing) {
+            list.remove(index);
+            syncFile(list);
+        }
     }
 
     public List findAll() throws DAOException {
@@ -102,30 +133,4 @@ public class HelloWorldFileDAOImpl extends FileBaseDAO {
 
     }
 
-    public String getLine(final BaseDTO baseDTO) {
-        final HelloDTO dto = (HelloDTO) baseDTO;
-        final String DEFAULT_SEPARATOR = ";";
-        return dto.getId() + DEFAULT_SEPARATOR
-                + dto.getMessage() + DEFAULT_SEPARATOR
-                + DateUtils.getDateTime(dto.getDateOfCreation(), Locale.getDefault()) + DEFAULT_SEPARATOR;
-    }
-
-    public void syncFile(final List list) throws DAOException {
-        if (list == null) {
-            return;
-        }
-
-        try {
-            final boolean APPEND_FILE = false;
-            final FileWriter out = new FileWriter(dataFile.getAbsoluteFile().getPath(), APPEND_FILE);
-            for (int index = 0; index < list.size(); index++) {
-                BaseDTO dto = (BaseDTO) list.get(index);
-                final String line = getLine(dto);
-                out.write(line + "\n");
-            }
-            out.close();
-        } catch (IOException e) {
-            throw new DAOException(DAOException.ERROR_DAO_01, e.getMessage(), e);
-        }
-    }
 }

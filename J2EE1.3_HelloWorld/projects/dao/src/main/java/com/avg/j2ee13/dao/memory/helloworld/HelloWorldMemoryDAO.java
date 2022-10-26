@@ -22,6 +22,10 @@ public class HelloWorldMemoryDAO extends MemoryBaseDAO {
 
     }
 
+    public void delete(BaseDTO baseDTO) throws DAOException {
+
+    }
+
     public List findAll() throws DAOException {
         return getData();
     }

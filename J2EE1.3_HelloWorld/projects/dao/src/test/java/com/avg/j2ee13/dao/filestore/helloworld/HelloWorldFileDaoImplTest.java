@@ -23,6 +23,7 @@ public class HelloWorldFileDaoImplTest extends MockObjectTestCase {
 
     protected static final Log logger = LogFactory.getLog(HelloWorldFileDaoImplTest.class);
     ServiceLocator locator;
+    IGenericDAO daoFactory;
 
     public void test_dummy() {
         assertEquals(1, 1);
@@ -36,24 +37,31 @@ public class HelloWorldFileDaoImplTest extends MockObjectTestCase {
         URL configurationUrl = classLoader.getResource("test.configuration.properties");
         System.setProperty(ServiceLocator.FILE_APP_CONFIGURATION, configurationUrl.getFile());
 
+        locator = ServiceLocator.getInstance();
+        HashMap parameters = new HashMap();
+        parameters.put(DAOParameters.SERVICE_LOCATOR, locator);
+        daoFactory = GenericDAOFactory.getInstance().getDAO(DAOParameters.FILE_STORE, HelloWorldFileDAOImpl.class, parameters);
+
     }
 
-    public void test_insert(){
+    public void test_insert() {
         try {
-            locator = ServiceLocator.getInstance();
-            HashMap parameters = new HashMap();
-            parameters.put(DAOParameters.SERVICE_LOCATOR, locator);
-            IGenericDAO daoFactory = GenericDAOFactory.getInstance().getDAO(DAOParameters.FILE_STORE, HelloWorldFileDAOImpl.class, parameters);
-
-            HelloDTO dto = new HelloDTO();
+            final HelloDTO dto = new HelloDTO();
             dto.setMessage("HelloWorldFileDaoImplTest");
             dto.setDateOfCreation(new Date());
-
             daoFactory.insert(dto);
-
-        } catch (LocalizationException e) {
+        } catch (DAOException e) {
             logger.error(e);
             throw new RuntimeException();
+        }
+
+    }
+
+    public void test_delete() {
+        try {
+            HelloDTO dto = new HelloDTO();
+            dto.setId(1L);
+            daoFactory.delete(dto);
         } catch (DAOException e) {
             logger.error(e);
             throw new RuntimeException();
@@ -64,7 +72,7 @@ public class HelloWorldFileDaoImplTest extends MockObjectTestCase {
     public static void main(String[] args) throws Exception {
         HelloWorldFileDaoImplTest test = new HelloWorldFileDaoImplTest();
         test.setUp();
-        test.test_insert();
+        test.test_delete();
     }
 
 }

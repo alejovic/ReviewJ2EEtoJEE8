@@ -87,6 +87,10 @@ public class HelloWorldDatabaseDAO extends DatabaseDAO {
         }
     }
 
+    public void delete(BaseDTO baseDTO) throws DAOException {
+
+    }
+
     public List findAll() throws DAOException {
         List result = new ArrayList();
 
