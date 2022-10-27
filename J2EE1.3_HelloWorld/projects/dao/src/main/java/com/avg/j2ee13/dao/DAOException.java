@@ -8,12 +8,16 @@ import java.io.Serializable;
 
 public class DAOException extends Exception implements Serializable {
 
-    private transient Log logger = LogFactory.getLog(this.getClass());
+    private final transient Log logger = LogFactory.getLog(this.getClass());
 
-    public final static String ERROR_DAO_01 = "ERROR_DAO_01";
-
-    private String code;
-    private Throwable cause;
+    public static final String DAO_INSTANCE_CLASS = "DAO_INSTANCE_CLASS";
+    public static final String DAO_FACTORY_CLASS = "DAO_FACTORY_CLASS";
+    public static final String DAO_ERROR_FILE_SYNC = "DAO_ERROR_FILE_SYNC";
+    public static final String DAO_ERROR_CONNECTION = "DAO_ERROR_CONNECTION";
+    public static final String DAO_ERROR_FIND_ALL = "DAO_ERROR_FIND_ALL";
+    public static final String DAO_ERROR_FIND = "DAO_ERROR_FIND";
+    public static final String DAO_ERROR_INSERT = "DAO_ERROR_INSERT";
+    public static final String DAO_ERROR_UPDATE = "DAO_ERROR_UPDATE";
 
     public DAOException(String code, String message) {
         this(code, message, null);
@@ -21,29 +25,11 @@ public class DAOException extends Exception implements Serializable {
 
     public DAOException(String code, String message, Throwable cause) {
         super(code + " : " + message);
-        this.code = code;
-        this.cause = cause;
         if (code != null) {
             logger.error(cause);
         } else {
             logger.error(this);
         }
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public Throwable getCause() {
-        return cause;
-    }
-
-    public void setCause(Throwable cause) {
-        this.cause = cause;
     }
 
 }

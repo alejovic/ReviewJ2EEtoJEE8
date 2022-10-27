@@ -8,9 +8,9 @@ import java.util.HashMap;
 
 public abstract class LDAPBaseDAO extends GenericAbstractDAO {
 
-    protected static final Log log = LogFactory.getLog(LDAPBaseDAO.class);
+    protected static final Log logger = LogFactory.getLog(LDAPBaseDAO.class);
 
-    public LDAPBaseDAO(HashMap parameters) {
+    protected LDAPBaseDAO(HashMap parameters) {
         super(parameters);
     }
 

@@ -4,25 +4,25 @@ import com.avg.j2ee13.util.localization.ServiceLocator;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public abstract class GenericAbstractDAO implements IGenericDAO {
 
     protected static final Log logger = LogFactory.getLog(GenericAbstractDAO.class);
 
-    private HashMap parameters;
+    private Map parameters;
     protected ServiceLocator locator;
 
-    public GenericAbstractDAO(HashMap parameters) {
+    protected GenericAbstractDAO(Map parameters) {
         this.parameters = parameters;
         locator = (ServiceLocator) parameters.get("SERVICE_LOCATOR");
     }
 
-    public HashMap getParameters() {
+    public Map getParameters() {
         return parameters;
     }
 
-    public void setParameters(HashMap parameters) {
+    public void setParameters(Map parameters) {
         this.parameters = parameters;
     }
 }

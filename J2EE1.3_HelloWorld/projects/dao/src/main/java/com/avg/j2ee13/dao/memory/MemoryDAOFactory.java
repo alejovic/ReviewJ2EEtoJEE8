@@ -7,11 +7,12 @@ import org.apache.commons.logging.LogFactory;
 
 import java.lang.reflect.Constructor;
 import java.util.HashMap;
+import java.util.Map;
 
 public class MemoryDAOFactory {
 
     protected Log log = LogFactory.getLog(MemoryDAOFactory.class);
-    private  static final String ERROR_DAO = "ERR_DAO";
+    private static final String ERROR_DAO = "ERR_DAO";
 
     private static MemoryDAOFactory instance;
 
@@ -25,7 +26,7 @@ public class MemoryDAOFactory {
         return instance;
     }
 
-    public IGenericDAO getDAO(Class clazz, HashMap parameters) throws DAOException {
+    public IGenericDAO getDAO(Class clazz, Map parameters) throws DAOException {
         MemoryBaseDAO dao = null;
 
         try {

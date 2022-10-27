@@ -32,7 +32,7 @@ public abstract class FileBaseDAO extends GenericAbstractDAO {
 
     public abstract Class getDTOClass();
 
-    public String getLine(final BaseDTO baseDTO, Class dtoClass, String[] orderFields) throws InvocationTargetException, IllegalAccessException {
+    private String getLine(final BaseDTO baseDTO, Class dtoClass, String[] orderFields) throws InvocationTargetException, IllegalAccessException {
         final StringBuffer stringBuffer = new StringBuffer(100);
 
         final Method[] methods = dtoClass.getDeclaredMethods();
@@ -64,7 +64,7 @@ public abstract class FileBaseDAO extends GenericAbstractDAO {
         return stringBuffer.toString();
     }
 
-    public void syncFile(final List list) throws DAOException {
+    protected void syncFile(final List list) throws DAOException {
         if (list == null) {
             return;
         }
@@ -79,11 +79,11 @@ public abstract class FileBaseDAO extends GenericAbstractDAO {
             }
             out.close();
         } catch (IOException e) {
-            throw new DAOException(DAOException.ERROR_DAO_01, e.getMessage(), e);
+            throw new DAOException(DAOException.DAO_ERROR_FILE_SYNC, e.getMessage(), e);
         } catch (InvocationTargetException e) {
-            throw new DAOException(DAOException.ERROR_DAO_01, e.getMessage(), e);
+            throw new DAOException(DAOException.DAO_ERROR_FILE_SYNC, e.getMessage(), e);
         } catch (IllegalAccessException e) {
-            throw new DAOException(DAOException.ERROR_DAO_01, e.getMessage(), e);
+            throw new DAOException(DAOException.DAO_ERROR_FILE_SYNC, e.getMessage(), e);
         }
     }
 

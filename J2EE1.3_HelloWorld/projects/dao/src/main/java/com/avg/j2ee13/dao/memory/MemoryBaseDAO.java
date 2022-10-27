@@ -10,11 +10,11 @@ import java.util.List;
 
 public abstract class MemoryBaseDAO extends GenericAbstractDAO {
 
-    protected static final Log log = LogFactory.getLog(MemoryBaseDAO.class);
+    protected static final Log logger = LogFactory.getLog(MemoryBaseDAO.class);
 
     private List data = new LinkedList();
 
-    public MemoryBaseDAO(HashMap parameters) {
+    protected MemoryBaseDAO(HashMap parameters) {
         super(parameters);
     }
 

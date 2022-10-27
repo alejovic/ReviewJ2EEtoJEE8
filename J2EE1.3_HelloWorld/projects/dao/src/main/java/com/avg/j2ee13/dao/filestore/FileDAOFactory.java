@@ -2,17 +2,17 @@ package com.avg.j2ee13.dao.filestore;
 
 import com.avg.j2ee13.dao.DAOException;
 import com.avg.j2ee13.dao.IGenericDAO;
-import com.avg.j2ee13.dao.memory.MemoryBaseDAO;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import java.lang.reflect.Constructor;
 import java.util.HashMap;
+import java.util.Map;
 
 public class FileDAOFactory {
 
-    protected Log log = LogFactory.getLog(FileDAOFactory.class);
-    private  static final String ERROR_DAO = "ERR_DAO";
+    protected Log logger = LogFactory.getLog(FileDAOFactory.class);
+    private static final String ERROR_DAO = "ERR_DAO";
 
     private static FileDAOFactory instance;
 
@@ -26,7 +26,7 @@ public class FileDAOFactory {
         return instance;
     }
 
-    public IGenericDAO getDAO(Class clazz, HashMap parameters) throws DAOException {
+    public IGenericDAO getDAO(Class clazz, Map parameters) throws DAOException {
         FileBaseDAO dao = null;
 
         try {
@@ -43,7 +43,7 @@ public class FileDAOFactory {
         } catch (InstantiationException e) {
             throw new DAOException(ERROR_DAO, clazz.getName(), e);
         } catch (Exception e) {
-            log.error(e.getMessage());
+            logger.error(e.getMessage());
         }
 
         return dao;

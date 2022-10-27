@@ -19,11 +19,11 @@ public class HelloWorldMemoryDAO extends MemoryBaseDAO {
     }
 
     public void update(BaseDTO baseDTO) throws DAOException {
-
+        throw new UnsupportedOperationException();
     }
 
     public void delete(BaseDTO baseDTO) throws DAOException {
-
+        throw new UnsupportedOperationException();
     }
 
     public List findAll() throws DAOException {

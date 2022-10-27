@@ -46,7 +46,7 @@ public class HelloWorldDatabaseDAO extends DatabaseDAO {
             ps.execute();
 
         } catch (SQLException e) {
-            throw new DAOException(DAOException.ERROR_DAO_01, e.getMessage(), e);
+            throw new DAOException(DAOException.DAO_ERROR_INSERT, e.getMessage(), e);
         } finally {
             this.closeAll(conn, ps, null);
         }
@@ -78,10 +78,10 @@ public class HelloWorldDatabaseDAO extends DatabaseDAO {
             ps.setDate(2, new java.sql.Date(dto.getDateOfCreation().getTime()));
             ps.execute();
 
-            logger.debug("SQL ejecutado: " + sql.toString());
+            logger.debug("SQL ejecutado: " + sql);
 
         } catch (SQLException e) {
-            throw new DAOException(DAOException.ERROR_DAO_01, e.getMessage(), e);
+            throw new DAOException(DAOException.DAO_ERROR_UPDATE, e.getMessage(), e);
         } finally {
             this.closeAll(conn, ps, null);
         }
@@ -119,7 +119,7 @@ public class HelloWorldDatabaseDAO extends DatabaseDAO {
             }
 
         } catch (SQLException e) {
-            throw new DAOException(DAOException.ERROR_DAO_01, e.getMessage(), e);
+            throw new DAOException(DAOException.DAO_ERROR_FIND_ALL, e.getMessage(), e);
         } finally {
             this.closeAll(conn, ps, rs);
         }
@@ -135,7 +135,6 @@ public class HelloWorldDatabaseDAO extends DatabaseDAO {
     }
 
     private void find(BaseDTO baseDTO) throws DAOException {
-        HelloDTO result = null;
 
         StringBuffer sql = new StringBuffer(100);
         Connection conn = null;
@@ -166,7 +165,6 @@ public class HelloWorldDatabaseDAO extends DatabaseDAO {
                     sql.append(" AND ");
                 }
                 sql.append(" DATEOFORDER = ? ");
-                isAnd = true;
             }
 
             ps = conn.prepareStatement(sql.toString());
@@ -179,17 +177,16 @@ public class HelloWorldDatabaseDAO extends DatabaseDAO {
             if (dto.getDateOfCreation() != null) {
                 ps.setDate(parameter, new java.sql.Date(dto.getDateOfCreation()
                         .getTime()));
-                parameter++;
             }
 
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                result = buildDTO(rs);
+                buildDTO(rs);
             }
 
         } catch (SQLException e) {
-            throw new DAOException(DAOException.ERROR_DAO_01, e.getMessage(), e);
+            throw new DAOException(DAOException.DAO_ERROR_FIND, e.getMessage(), e);
         } finally {
             this.closeAll(conn, ps, rs);
         }

@@ -4,7 +4,7 @@ import com.avg.j2ee13.dao.database.DatabaseDAOFactory;
 import com.avg.j2ee13.dao.filestore.FileDAOFactory;
 import com.avg.j2ee13.dao.memory.MemoryDAOFactory;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public class GenericDAOFactory {
 
@@ -20,18 +20,17 @@ public class GenericDAOFactory {
         return instance;
     }
 
-    public IGenericDAO getDAO(final int factory, final Class clazz, final HashMap parameters) throws DAOException {
-        IGenericDAO dao = null;
+    public IGenericDAO getDAO(final int factory, final Class clazz, final Map parameters) throws DAOException {
         switch (factory) {
-            case DAOParameters.LDAP:
-                throw new DAOException(DAOException.ERROR_DAO_01, "Not implemented");
             case DAOParameters.ORACLE:
                 return DatabaseDAOFactory.getInstance().getDAO(clazz, parameters);
             case DAOParameters.MEMORY:
                 return MemoryDAOFactory.getInstance().getDAO(clazz, parameters);
             case DAOParameters.FILE_STORE:
                 return FileDAOFactory.getInstance().getDAO(clazz, parameters);
+            case DAOParameters.LDAP:
+            default:
+                throw new DAOException(DAOException.DAO_FACTORY_CLASS, "Not implemented");
         }
-        throw new DAOException(DAOException.ERROR_DAO_01, "Not implemented");
     }
 }

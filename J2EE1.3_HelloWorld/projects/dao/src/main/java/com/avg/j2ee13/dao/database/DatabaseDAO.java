@@ -16,20 +16,17 @@ public abstract class DatabaseDAO extends GenericAbstractDAO {
 
     protected static final Log logger = LogFactory.getLog(DatabaseDAO.class);
 
-    public DatabaseDAO(HashMap parameters) {
-        //podria iniciar aqui
+    protected DatabaseDAO(HashMap parameters) {
         super(parameters);
     }
 
     protected Connection getConnection() throws DAOException {
         try {
             String dsName = (String) getParameters().get("DS_NAME");
-            Connection connection = ServiceLocator.getInstance().getConnection(dsName);
-
-            return connection;
+            return ServiceLocator.getInstance().getConnection(dsName);
         } catch (Exception e) {
             logger.error(e);
-            throw new DAOException(DAOException.ERROR_DAO_01, e.getMessage(), e);
+            throw new DAOException(DAOException.DAO_ERROR_CONNECTION, e.getMessage(), e);
         }
     }
 

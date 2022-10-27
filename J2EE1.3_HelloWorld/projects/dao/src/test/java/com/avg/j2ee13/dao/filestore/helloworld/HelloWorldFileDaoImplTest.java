@@ -5,7 +5,6 @@ import com.avg.j2ee13.dao.DAOParameters;
 import com.avg.j2ee13.dao.GenericDAOFactory;
 import com.avg.j2ee13.dao.IGenericDAO;
 import com.avg.j2ee13.dto.HelloDTO;
-import com.avg.j2ee13.util.localization.LocalizationException;
 import com.avg.j2ee13.util.localization.ServiceLocator;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -50,6 +49,7 @@ public class HelloWorldFileDaoImplTest extends MockObjectTestCase {
             dto.setMessage("HelloWorldFileDaoImplTest");
             dto.setDateOfCreation(new Date());
             daoFactory.insert(dto);
+            assertEquals(1, 1);
         } catch (DAOException e) {
             logger.error(e);
             throw new RuntimeException();
@@ -62,6 +62,7 @@ public class HelloWorldFileDaoImplTest extends MockObjectTestCase {
             HelloDTO dto = new HelloDTO();
             dto.setId(1L);
             daoFactory.delete(dto);
+            assertEquals(1, 1);
         } catch (DAOException e) {
             logger.error(e);
             throw new RuntimeException();

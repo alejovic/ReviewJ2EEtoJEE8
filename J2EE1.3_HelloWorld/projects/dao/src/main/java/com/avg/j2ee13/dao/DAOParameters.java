@@ -1,12 +1,14 @@
 package com.avg.j2ee13.dao;
 
-public interface DAOParameters {
+public final class DAOParameters {
+    private DAOParameters() {
+    }
 
-    String SERVICE_LOCATOR = "SERVICE_LOCATOR";
-    String DAO_DATASOURCE = "DAO_DATASOURCE";
+    public static final String SERVICE_LOCATOR = "SERVICE_LOCATOR";
+    public static final String DAO_DATASOURCE = "DAO_DATASOURCE";
 
-    int LDAP = 1;
-    int ORACLE = 2;
-    int MEMORY = 3;
-    int FILE_STORE = 4;
+    public static final int LDAP = 1;
+    public static final int ORACLE = 2;
+    public static final int MEMORY = 3;
+    public static final int FILE_STORE = 4;
 }

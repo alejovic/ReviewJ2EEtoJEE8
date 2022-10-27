@@ -43,11 +43,11 @@ public class HelloWorldFileDAOImpl extends FileBaseDAO {
         for (int index = 0; index < list.size(); index++) {
             final HelloDTO dto = (HelloDTO) list.get(index);
             if (dto.getId() == baseDTO.getId()) {
-                return dto;
+                existing = true;
             }
         }
         if (!existing) {
-            final long id = new Long(list.size()).longValue() + 1;
+            final long id = Long.parseLong(list.size() + "") + 1;
             baseDTO.setId(id);
             list.add(baseDTO);
             syncFile(list);
@@ -60,7 +60,7 @@ public class HelloWorldFileDAOImpl extends FileBaseDAO {
         for (int index = 0; index < list.size(); index++) {
             final HelloDTO dto = (HelloDTO) list.get(index);
             if (dto.getId() == baseDTO.getId()) {
-                list.set(index, (HelloDTO) baseDTO);
+                list.set(index, baseDTO);
             }
         }
         syncFile(list);
@@ -102,9 +102,9 @@ public class HelloWorldFileDAOImpl extends FileBaseDAO {
             }
 
         } catch (IOException e) {
-            throw new DAOException(DAOException.ERROR_DAO_01, e.getMessage(), e);
+            throw new DAOException(DAOException.DAO_ERROR_FIND_ALL, e.getMessage(), e);
         } catch (ParseException e) {
-            throw new DAOException(DAOException.ERROR_DAO_01, e.getMessage(), e);
+            throw new DAOException(DAOException.DAO_ERROR_FIND_ALL, e.getMessage(), e);
         } finally {
             closeAll(bufferedReader, fileReader);
         }
