@@ -14,23 +14,49 @@ public class HelloWorldMemoryDAO extends MemoryBaseDAO {
     }
 
     public BaseDTO insert(BaseDTO baseDTO) throws DAOException {
-        getData().add(baseDTO);
-        return baseDTO;
+        try {
+            getData().add(baseDTO);
+            return baseDTO;
+        } catch (Exception e) {
+            throw new DAOException(DAOException.DAO_ERROR_INSERT, e.getMessage(), e);
+        }
     }
 
     public void update(BaseDTO baseDTO) throws DAOException {
-        throw new UnsupportedOperationException();
+        try {
+            final int index = getIndex(baseDTO);
+            getData().set(index, baseDTO);
+        } catch (Exception e) {
+            throw new DAOException(DAOException.DAO_ERROR_UPDATE, e.getMessage(), e);
+        }
     }
 
     public void delete(BaseDTO baseDTO) throws DAOException {
-        throw new UnsupportedOperationException();
+        try {
+            final int index = getIndex(baseDTO);
+            getData().remove(index);
+        } catch (Exception e) {
+            throw new DAOException(DAOException.DAO_ERROR_DELETE, e.getMessage(), e);
+        }
     }
 
     public List findAll() throws DAOException {
-        return getData();
+        try {
+            return getData();
+        } catch (Exception e) {
+            throw new DAOException(DAOException.DAO_ERROR_FIND_ALL, e.getMessage(), e);
+        }
     }
 
     public BaseDTO findById(long id) throws DAOException {
-        return (BaseDTO) getData().get((int) id);
+        try {
+            return (BaseDTO) getData().get((int) id);
+        } catch (Exception e) {
+            throw new DAOException(DAOException.DAO_ERROR_FIND, e.getMessage(), e);
+        }
+    }
+
+    private int getIndex(BaseDTO baseDTO) {
+        return getData().indexOf(baseDTO);
     }
 }

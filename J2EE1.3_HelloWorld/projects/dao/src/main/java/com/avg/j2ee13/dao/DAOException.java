@@ -18,6 +18,7 @@ public class DAOException extends Exception implements Serializable {
     public static final String DAO_ERROR_FIND = "DAO_ERROR_FIND";
     public static final String DAO_ERROR_INSERT = "DAO_ERROR_INSERT";
     public static final String DAO_ERROR_UPDATE = "DAO_ERROR_UPDATE";
+    public static final String DAO_ERROR_DELETE = "DAO_ERROR_DELETE";
 
     public DAOException(String code, String message) {
         this(code, message, null);

@@ -13,4 +13,17 @@ public abstract class BaseDTO implements Serializable {
     public void setId(long id) {
         this.id = id;
     }
+
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        BaseDTO baseDTO = (BaseDTO) o;
+
+        return id == baseDTO.id;
+    }
+
+    public int hashCode() {
+        return (int) (id ^ (id >>> 32));
+    }
 }

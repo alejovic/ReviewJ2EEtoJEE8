@@ -20,7 +20,6 @@ public class HelloWorldFileDAOImpl extends FileBaseDAO {
 
     private static final String FILE = "helloworld.txt";
 
-
     public HelloWorldFileDAOImpl(HashMap parameters) throws IOException {
         super(parameters);
     }
@@ -38,48 +37,60 @@ public class HelloWorldFileDAOImpl extends FileBaseDAO {
     }
 
     public BaseDTO insert(BaseDTO baseDTO) throws DAOException {
-        boolean existing = false;
-        final List list = findAll();
-        for (int index = 0; index < list.size(); index++) {
-            final HelloDTO dto = (HelloDTO) list.get(index);
-            if (dto.getId() == baseDTO.getId()) {
-                existing = true;
+        try {
+            boolean existing = false;
+            final List list = findAll();
+            for (int index = 0; index < list.size(); index++) {
+                final HelloDTO dto = (HelloDTO) list.get(index);
+                if (dto.getId() == baseDTO.getId()) {
+                    existing = true;
+                }
             }
+            if (!existing) {
+                final long id = Long.parseLong(list.size() + "") + 1;
+                baseDTO.setId(id);
+                list.add(baseDTO);
+                syncFile(list);
+            }
+            return baseDTO;
+        } catch (Exception e) {
+            throw new DAOException(DAOException.DAO_ERROR_INSERT, e.getMessage(), e);
         }
-        if (!existing) {
-            final long id = Long.parseLong(list.size() + "") + 1;
-            baseDTO.setId(id);
-            list.add(baseDTO);
-            syncFile(list);
-        }
-        return baseDTO;
     }
 
     public void update(BaseDTO baseDTO) throws DAOException {
-        final List list = findAll();
-        for (int index = 0; index < list.size(); index++) {
-            final HelloDTO dto = (HelloDTO) list.get(index);
-            if (dto.getId() == baseDTO.getId()) {
-                list.set(index, baseDTO);
+        try {
+            final List list = findAll();
+            for (int index = 0; index < list.size(); index++) {
+                final HelloDTO dto = (HelloDTO) list.get(index);
+                if (dto.getId() == baseDTO.getId()) {
+                    list.set(index, baseDTO);
+                }
             }
+            syncFile(list);
+        } catch (Exception e) {
+            throw new DAOException(DAOException.DAO_ERROR_UPDATE, e.getMessage(), e);
         }
-        syncFile(list);
     }
 
     public void delete(BaseDTO baseDTO) throws DAOException {
-        boolean existing = false;
-        final List list = findAll();
-        int index = 0;
-        for (; index < list.size(); index++) {
-            HelloDTO dto = (HelloDTO) list.get(index);
-            if (dto.getId() == baseDTO.getId()) {
-                existing = true;
-                break;
+        try {
+            boolean existing = false;
+            final List list = findAll();
+            int index = 0;
+            for (; index < list.size(); index++) {
+                HelloDTO dto = (HelloDTO) list.get(index);
+                if (dto.getId() == baseDTO.getId()) {
+                    existing = true;
+                    break;
+                }
             }
-        }
-        if (existing) {
-            list.remove(index);
-            syncFile(list);
+            if (existing) {
+                list.remove(index);
+                syncFile(list);
+            }
+        } catch (Exception e) {
+            throw new DAOException(DAOException.DAO_ERROR_DELETE, e.getMessage(), e);
         }
     }
 
@@ -113,15 +124,19 @@ public class HelloWorldFileDAOImpl extends FileBaseDAO {
     }
 
     public BaseDTO findById(long id) throws DAOException {
-        List list = findAll();
-        HelloDTO dto = null;
-        for (int index = 0; index < list.size(); index++) {
-            dto = (HelloDTO) list.get(index);
-            if (dto.getId() == id) {
-                return dto;
+        try {
+            List list = findAll();
+            HelloDTO dto = null;
+            for (int index = 0; index < list.size(); index++) {
+                dto = (HelloDTO) list.get(index);
+                if (dto.getId() == id) {
+                    return dto;
+                }
             }
+            return dto;
+        } catch (Exception e) {
+            throw new DAOException(DAOException.DAO_ERROR_FIND, e.getMessage(), e);
         }
-        return dto;
     }
 
     private HelloDTO buildDTO(final String[] fields) throws ParseException {
