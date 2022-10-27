@@ -22,13 +22,13 @@ public class GenericDAOFactory {
 
     public IGenericDAO getDAO(final int factory, final Class clazz, final Map parameters) throws DAOException {
         switch (factory) {
-            case DAOParameters.ORACLE:
+            case DAOParameters.FACTORY_ORACLE:
                 return DatabaseDAOFactory.getInstance().getDAO(clazz, parameters);
-            case DAOParameters.MEMORY:
+            case DAOParameters.FACTORY_MEMORY:
                 return MemoryDAOFactory.getInstance().getDAO(clazz, parameters);
-            case DAOParameters.FILE_STORE:
+            case DAOParameters.FACTORY_FILE_STORE:
                 return FileDAOFactory.getInstance().getDAO(clazz, parameters);
-            case DAOParameters.LDAP:
+            case DAOParameters.FACTORY_LDAP:
             default:
                 throw new DAOException(DAOException.DAO_FACTORY_CLASS, "Not implemented");
         }

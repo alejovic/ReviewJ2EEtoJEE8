@@ -38,8 +38,8 @@ public class HelloWorldFileDaoImplTest extends MockObjectTestCase {
 
         locator = ServiceLocator.getInstance();
         HashMap parameters = new HashMap();
-        parameters.put(DAOParameters.SERVICE_LOCATOR, locator);
-        daoFactory = GenericDAOFactory.getInstance().getDAO(DAOParameters.FILE_STORE, HelloWorldFileDAOImpl.class, parameters);
+        parameters.put(DAOParameters.PARAM_SERVICE_LOCATOR, locator);
+        daoFactory = GenericDAOFactory.getInstance().getDAO(DAOParameters.FACTORY_FILE_STORE, HelloWorldFileDAOImpl.class, parameters);
 
     }
 
