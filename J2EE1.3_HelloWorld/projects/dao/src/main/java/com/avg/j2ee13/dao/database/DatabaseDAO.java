@@ -1,8 +1,8 @@
 package com.avg.j2ee13.dao.database;
 
 import com.avg.j2ee13.dao.DAOException;
+import com.avg.j2ee13.dao.DAOParameters;
 import com.avg.j2ee13.dao.GenericAbstractDAO;
-import com.avg.j2ee13.util.localization.ServiceLocator;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -10,20 +10,28 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
+import java.util.Map;
 
 public abstract class DatabaseDAO extends GenericAbstractDAO {
 
     protected static final Log logger = LogFactory.getLog(DatabaseDAO.class);
 
-    protected DatabaseDAO(HashMap parameters) {
+    private String dsName;
+
+    protected DatabaseDAO(final Map parameters) throws DAOException {
         super(parameters);
+    }
+
+    protected void initParameters(Map parameters) throws DAOException {
+        if (parameters.get(DAOParameters.PARAM_DAO_DATASOURCE) == null) {
+            throw new DAOException(DAOException.DAO_MISSING_PARAMETER, "Parameter missing -> " + DAOParameters.PARAM_DAO_DATASOURCE);
+        }
+        this.dsName = (String) parameters.get(DAOParameters.PARAM_DAO_DATASOURCE);
     }
 
     protected Connection getConnection() throws DAOException {
         try {
-            String dsName = (String) getParameters().get("DS_NAME");
-            return ServiceLocator.getInstance().getConnection(dsName);
+            return locator.getConnection(this.dsName);
         } catch (Exception e) {
             logger.error(e);
             throw new DAOException(DAOException.DAO_ERROR_CONNECTION, e.getMessage(), e);

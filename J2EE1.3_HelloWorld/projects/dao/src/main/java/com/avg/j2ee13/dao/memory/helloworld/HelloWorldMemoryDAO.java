@@ -4,12 +4,12 @@ import com.avg.j2ee13.dao.DAOException;
 import com.avg.j2ee13.dao.memory.MemoryBaseDAO;
 import com.avg.j2ee13.dto.BaseDTO;
 
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class HelloWorldMemoryDAO extends MemoryBaseDAO {
 
-    public HelloWorldMemoryDAO(HashMap parameters) {
+    public HelloWorldMemoryDAO(final Map parameters) throws DAOException {
         super(parameters);
     }
 

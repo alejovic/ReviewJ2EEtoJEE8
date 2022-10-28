@@ -1,12 +1,15 @@
 package com.avg.j2ee13.dao.database;
 
 import com.avg.j2ee13.dao.DAOException;
-import com.avg.j2ee13.dao.IGenericDAO;
 
 import java.lang.reflect.Constructor;
-import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Simple Factory.
+ * <p>
+ * Factory Maker for Database
+ */
 public class DatabaseDAOFactory {
 
     private static DatabaseDAOFactory instance;
@@ -21,13 +24,13 @@ public class DatabaseDAOFactory {
         return instance;
     }
 
-    public IGenericDAO getDAO(Class clazz, Map parameters) throws DAOException {
-        DatabaseDAO dao = null;
+    public DatabaseDAO getDAO(Class clazz, Map parameters) throws DAOException {
+        DatabaseDAO dao;
 
         try {
             Class daoClass = Class.forName(clazz.getName(), true, Thread
                     .currentThread().getContextClassLoader());
-            Class[] parameterTypes = new Class[]{HashMap.class};
+            Class[] parameterTypes = new Class[]{Map.class};
             Constructor ctor = daoClass.getConstructor(parameterTypes);
             dao = (DatabaseDAO) ctor.newInstance(new Object[]{parameters});
         } catch (ClassNotFoundException e) {

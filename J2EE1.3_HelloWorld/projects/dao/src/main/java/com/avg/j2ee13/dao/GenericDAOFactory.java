@@ -6,6 +6,11 @@ import com.avg.j2ee13.dao.memory.MemoryDAOFactory;
 
 import java.util.Map;
 
+/**
+ * Simple Factory.
+ *
+ * Generic DAO Factory
+ */
 public class GenericDAOFactory {
 
     private static GenericDAOFactory instance;

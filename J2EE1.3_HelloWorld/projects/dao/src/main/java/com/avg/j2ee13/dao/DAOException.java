@@ -12,6 +12,8 @@ public class DAOException extends Exception implements Serializable {
 
     public static final String DAO_INSTANCE_CLASS = "DAO_INSTANCE_CLASS";
     public static final String DAO_FACTORY_CLASS = "DAO_FACTORY_CLASS";
+    public static final String DAO_MISSING_PARAMETER = "DAO_MISSING_PARAMETER";
+    public static final String DAO_NO_FILE = "DAO_NO_FILE";
     public static final String DAO_ERROR_FILE_SYNC = "DAO_ERROR_FILE_SYNC";
     public static final String DAO_ERROR_CONNECTION = "DAO_ERROR_CONNECTION";
     public static final String DAO_ERROR_FIND_ALL = "DAO_ERROR_FIND_ALL";

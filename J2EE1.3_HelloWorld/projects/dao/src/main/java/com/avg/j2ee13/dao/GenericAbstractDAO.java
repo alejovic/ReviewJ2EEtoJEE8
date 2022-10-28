@@ -10,19 +10,16 @@ public abstract class GenericAbstractDAO implements IGenericDAO {
 
     protected static final Log logger = LogFactory.getLog(GenericAbstractDAO.class);
 
-    private Map parameters;
     protected ServiceLocator locator;
 
-    protected GenericAbstractDAO(Map parameters) {
-        this.parameters = parameters;
-        locator = (ServiceLocator) parameters.get("SERVICE_LOCATOR");
+    protected GenericAbstractDAO(final Map parameters) throws DAOException {
+        if (parameters.get(DAOParameters.PARAM_SERVICE_LOCATOR) == null) {
+            throw new DAOException(DAOException.DAO_MISSING_PARAMETER, "Parameter missing -> " + DAOParameters.PARAM_DAO_DATASOURCE);
+        }
+        locator = (ServiceLocator) parameters.get(DAOParameters.PARAM_SERVICE_LOCATOR);
+        initParameters(parameters);
     }
 
-    public Map getParameters() {
-        return parameters;
-    }
+    protected abstract void initParameters(final Map parameters) throws DAOException;
 
-    public void setParameters(Map parameters) {
-        this.parameters = parameters;
-    }
 }

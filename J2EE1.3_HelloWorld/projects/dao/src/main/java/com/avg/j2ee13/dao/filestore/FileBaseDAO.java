@@ -9,20 +9,27 @@ import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public abstract class FileBaseDAO extends GenericAbstractDAO {
 
     protected File dataFile;
     protected static final String DEFAULT_LINE_SEPARATOR = ";";
 
-    protected FileBaseDAO(HashMap parameters) throws IOException {
+    protected FileBaseDAO(final Map parameters) throws DAOException {
         super(parameters);
+    }
+
+    protected void initParameters(Map parameters) throws DAOException {
         dataFile = new File(locator.getFileDataSource() + File.separator + getFileName());
-        if (dataFile.createNewFile()) {
-            logger.info("FileBaseDAO A new file has been created -> " + dataFile.getAbsolutePath());
+        try {
+            if (dataFile.createNewFile()) {
+                logger.info("FileBaseDAO A new file has been created -> " + dataFile.getAbsolutePath());
+            }
+        } catch (IOException e) {
+            throw new DAOException(DAOException.DAO_NO_FILE, e.getMessage(), e);
         }
     }
 

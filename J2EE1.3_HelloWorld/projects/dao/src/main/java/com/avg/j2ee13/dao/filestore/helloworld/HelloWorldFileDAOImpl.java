@@ -12,15 +12,15 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class HelloWorldFileDAOImpl extends FileBaseDAO {
 
     private static final String FILE = "helloworld.txt";
 
-    public HelloWorldFileDAOImpl(HashMap parameters) throws IOException {
+    public HelloWorldFileDAOImpl(final Map parameters) throws DAOException {
         super(parameters);
     }
 
