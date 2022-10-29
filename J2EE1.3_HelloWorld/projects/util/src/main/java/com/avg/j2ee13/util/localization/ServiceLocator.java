@@ -41,7 +41,8 @@ public class ServiceLocator {
     private static final String P_DB_PASSWORD = ROOT_APPLICATION_NAME + ".bd.password";
     private static final String P_DB_URL = ROOT_APPLICATION_NAME + ".bd.url";
     private static final String P_DB_DRIVER = ROOT_APPLICATION_NAME + ".bd.driver";
-    private static final String P_FILE_STORE_LOCATION = ROOT_APPLICATION_NAME + ".filestore.path";
+    private static final String P_DAO_FACTORY= ROOT_APPLICATION_NAME + ".dao.factory";
+    private static final String P_DAO_FILE_STORE_LOCATION = ROOT_APPLICATION_NAME + ".dao.filestore.path";
 
     public static final String FILE_APP_CONFIGURATION = ROOT_APPLICATION_NAME + ".configuration.properties";
 
@@ -239,7 +240,11 @@ public class ServiceLocator {
         return PropertiesConfiguration.getInstance(jndiPropertiesFile);
     }
 
-    public String getFileDataSource(){
-        return getAppConfiguration().getProperty(P_FILE_STORE_LOCATION);
+    public String getDAOFileDataSource(){
+        return getAppConfiguration().getProperty(P_DAO_FILE_STORE_LOCATION);
+    }
+
+    public int getDAOFactory(){
+        return getAppConfiguration().getIntProperty(P_DAO_FACTORY);
     }
 }

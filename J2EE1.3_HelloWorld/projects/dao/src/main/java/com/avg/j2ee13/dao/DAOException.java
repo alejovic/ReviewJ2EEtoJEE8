@@ -8,8 +8,6 @@ import java.io.Serializable;
 
 public class DAOException extends Exception implements Serializable {
 
-    private final transient Log logger = LogFactory.getLog(this.getClass());
-
     public static final String DAO_INSTANCE_CLASS = "DAO_INSTANCE_CLASS";
     public static final String DAO_FACTORY_CLASS = "DAO_FACTORY_CLASS";
     public static final String DAO_MISSING_PARAMETER = "DAO_MISSING_PARAMETER";
@@ -21,6 +19,7 @@ public class DAOException extends Exception implements Serializable {
     public static final String DAO_ERROR_INSERT = "DAO_ERROR_INSERT";
     public static final String DAO_ERROR_UPDATE = "DAO_ERROR_UPDATE";
     public static final String DAO_ERROR_DELETE = "DAO_ERROR_DELETE";
+    private final transient Log logger = LogFactory.getLog(this.getClass());
 
     public DAOException(String code, String message) {
         this(code, message, null);

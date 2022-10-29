@@ -3,7 +3,8 @@ package com.avg.j2ee13.dao.filestore.helloworld;
 import com.avg.j2ee13.dao.DAOException;
 import com.avg.j2ee13.dao.DAOParameters;
 import com.avg.j2ee13.dao.IGenericDAO;
-import com.avg.j2ee13.dao.filestore.FileDAOFactory;
+import com.avg.j2ee13.dao.memory.MemoryDAOFactory;
+import com.avg.j2ee13.dao.memory.helloworld.HelloWorldMemoryDAO;
 import com.avg.j2ee13.dto.HelloDTO;
 import com.avg.j2ee13.util.localization.ServiceLocator;
 import org.apache.commons.logging.Log;
@@ -18,14 +19,14 @@ import java.util.HashMap;
  * Junit 3.8.2 http://dev.cs.ovgu.de/java/junit/javadoc/junit/framework/TestCase.html
  * jMock 1.2.0 @see http://jmock.org/jmock1-getting-started.html
  */
-public class HelloWorldFileDaoImplTest extends MockObjectTestCase {
+public class HelloWorldMemoryDaoImplTest extends MockObjectTestCase {
 
-    protected static final Log logger = LogFactory.getLog(HelloWorldFileDaoImplTest.class);
+    protected static final Log logger = LogFactory.getLog(HelloWorldMemoryDaoImplTest.class);
     ServiceLocator locator;
     IGenericDAO daoFactory;
 
     public static void main(String[] args) throws Exception {
-        HelloWorldFileDaoImplTest test = new HelloWorldFileDaoImplTest();
+        HelloWorldMemoryDaoImplTest test = new HelloWorldMemoryDaoImplTest();
         test.setUp();
         test.test_delete();
     }
@@ -35,7 +36,7 @@ public class HelloWorldFileDaoImplTest extends MockObjectTestCase {
     }
 
     public void setUp() throws Exception {
-        Class clazz = Class.forName("com.avg.j2ee13.dao.filestore.helloworld.HelloWorldFileDaoImplTest");
+        Class clazz = Class.forName("com.avg.j2ee13.dao.filestore.helloworld.HelloWorldMemoryDaoImplTest");
         // returns the ClassLoader object associated with this Class.
         ClassLoader classLoader = clazz.getClassLoader();
 
@@ -45,7 +46,7 @@ public class HelloWorldFileDaoImplTest extends MockObjectTestCase {
         locator = ServiceLocator.getInstance();
         HashMap parameters = new HashMap();
         parameters.put(DAOParameters.PARAM_SERVICE_LOCATOR, locator);
-        daoFactory = new FileDAOFactory().createDAO(HelloWorldFileDAOImpl.class, parameters);
+        daoFactory = new MemoryDAOFactory().createDAO(HelloWorldMemoryDAO.class, parameters);
 
     }
 

@@ -16,6 +16,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+/**
+ * Simple Factory -> Factory Method Design Pattern
+ * FileDAO Concrete implementation
+ */
 public class HelloWorldFileDAOImpl extends FileBaseDAO {
 
     private static final String FILE = "helloworld.txt";

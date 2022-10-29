@@ -7,6 +7,10 @@ import com.avg.j2ee13.dto.BaseDTO;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Simple Factory -> Factory Method Design Pattern
+ * MemoryDAO Concrete implementation
+ */
 public class HelloWorldMemoryDAO extends MemoryBaseDAO {
 
     public HelloWorldMemoryDAO(final Map parameters) throws DAOException {

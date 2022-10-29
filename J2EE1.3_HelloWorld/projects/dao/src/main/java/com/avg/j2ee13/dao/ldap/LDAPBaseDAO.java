@@ -14,5 +14,5 @@ public abstract class LDAPBaseDAO extends GenericAbstractDAO {
     protected LDAPBaseDAO(final Map parameters) throws DAOException {
         super(parameters);
     }
-
+//https://hub.docker.com/r/openmicroscopy/apacheds
 }

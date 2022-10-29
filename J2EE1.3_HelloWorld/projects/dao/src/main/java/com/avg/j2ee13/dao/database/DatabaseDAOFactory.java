@@ -1,33 +1,26 @@
 package com.avg.j2ee13.dao.database;
 
 import com.avg.j2ee13.dao.DAOException;
+import com.avg.j2ee13.dao.GenericDAOFactory;
+import com.avg.j2ee13.dao.IGenericDAO;
 
 import java.lang.reflect.Constructor;
 import java.util.Map;
 
 /**
- * Simple Factory.
+ * Simple Factory -> Factory Method Design Pattern
  * <p>
  * Factory Maker for Database
  */
-public class DatabaseDAOFactory {
+public final class DatabaseDAOFactory extends GenericDAOFactory {
 
-    private static DatabaseDAOFactory instance;
-
-    private DatabaseDAOFactory() {
-    }
-
-    public static DatabaseDAOFactory getInstance() {
-        if (instance == null) {
-            instance = new DatabaseDAOFactory();
-        }
-        return instance;
-    }
-
-    public DatabaseDAO getDAO(Class clazz, Map parameters) throws DAOException {
+    public IGenericDAO createDAO(Class clazz, Map parameters) throws DAOException {
         DatabaseDAO dao;
-
         try {
+            if (!DatabaseDAO.class.isAssignableFrom(clazz)) {
+                throw new DAOException(DAOException.DAO_INSTANCE_CLASS, "The class " + clazz + " does not belong to the family -> " + DatabaseDAO.class);
+            }
+
             Class daoClass = Class.forName(clazz.getName(), true, Thread
                     .currentThread().getContextClassLoader());
             Class[] parameterTypes = new Class[]{Map.class};

@@ -14,7 +14,7 @@ public abstract class GenericAbstractDAO implements IGenericDAO {
 
     protected GenericAbstractDAO(final Map parameters) throws DAOException {
         if (parameters.get(DAOParameters.PARAM_SERVICE_LOCATOR) == null) {
-            throw new DAOException(DAOException.DAO_MISSING_PARAMETER, "Parameter missing -> " + DAOParameters.PARAM_DAO_DATASOURCE);
+            throw new DAOException(DAOException.DAO_MISSING_PARAMETER, "Parameter missing -> " + DAOParameters.PARAM_SERVICE_LOCATOR);
         }
         locator = (ServiceLocator) parameters.get(DAOParameters.PARAM_SERVICE_LOCATOR);
         initParameters(parameters);

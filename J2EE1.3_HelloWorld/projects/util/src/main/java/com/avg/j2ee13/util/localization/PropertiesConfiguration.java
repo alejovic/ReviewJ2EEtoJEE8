@@ -63,6 +63,13 @@ public class PropertiesConfiguration {
         return null;
     }
 
+    public int getIntProperty(String key) {
+        if (containsKey(key)) {
+            return Integer.parseInt(bundle.getString(key));
+        }
+        return 0;
+    }
+
     public String getProperty(String key, String defaultValue) {
         if (containsKey(key)) {
             return bundle.getString(key);

@@ -1,36 +1,26 @@
 package com.avg.j2ee13.dao.memory;
 
 import com.avg.j2ee13.dao.DAOException;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.avg.j2ee13.dao.GenericDAOFactory;
+import com.avg.j2ee13.dao.IGenericDAO;
 
 import java.lang.reflect.Constructor;
 import java.util.Map;
 
 /**
- * Simple Factory.
+ * Simple Factory -> Factory Method Design Pattern
  * <p>
  * Factory Maker for MemoryStorage
  */
-public class MemoryDAOFactory {
+public final class MemoryDAOFactory extends GenericDAOFactory {
 
-    protected Log log = LogFactory.getLog(MemoryDAOFactory.class);
-
-    private static MemoryDAOFactory instance;
-
-    private MemoryDAOFactory() {
-    }
-
-    public static MemoryDAOFactory getInstance() {
-        if (instance == null) {
-            instance = new MemoryDAOFactory();
-        }
-        return instance;
-    }
-
-    public MemoryBaseDAO getDAO(Class clazz, Map parameters) throws DAOException {
+    public IGenericDAO createDAO(Class clazz, Map parameters) throws DAOException {
         MemoryBaseDAO dao;
         try {
+            if (!MemoryBaseDAO.class.isAssignableFrom(clazz)) {
+                throw new DAOException(DAOException.DAO_INSTANCE_CLASS, "The class " + clazz + " does not belong to the family -> " + MemoryBaseDAO.class);
+            }
+
             Class daoClass = Class.forName(clazz.getName(), true, Thread
                     .currentThread().getContextClassLoader());
             Class[] parameterTypes = new Class[]{Map.class};

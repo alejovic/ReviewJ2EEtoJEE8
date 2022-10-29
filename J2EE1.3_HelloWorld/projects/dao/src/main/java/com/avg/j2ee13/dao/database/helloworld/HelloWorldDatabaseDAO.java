@@ -13,6 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Simple Factory -> Factory Method Design Pattern
+ * DatabaseDAO Concrete implementation
+ */
 public class HelloWorldDatabaseDAO extends DatabaseDAO {
 
     public HelloWorldDatabaseDAO(final Map parameters) throws DAOException {

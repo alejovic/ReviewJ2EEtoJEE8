@@ -15,15 +15,15 @@ import java.util.Map;
 
 public abstract class FileBaseDAO extends GenericAbstractDAO {
 
-    protected File dataFile;
     protected static final String DEFAULT_LINE_SEPARATOR = ";";
+    protected File dataFile;
 
     protected FileBaseDAO(final Map parameters) throws DAOException {
         super(parameters);
     }
 
     protected void initParameters(Map parameters) throws DAOException {
-        dataFile = new File(locator.getFileDataSource() + File.separator + getFileName());
+        dataFile = new File(locator.getDAOFileDataSource() + File.separator + getFileName());
         try {
             if (dataFile.createNewFile()) {
                 logger.info("FileBaseDAO A new file has been created -> " + dataFile.getAbsolutePath());
