@@ -244,6 +244,10 @@ public class ServiceLocator {
         return getAppConfiguration().getProperty(P_DAO_FILE_STORE_LOCATION);
     }
 
+    public String getDAODBDataSource(){
+        return getJndiConfiguration().getProperty(P_APP_DATASOURCE);
+    }
+
     public int getDAOFactory(){
         return getAppConfiguration().getIntProperty(P_DAO_FACTORY);
     }

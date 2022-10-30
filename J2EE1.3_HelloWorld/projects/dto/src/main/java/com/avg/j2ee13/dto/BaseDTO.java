@@ -26,4 +26,10 @@ public abstract class BaseDTO implements Serializable {
     public int hashCode() {
         return (int) (id ^ (id >>> 32));
     }
+
+    public String toString() {
+        return "BaseDTO{" +
+                "id=" + id +
+                '}';
+    }
 }

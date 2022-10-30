@@ -1,8 +1,6 @@
 package com.avg.j2ee13.dao.filestore.helloworld;
 
-import com.avg.j2ee13.dao.DAOException;
-import com.avg.j2ee13.dao.DAOParameters;
-import com.avg.j2ee13.dao.IGenericDAO;
+import com.avg.j2ee13.dao.*;
 import com.avg.j2ee13.dao.filestore.FileDAOFactory;
 import com.avg.j2ee13.dto.HelloDTO;
 import com.avg.j2ee13.util.localization.ServiceLocator;
@@ -23,6 +21,7 @@ public class HelloWorldFileDaoImplTest extends MockObjectTestCase {
     protected static final Log logger = LogFactory.getLog(HelloWorldFileDaoImplTest.class);
     ServiceLocator locator;
     IGenericDAO daoFactory;
+    IGenericDAO defaultDaoFactory;
 
     public static void main(String[] args) throws Exception {
         HelloWorldFileDaoImplTest test = new HelloWorldFileDaoImplTest();
@@ -45,6 +44,10 @@ public class HelloWorldFileDaoImplTest extends MockObjectTestCase {
         locator = ServiceLocator.getInstance();
         HashMap parameters = new HashMap();
         parameters.put(DAOParameters.PARAM_SERVICE_LOCATOR, locator);
+
+        GenericDAOFactory genericDAOFactory = DAOFactoryMaker.getInstance().createDefaultDAOFactory();
+        defaultDaoFactory = genericDAOFactory.createDAO(HelloWorldFileDAOImpl.class, parameters);
+
         daoFactory = new FileDAOFactory().createDAO(HelloWorldFileDAOImpl.class, parameters);
 
     }

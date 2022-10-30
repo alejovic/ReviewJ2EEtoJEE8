@@ -1,0 +1,6 @@
+<!DOCTYPE application-client PUBLIC "-//Sun Microsystems,
+Inc.//DTD J2EE Application Client 1.2//EN"
+        "http://java.sun.com/j2ee/dtds/application-client_1_2.dtd">
+<application-client>
+    <display-name>client-delegate-test</display-name>
+</application-client>
