@@ -50,7 +50,7 @@ public class HelloWorldTransferFromMemoryToFileBO implements IHelloWorldTransfer
     }
 
     private void writeData(List data) throws DAOException {
-        IGenericDAO dao = daoTargetFactory.createDAO(HelloWorldFileDAOImpl.class, this.parameters);
+        IGenericDAO dao = daoTargetFactory.createDAO(HelloWorldFileDAOImpl.class);
         for (int index = 0; index < data.size(); index++) {
             HelloDTO dto = (HelloDTO) data.get(index);
             dao.insert(dto);
@@ -58,7 +58,7 @@ public class HelloWorldTransferFromMemoryToFileBO implements IHelloWorldTransfer
     }
 
     private List getDataSource() throws DAOException {
-        IGenericDAO dao = daoSourceFactory.createDAO(HelloWorldMemoryDAO.class, this.parameters);
+        IGenericDAO dao = daoSourceFactory.createDAO(HelloWorldMemoryDAO.class);
         dao.insert(new HelloDTO(1000L, "HelloWorldTransferFromMemoryToFileBO 1", new Date()));
         dao.insert(new HelloDTO(1001L, "HelloWorldTransferFromMemoryToFileBO 2", new Date()));
         return dao.findAll();

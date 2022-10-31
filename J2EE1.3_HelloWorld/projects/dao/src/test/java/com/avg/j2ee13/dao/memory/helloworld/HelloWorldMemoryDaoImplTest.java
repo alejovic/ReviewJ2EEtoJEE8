@@ -47,7 +47,7 @@ public class HelloWorldMemoryDaoImplTest extends MockObjectTestCase {
         locator = ServiceLocator.getInstance();
         HashMap parameters = new HashMap();
         parameters.put(DAOParameters.PARAM_SERVICE_LOCATOR, locator);
-        daoFactory = new MemoryDAOFactory().createDAO(HelloWorldMemoryDAO.class, parameters);
+        daoFactory = new MemoryDAOFactory().createDAO(HelloWorldMemoryDAO.class);
 
     }
 

@@ -6,8 +6,6 @@ import com.avg.j2ee13.dao.memory.MemoryDAOFactory;
 import com.avg.j2ee13.util.localization.LocalizationException;
 import com.avg.j2ee13.util.localization.ServiceLocator;
 
-import java.util.Map;
-
 /**
  * Simple Factory -> Factory Method Design Pattern
  * <p>

@@ -4,6 +4,7 @@ import com.avg.j2ee13.dao.DAOException;
 import com.avg.j2ee13.dao.database.DatabaseDAO;
 import com.avg.j2ee13.dto.BaseDTO;
 import com.avg.j2ee13.dto.HelloDTO;
+import com.avg.j2ee13.util.localization.ServiceLocator;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +12,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Simple Factory -> Factory Method Design Pattern
@@ -19,8 +19,8 @@ import java.util.Map;
  */
 public class HelloWorldDatabaseDAO extends DatabaseDAO {
 
-    public HelloWorldDatabaseDAO(final Map parameters) throws DAOException {
-        super(parameters);
+    protected HelloWorldDatabaseDAO(ServiceLocator locator) {
+        super(locator);
     }
 
     public BaseDTO insert(BaseDTO baseDTO) throws DAOException {

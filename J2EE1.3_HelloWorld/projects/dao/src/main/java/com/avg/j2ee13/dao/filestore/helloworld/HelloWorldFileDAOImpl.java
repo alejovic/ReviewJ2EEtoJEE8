@@ -6,6 +6,7 @@ import com.avg.j2ee13.dto.BaseDTO;
 import com.avg.j2ee13.dto.HelloDTO;
 import com.avg.j2ee13.util.DateUtils;
 import com.avg.j2ee13.util.StringUtils;
+import com.avg.j2ee13.util.localization.ServiceLocator;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -14,7 +15,6 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 /**
  * Simple Factory -> Factory Method Design Pattern
@@ -24,8 +24,8 @@ public class HelloWorldFileDAOImpl extends FileBaseDAO {
 
     private static final String FILE = "helloworld.txt";
 
-    public HelloWorldFileDAOImpl(final Map parameters) throws DAOException {
-        super(parameters);
+    protected HelloWorldFileDAOImpl(ServiceLocator locator) {
+        super(locator);
     }
 
     public String getFileName() {

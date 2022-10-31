@@ -1,13 +1,12 @@
 package com.avg.j2ee13.dao.memory;
 
-import com.avg.j2ee13.dao.DAOException;
 import com.avg.j2ee13.dao.GenericAbstractDAO;
+import com.avg.j2ee13.util.localization.ServiceLocator;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 public abstract class MemoryBaseDAO extends GenericAbstractDAO {
 
@@ -15,12 +14,8 @@ public abstract class MemoryBaseDAO extends GenericAbstractDAO {
 
     private List data = new LinkedList();
 
-    protected MemoryBaseDAO(final Map parameters) throws DAOException {
-        super(parameters);
-    }
-
-    protected void initParameters(Map parameters) {
-        // no extra-parameters
+    protected MemoryBaseDAO(ServiceLocator locator) {
+        super(locator);
     }
 
     protected List getData() {

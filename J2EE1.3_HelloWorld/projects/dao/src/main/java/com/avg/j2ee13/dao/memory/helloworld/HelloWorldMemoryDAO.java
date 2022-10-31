@@ -3,9 +3,9 @@ package com.avg.j2ee13.dao.memory.helloworld;
 import com.avg.j2ee13.dao.DAOException;
 import com.avg.j2ee13.dao.memory.MemoryBaseDAO;
 import com.avg.j2ee13.dto.BaseDTO;
+import com.avg.j2ee13.util.localization.ServiceLocator;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Simple Factory -> Factory Method Design Pattern
@@ -13,8 +13,9 @@ import java.util.Map;
  */
 public class HelloWorldMemoryDAO extends MemoryBaseDAO {
 
-    public HelloWorldMemoryDAO(final Map parameters) throws DAOException {
-        super(parameters);
+
+    protected HelloWorldMemoryDAO(ServiceLocator locator) {
+        super(locator);
     }
 
     public BaseDTO insert(BaseDTO baseDTO) throws DAOException {

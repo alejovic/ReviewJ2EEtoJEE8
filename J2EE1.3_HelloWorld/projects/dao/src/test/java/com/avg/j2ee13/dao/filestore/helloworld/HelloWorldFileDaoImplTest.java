@@ -46,9 +46,9 @@ public class HelloWorldFileDaoImplTest extends MockObjectTestCase {
         parameters.put(DAOParameters.PARAM_SERVICE_LOCATOR, locator);
 
         GenericDAOFactory genericDAOFactory = DAOFactoryMaker.getInstance().createDefaultDAOFactory();
-        defaultDaoFactory = genericDAOFactory.createDAO(HelloWorldFileDAOImpl.class, parameters);
+        defaultDaoFactory = genericDAOFactory.createDAO(HelloWorldFileDAOImpl.class);
 
-        daoFactory = new FileDAOFactory().createDAO(HelloWorldFileDAOImpl.class, parameters);
+        daoFactory = new FileDAOFactory().createDAO(HelloWorldFileDAOImpl.class);
 
     }
 

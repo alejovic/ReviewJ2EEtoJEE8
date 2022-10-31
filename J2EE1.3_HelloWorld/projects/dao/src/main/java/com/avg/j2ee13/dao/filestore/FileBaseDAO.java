@@ -4,6 +4,7 @@ import com.avg.j2ee13.dao.DAOException;
 import com.avg.j2ee13.dao.GenericAbstractDAO;
 import com.avg.j2ee13.dto.BaseDTO;
 import com.avg.j2ee13.util.DateUtils;
+import com.avg.j2ee13.util.localization.ServiceLocator;
 
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
@@ -18,8 +19,8 @@ public abstract class FileBaseDAO extends GenericAbstractDAO {
     protected static final String DEFAULT_LINE_SEPARATOR = ";";
     protected File dataFile;
 
-    protected FileBaseDAO(final Map parameters) throws DAOException {
-        super(parameters);
+    protected FileBaseDAO(ServiceLocator locator) {
+        super(locator);
     }
 
     protected void initParameters(Map parameters) throws DAOException {
