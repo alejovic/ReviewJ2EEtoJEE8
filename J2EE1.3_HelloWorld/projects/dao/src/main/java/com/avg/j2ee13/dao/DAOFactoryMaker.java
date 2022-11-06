@@ -13,6 +13,11 @@ import com.avg.j2ee13.util.localization.ServiceLocator;
  */
 public class DAOFactoryMaker {
 
+    public static final int FACTORY_LDAP = 1;
+    public static final int FACTORY_BD = 2;
+    public static final int FACTORY_MEMORY = 3;
+    public static final int FACTORY_FILE_STORE = 4;
+
     private static DAOFactoryMaker instance;
 
     private DAOFactoryMaker() {
@@ -37,13 +42,13 @@ public class DAOFactoryMaker {
 
     public GenericDAOFactory createDAOFactory(final int factory) throws DAOException {
         switch (factory) {
-            case DAOParameters.FACTORY_BD:
+            case FACTORY_BD:
                 return new DatabaseDAOFactory();
-            case DAOParameters.FACTORY_MEMORY:
+            case FACTORY_MEMORY:
                 return new MemoryDAOFactory();
-            case DAOParameters.FACTORY_FILE_STORE:
+            case FACTORY_FILE_STORE:
                 return new FileDAOFactory();
-            case DAOParameters.FACTORY_LDAP:
+            case FACTORY_LDAP:
             default:
                 throw new DAOException(DAOException.DAO_FACTORY_CLASS, "Not implemented");
         }

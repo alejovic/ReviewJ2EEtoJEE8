@@ -1,22 +1,26 @@
-package com.avg.j2ee13.bo;
+package com.avg.j2ee13.bo.implementations;
 
+import com.avg.j2ee13.bo.BOException;
 import com.avg.j2ee13.dao.DAOClassList;
 import com.avg.j2ee13.dao.DAOException;
 import com.avg.j2ee13.dao.GenericDAOFactory;
 import com.avg.j2ee13.dao.IGenericDAO;
 import com.avg.j2ee13.dto.HelloDTO;
 
-public class IHelloWorldBusinessImpl {
+import java.util.Date;
+
+public class HelloWorldBO {
 
     private GenericDAOFactory daoSourceFactory;
 
-    public IHelloWorldBusinessImpl(GenericDAOFactory daoSourceFactory) {
+    public HelloWorldBO(GenericDAOFactory daoSourceFactory) {
         this.daoSourceFactory = daoSourceFactory;
     }
 
     public HelloDTO storeMessage(String message) throws BOException {
         HelloDTO dto = new HelloDTO();
         dto.setMessage(message);
+        dto.setDateOfCreation(new Date());
         try {
             IGenericDAO dao = this.daoSourceFactory.createDAO(DAOClassList.HelloWorld);
             dao.insert(dto);

@@ -21,8 +21,8 @@ public class HelloWorldTransferFromMemoryToFileBO implements IHelloWorldTransfer
 
     public HelloWorldTransferFromMemoryToFileBO() throws BOException {
         try {
-            this.daoSourceFactory = DAOFactoryMaker.getInstance().createDAOFactory(DAOParameters.FACTORY_MEMORY);
-            this.daoTargetFactory = DAOFactoryMaker.getInstance().createDAOFactory(DAOParameters.FACTORY_FILE_STORE);
+            this.daoSourceFactory = DAOFactoryMaker.getInstance().createDAOFactory(DAOFactoryMaker.FACTORY_MEMORY);
+            this.daoTargetFactory = DAOFactoryMaker.getInstance().createDAOFactory(DAOFactoryMaker.FACTORY_FILE_STORE);
             logger.debug("HelloWorldTransferFromMemoryToFileBO.daoSourceFactory -> " + daoSourceFactory);
             logger.debug("HelloWorldTransferFromMemoryToFileBO.daoTargetFactory -> " + daoTargetFactory);
         } catch (DAOException e) {

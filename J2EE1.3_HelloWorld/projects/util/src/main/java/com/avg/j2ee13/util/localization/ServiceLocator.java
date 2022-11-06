@@ -24,7 +24,7 @@ public class ServiceLocator {
     protected static final Log logger = LogFactory.getLog(ServiceLocator.class);
 
     private static final String ROOT_APPLICATION_NAME = "app";
-
+    public static final String FILE_APP_CONFIGURATION = ROOT_APPLICATION_NAME + ".configuration.properties";
     private static final String P_EJB_FILE_CONFIGURATION = ROOT_APPLICATION_NAME + ".jndi.file";
     private static final String P_EJB_CTX_INITIAL_CONTEXT_FACTORY = ROOT_APPLICATION_NAME + "." + Context.INITIAL_CONTEXT_FACTORY;
     private static final String P_EJB_CTX_PROVIDER_URL = ROOT_APPLICATION_NAME + "." + Context.PROVIDER_URL;
@@ -32,20 +32,15 @@ public class ServiceLocator {
     private static final String P_EJB_CTX_SECURITY_CREDENTIALS = ROOT_APPLICATION_NAME + "." + Context.SECURITY_CREDENTIALS;
     private static final String P_EJB_CTX_SECURITY_AUTHENTICATION = ROOT_APPLICATION_NAME + "." + Context.SECURITY_AUTHENTICATION;
     private static final String P_EJB_CTX_SECURITY_PROTOCOL = ROOT_APPLICATION_NAME + "." + Context.SECURITY_PROTOCOL;
-
     private static final String P_COMP_NAME_LOCAL = ROOT_APPLICATION_NAME + "java.naming.prefix.local";
     private static final String P_COMP_NAME_REMOTE = ROOT_APPLICATION_NAME + "java.naming.prefix.remote";
     private static final String P_APP_DATASOURCE = ROOT_APPLICATION_NAME + ".java.naming.datasource";
-
     private static final String P_DB_USER = ROOT_APPLICATION_NAME + ".bd.user";
     private static final String P_DB_PASSWORD = ROOT_APPLICATION_NAME + ".bd.password";
     private static final String P_DB_URL = ROOT_APPLICATION_NAME + ".bd.url";
     private static final String P_DB_DRIVER = ROOT_APPLICATION_NAME + ".bd.driver";
-    private static final String P_DAO_FACTORY= ROOT_APPLICATION_NAME + ".dao.factory";
+    private static final String P_DAO_FACTORY = ROOT_APPLICATION_NAME + ".dao.factory";
     private static final String P_DAO_FILE_STORE_LOCATION = ROOT_APPLICATION_NAME + ".dao.filestore.path";
-
-    public static final String FILE_APP_CONFIGURATION = ROOT_APPLICATION_NAME + ".configuration.properties";
-
     private static ServiceLocator instance;
     private HashMap services = new HashMap();
     private InitialContext initialContext;
@@ -240,15 +235,15 @@ public class ServiceLocator {
         return PropertiesConfiguration.getInstance(jndiPropertiesFile);
     }
 
-    public String getDAOFileDataSource(){
+    public String getDAOFileDataSource() {
         return getAppConfiguration().getProperty(P_DAO_FILE_STORE_LOCATION);
     }
 
-    public String getDAODBDataSource(){
+    public String getDAODBDataSource() {
         return getJndiConfiguration().getProperty(P_APP_DATASOURCE);
     }
 
-    public int getDAOFactory(){
+    public int getDAOFactory() {
         return getAppConfiguration().getIntProperty(P_DAO_FACTORY);
     }
 }

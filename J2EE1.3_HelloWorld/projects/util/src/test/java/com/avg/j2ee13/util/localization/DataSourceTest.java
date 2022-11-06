@@ -25,6 +25,13 @@ public class DataSourceTest extends MockObjectTestCase {
 
     ServiceLocator locator;
 
+    public static void main(String[] args) throws Exception {
+        DataSourceTest test = new DataSourceTest();
+        test.setUp();
+        test._test_DataSource();
+        test._test_Connection();
+    }
+
     public void test_dummy() {
         assertEquals(1, 1);
     }
@@ -108,13 +115,6 @@ public class DataSourceTest extends MockObjectTestCase {
             ex.printStackTrace();
             assertEquals(null, ex.getMessage());
         }
-    }
-
-    public static void main(String[] args) throws Exception {
-        DataSourceTest test = new DataSourceTest();
-        test.setUp();
-        test._test_DataSource();
-        test._test_Connection();
     }
 
 }

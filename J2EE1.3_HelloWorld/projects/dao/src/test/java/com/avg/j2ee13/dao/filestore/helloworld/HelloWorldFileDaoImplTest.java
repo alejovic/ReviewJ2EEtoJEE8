@@ -9,7 +9,6 @@ import org.jmock.MockObjectTestCase;
 
 import java.net.URL;
 import java.util.Date;
-import java.util.HashMap;
 
 /**
  * Junit 3.8.2 http://dev.cs.ovgu.de/java/junit/javadoc/junit/framework/TestCase.html
@@ -41,14 +40,12 @@ public class HelloWorldFileDaoImplTest extends MockObjectTestCase {
         System.setProperty(ServiceLocator.FILE_APP_CONFIGURATION, configurationUrl.getFile());
 
         locator = ServiceLocator.getInstance();
-        HashMap parameters = new HashMap();
-        parameters.put(DAOParameters.PARAM_SERVICE_LOCATOR, locator);
 
         GenericDAOFactory genericDAOFactory = DAOFactoryMaker.getInstance().createDefaultDAOFactory();
         defaultDaoFactory = genericDAOFactory.createDAO(DAOClassList.HelloWorld);
 
         daoFactory = DAOFactoryMaker.getInstance()
-                .createDAOFactory(DAOParameters.FACTORY_FILE_STORE).createDAO(DAOClassList.HelloWorld);
+                .createDAOFactory(DAOFactoryMaker.FACTORY_FILE_STORE).createDAO(DAOClassList.HelloWorld);
 
     }
 

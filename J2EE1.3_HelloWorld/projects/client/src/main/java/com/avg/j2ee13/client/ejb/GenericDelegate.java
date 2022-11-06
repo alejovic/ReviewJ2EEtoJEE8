@@ -49,6 +49,7 @@ public abstract class GenericDelegate {
     }
 
     public abstract Class getHomeClass();
+
     public abstract String getEJBName();
 
     public String getEJBService() {

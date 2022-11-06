@@ -4,6 +4,9 @@ import java.util.Date;
 
 public class HelloDTO extends BaseDTO {
 
+    private String message;
+    private Date dateOfCreation;
+
     public HelloDTO() {
     }
 
@@ -12,13 +15,9 @@ public class HelloDTO extends BaseDTO {
         this.message = message;
         this.dateOfCreation = dateOfCreation;
     }
-
     public HelloDTO(String message) {
         this.message = message;
     }
-
-    private String message;
-    private Date dateOfCreation;
 
     public String getMessage() {
         return message;

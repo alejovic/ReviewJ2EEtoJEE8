@@ -2,8 +2,8 @@ package com.avg.j2ee13.client.ejb;
 
 import com.avg.j2ee13.bo.interfaces.IHelloWorldBusiness;
 import com.avg.j2ee13.ejb.facade.HelloWorldFacade;
-import com.avg.j2ee13.ejb.service.HelloWorldLocalHome;
 import com.avg.j2ee13.ejb.facade.HelloWorldFacadeHome;
+import com.avg.j2ee13.ejb.service.HelloWorldLocalHome;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 

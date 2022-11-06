@@ -10,7 +10,8 @@ public class StringUtils {
 
     private static final String DEFAULT_SEPARATOR = ";";
 
-    private StringUtils(){}
+    private StringUtils() {
+    }
 
     // public String[] split(String regex) was introduced in Java 1.4
     public static String[] split(String string) {
@@ -31,7 +32,7 @@ public class StringUtils {
     public static String join(String[] string, String delimeter) {
         StringBuffer buffer = new StringBuffer();
 
-        for(int i = 0; i < string.length; ++i) {
+        for (int i = 0; i < string.length; ++i) {
             buffer.append(string[i]);
             buffer.append(delimeter);
         }
@@ -47,7 +48,7 @@ public class StringUtils {
             StringBuffer result = new StringBuffer();
 
             int lastSwapIndex;
-            for(lastSwapIndex = 0; swapIndex >= 0; swapIndex = source.indexOf(original, lastSwapIndex)) {
+            for (lastSwapIndex = 0; swapIndex >= 0; swapIndex = source.indexOf(original, lastSwapIndex)) {
                 result.append(source.substring(lastSwapIndex, swapIndex));
                 result.append(newDelimeter);
                 lastSwapIndex = swapIndex + 1;
@@ -69,7 +70,7 @@ public class StringUtils {
             StringBuffer result = new StringBuffer();
 
             int lastSwapIndex;
-            for(lastSwapIndex = 0; swapIndex >= 0; swapIndex = source.indexOf(original, lastSwapIndex)) {
+            for (lastSwapIndex = 0; swapIndex >= 0; swapIndex = source.indexOf(original, lastSwapIndex)) {
                 result.append(source.substring(lastSwapIndex, swapIndex));
                 result.append(newDelimeter);
                 lastSwapIndex = swapIndex + original.length();
@@ -86,7 +87,7 @@ public class StringUtils {
     public static ByteString[] toByteString(String[] strings) {
         ByteString[] byteStrings = new ByteString[strings.length];
 
-        for(int i = 0; i < byteStrings.length; ++i) {
+        for (int i = 0; i < byteStrings.length; ++i) {
             if (strings[i] != null) {
                 byteStrings[i] = new ByteString(strings[i]);
             }
@@ -99,7 +100,7 @@ public class StringUtils {
         ByteString[] byteStrings = new ByteString[collection.size()];
         Iterator iterator = collection.iterator();
 
-        for(int i = 0; iterator.hasNext(); ++i) {
+        for (int i = 0; iterator.hasNext(); ++i) {
             Object object = iterator.next();
             if (object != null) {
                 byteStrings[i] = new ByteString(object.toString());
@@ -112,7 +113,7 @@ public class StringUtils {
     public static int getMatchedEndLength(String a, String b) {
         int size = a.length() > b.length() ? b.length() : a.length();
 
-        for(int i = 0; i < size; ++i) {
+        for (int i = 0; i < size; ++i) {
             if (a.charAt(a.length() - i - 1) != b.charAt(b.length() - i - 1)) {
                 return i;
             }
@@ -124,7 +125,7 @@ public class StringUtils {
     public static int getMatchesIn(String content, String match) {
         int matchPos = 0;
 
-        for(int i = 0; i < content.length(); ++i) {
+        for (int i = 0; i < content.length(); ++i) {
             if (matchPos == match.length()) {
                 return matchPos;
             }
@@ -140,7 +141,7 @@ public class StringUtils {
     public static int getMatchesInBackwards(String content, String match) {
         int matchPos = match.length() - 1;
 
-        for(int i = content.length() - 1; i >= 0; --i) {
+        for (int i = content.length() - 1; i >= 0; --i) {
             if (matchPos == -1) {
                 return match.length();
             }

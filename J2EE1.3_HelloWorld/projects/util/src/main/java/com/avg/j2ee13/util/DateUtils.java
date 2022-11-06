@@ -8,10 +8,10 @@ import java.util.Locale;
 
 public class DateUtils {
 
+    private static final String[] formats = {"yyyy-MM-dd HH:mm:ss.S"};
+
     private DateUtils() {
     }
-
-    private static final String[] formats = {"yyyy-MM-dd HH:mm:ss.S"};
 
     public static Date toDate(String s, Locale locale) throws ParseException {
         return toDate(s, new SimpleDateFormat(formats[0], locale));

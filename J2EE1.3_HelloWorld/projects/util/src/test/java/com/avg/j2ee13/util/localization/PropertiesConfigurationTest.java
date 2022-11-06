@@ -13,8 +13,14 @@ public class PropertiesConfigurationTest extends MockObjectTestCase {
     PropertiesConfiguration jndiConfiguration;
     PropertiesConfiguration appConfiguration;
 
-    public void test_dummy(){
-        assertEquals(1,1);
+    public static void main(String[] args) throws Exception {
+        PropertiesConfigurationTest test = new PropertiesConfigurationTest();
+        test.setUp();
+        test._test_Configuration();
+    }
+
+    public void test_dummy() {
+        assertEquals(1, 1);
     }
 
     public void setUp() throws Exception {
@@ -42,12 +48,6 @@ public class PropertiesConfigurationTest extends MockObjectTestCase {
         assertEquals(appConfiguration.getProperty("app.property1"), "This is a property from the file");
         System.out.println("jndiConfiguration:: app.java.naming.factory.initial - " + jndiConfiguration.getProperty("app.java.naming.factory.initial"));
         assertNotNull(jndiConfiguration.getProperty("app.java.naming.factory.initial"));
-    }
-
-    public static void main(String[] args) throws Exception {
-        PropertiesConfigurationTest test = new PropertiesConfigurationTest();
-        test.setUp();
-        test._test_Configuration();
     }
 
 }

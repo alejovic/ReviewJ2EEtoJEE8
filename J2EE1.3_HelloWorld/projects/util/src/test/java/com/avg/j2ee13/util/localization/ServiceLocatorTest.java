@@ -15,6 +15,12 @@ public class ServiceLocatorTest extends MockObjectTestCase {
 
     ServiceLocator locator;
 
+    public static void main(String[] args) throws Exception {
+        ServiceLocatorTest test = new ServiceLocatorTest();
+        test.setUp();
+        test._test_ServiceLocator();
+    }
+
     public void test_dummy() {
         assertEquals(1, 1);
     }
@@ -49,12 +55,6 @@ public class ServiceLocatorTest extends MockObjectTestCase {
         } catch (Exception ex) {
             assertEquals(null, ex.getMessage());
         }
-    }
-
-    public static void main(String[] args) throws Exception {
-        ServiceLocatorTest test = new ServiceLocatorTest();
-        test.setUp();
-        test._test_ServiceLocator();
     }
 
 }
