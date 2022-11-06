@@ -14,6 +14,7 @@ public class HelloWorldTransferBO {
     protected static final Log logger = LogFactory.getLog(HelloWorldTransferBO.class);
 
     public void transferData(IHelloWorldTransferStrategyBO transferStrategy) throws BOException {
+        logger.debug("HelloWorldTransferBO.transferData strategy -> " + transferStrategy);
         transferStrategy.transferMessage();
     }
 

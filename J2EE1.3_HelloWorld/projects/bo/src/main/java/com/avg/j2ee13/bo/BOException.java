@@ -8,7 +8,8 @@ import java.io.Serializable;
 
 public class BOException extends Exception implements Serializable {
 
-    public static final String BO_ERROR = "BO_ERROR";
+    public static final String BO_TRANSFER_ERROR = "BO_TRANSFER_ERROR";
+    public static final String BO_ERROR_01 = "BO_ERROR_01";
 
     private final transient Log logger = LogFactory.getLog(this.getClass());
 

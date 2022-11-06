@@ -1,5 +1,6 @@
 package com.avg.j2ee13.dao.filestore;
 
+import com.avg.j2ee13.dao.DAOClassList;
 import com.avg.j2ee13.dao.DAOException;
 import com.avg.j2ee13.dao.GenericDAOFactory;
 import com.avg.j2ee13.dao.IGenericDAO;
@@ -11,9 +12,12 @@ import com.avg.j2ee13.dao.IGenericDAO;
  */
 public final class FileDAOFactory extends GenericDAOFactory {
 
-    public IGenericDAO createDAO(Class clazz) throws DAOException {
-        return createGenericDAO(FileBaseDAO.class, clazz);
-    }
+    private final static String DAO_PACKAGE_BASE = "com.avg.j2ee13.dao.filestore.implementations.";
+    private final static String DAO_SUFFIX_BASE = "FileDAO";
 
+    public IGenericDAO createDAO(DAOClassList daoName) throws DAOException {
+        final String daoClassLocation = DAO_PACKAGE_BASE + daoName + DAO_SUFFIX_BASE;
+        return createGenericDAO(FileBaseDAO.class, daoClassLocation);
+    }
 
 }

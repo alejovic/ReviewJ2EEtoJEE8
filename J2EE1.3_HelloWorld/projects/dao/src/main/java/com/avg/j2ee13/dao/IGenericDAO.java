@@ -6,13 +6,13 @@ import java.util.List;
 
 public interface IGenericDAO {
 
-    public abstract BaseDTO insert(BaseDTO baseDTO) throws DAOException;
+    BaseDTO insert(BaseDTO baseDTO) throws DAOException;
 
-    public abstract void update(BaseDTO baseDTO) throws DAOException;
+    void update(BaseDTO baseDTO) throws DAOException;
 
-    public abstract void delete(BaseDTO baseDTO) throws DAOException;
+    void delete(BaseDTO baseDTO) throws DAOException;
 
-    public abstract List findAll() throws DAOException;
+    List findAll() throws DAOException;
 
-    public abstract BaseDTO findById(long id) throws DAOException;
+    BaseDTO findById(long id) throws DAOException;
 }

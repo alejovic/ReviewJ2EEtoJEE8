@@ -1,7 +1,7 @@
 package com.avg.j2ee13.dao.memory.helloworld;
 
+import com.avg.j2ee13.dao.DAOClassList;
 import com.avg.j2ee13.dao.DAOException;
-import com.avg.j2ee13.dao.DAOParameters;
 import com.avg.j2ee13.dao.IGenericDAO;
 import com.avg.j2ee13.dao.memory.MemoryDAOFactory;
 import com.avg.j2ee13.dto.HelloDTO;
@@ -13,7 +13,6 @@ import org.jmock.MockObjectTestCase;
 
 import java.net.URL;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -29,7 +28,7 @@ public class HelloWorldMemoryDaoImplTest extends MockObjectTestCase {
     public static void main(String[] args) throws Exception {
         HelloWorldMemoryDaoImplTest test = new HelloWorldMemoryDaoImplTest();
         test.setUp();
-        test.test_delete();
+        test.test_insert();
     }
 
     public void test_dummy() {
@@ -45,9 +44,8 @@ public class HelloWorldMemoryDaoImplTest extends MockObjectTestCase {
         System.setProperty(ServiceLocator.FILE_APP_CONFIGURATION, configurationUrl.getFile());
 
         locator = ServiceLocator.getInstance();
-        HashMap parameters = new HashMap();
-        parameters.put(DAOParameters.PARAM_SERVICE_LOCATOR, locator);
-        daoFactory = new MemoryDAOFactory().createDAO(HelloWorldMemoryDAO.class);
+
+        daoFactory = new MemoryDAOFactory().createDAO(DAOClassList.HelloWorld);
 
     }
 

@@ -12,25 +12,27 @@ import java.lang.reflect.Method;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 public abstract class FileBaseDAO extends GenericAbstractDAO {
 
     protected static final String DEFAULT_LINE_SEPARATOR = ";";
     protected File dataFile;
 
-    protected FileBaseDAO(ServiceLocator locator) {
+    protected FileBaseDAO(ServiceLocator locator) throws DAOException {
         super(locator);
+        init();
     }
 
-    protected void initParameters(Map parameters) throws DAOException {
-        dataFile = new File(locator.getDAOFileDataSource() + File.separator + getFileName());
+    protected void init() throws DAOException {
         try {
+            dataFile = new File(locator.getDAOFileDataSource() + File.separator + getFileName());
             if (dataFile.createNewFile()) {
                 logger.info("FileBaseDAO A new file has been created -> " + dataFile.getAbsolutePath());
             }
         } catch (IOException e) {
             throw new DAOException(DAOException.DAO_NO_FILE, e.getMessage(), e);
+        } finally {
+            logger.info("FileBaseDAO the dataFile is located at -> " + dataFile.getAbsolutePath());
         }
     }
 

@@ -1,4 +1,4 @@
-package com.avg.j2ee13.dao.filestore.helloworld;
+package com.avg.j2ee13.dao.filestore.implementations;
 
 import com.avg.j2ee13.dao.DAOException;
 import com.avg.j2ee13.dao.filestore.FileBaseDAO;
@@ -20,11 +20,11 @@ import java.util.Locale;
  * Simple Factory -> Factory Method Design Pattern
  * FileDAO Concrete implementation
  */
-public class HelloWorldFileDAOImpl extends FileBaseDAO {
+public class HelloWorldFileDAO extends FileBaseDAO {
 
     private static final String FILE = "helloworld.txt";
 
-    protected HelloWorldFileDAOImpl(ServiceLocator locator) {
+    public HelloWorldFileDAO(ServiceLocator locator) throws DAOException {
         super(locator);
     }
 

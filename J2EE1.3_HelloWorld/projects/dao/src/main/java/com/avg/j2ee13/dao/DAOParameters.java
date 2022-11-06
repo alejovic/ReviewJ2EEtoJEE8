@@ -8,6 +8,8 @@ public final class DAOParameters {
     public static final int FACTORY_MEMORY = 3;
     public static final int FACTORY_FILE_STORE = 4;
 
+    public static final String PARAM_DAO_CLASS_HELLOWORLD = "HelloWorld";
+
     private DAOParameters() {
     }
 }

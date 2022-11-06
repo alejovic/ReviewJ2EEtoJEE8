@@ -1,4 +1,4 @@
-package com.avg.j2ee13.dao.memory.helloworld;
+package com.avg.j2ee13.dao.memory.implementations;
 
 import com.avg.j2ee13.dao.DAOException;
 import com.avg.j2ee13.dao.memory.MemoryBaseDAO;
@@ -13,8 +13,7 @@ import java.util.List;
  */
 public class HelloWorldMemoryDAO extends MemoryBaseDAO {
 
-
-    protected HelloWorldMemoryDAO(ServiceLocator locator) {
+    public HelloWorldMemoryDAO(ServiceLocator locator) {
         super(locator);
     }
 

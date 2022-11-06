@@ -1,4 +1,4 @@
-package com.avg.j2ee13.dao.database.helloworld;
+package com.avg.j2ee13.dao.database.implementations;
 
 import com.avg.j2ee13.dao.DAOException;
 import com.avg.j2ee13.dao.database.DatabaseDAO;
@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class HelloWorldDatabaseDAO extends DatabaseDAO {
 
-    protected HelloWorldDatabaseDAO(ServiceLocator locator) {
+    public HelloWorldDatabaseDAO(ServiceLocator locator) {
         super(locator);
     }
 

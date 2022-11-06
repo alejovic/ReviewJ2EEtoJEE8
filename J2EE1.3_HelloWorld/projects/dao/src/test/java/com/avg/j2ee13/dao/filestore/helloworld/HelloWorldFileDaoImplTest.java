@@ -1,7 +1,6 @@
 package com.avg.j2ee13.dao.filestore.helloworld;
 
 import com.avg.j2ee13.dao.*;
-import com.avg.j2ee13.dao.filestore.FileDAOFactory;
 import com.avg.j2ee13.dto.HelloDTO;
 import com.avg.j2ee13.util.localization.ServiceLocator;
 import org.apache.commons.logging.Log;
@@ -26,7 +25,7 @@ public class HelloWorldFileDaoImplTest extends MockObjectTestCase {
     public static void main(String[] args) throws Exception {
         HelloWorldFileDaoImplTest test = new HelloWorldFileDaoImplTest();
         test.setUp();
-        test.test_delete();
+        test.test_insert();
     }
 
     public void test_dummy() {
@@ -46,9 +45,10 @@ public class HelloWorldFileDaoImplTest extends MockObjectTestCase {
         parameters.put(DAOParameters.PARAM_SERVICE_LOCATOR, locator);
 
         GenericDAOFactory genericDAOFactory = DAOFactoryMaker.getInstance().createDefaultDAOFactory();
-        defaultDaoFactory = genericDAOFactory.createDAO(HelloWorldFileDAOImpl.class);
+        defaultDaoFactory = genericDAOFactory.createDAO(DAOClassList.HelloWorld);
 
-        daoFactory = new FileDAOFactory().createDAO(HelloWorldFileDAOImpl.class);
+        daoFactory = DAOFactoryMaker.getInstance()
+                .createDAOFactory(DAOParameters.FACTORY_FILE_STORE).createDAO(DAOClassList.HelloWorld);
 
     }
 

@@ -7,7 +7,7 @@ import com.avg.j2ee13.util.localization.LocalizationException;
 import com.avg.j2ee13.util.localization.ServiceLocator;
 
 /**
- * Simple Factory -> Factory Method Design Pattern
+ * Simple Factory
  * <p>
  * DAO Factory Maker
  */
@@ -26,13 +26,13 @@ public class DAOFactoryMaker {
     }
 
     public GenericDAOFactory createDefaultDAOFactory() throws DAOException {
-        final int factory;
+        final int defaultFactory;
         try {
-            factory = ServiceLocator.getInstance().getDAOFactory();
+            defaultFactory = ServiceLocator.getInstance().getDAOFactory();
         } catch (LocalizationException e) {
             throw new DAOException(DAOException.DAO_INSTANCE_CLASS, e.getMessage(), e);
         }
-        return createDAOFactory(factory);
+        return createDAOFactory(defaultFactory);
     }
 
     public GenericDAOFactory createDAOFactory(final int factory) throws DAOException {
