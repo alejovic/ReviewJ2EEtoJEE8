@@ -3,6 +3,7 @@ package com.avg.j2ee13.bo.implementations;
 import com.avg.j2ee13.bo.BOException;
 import com.avg.j2ee13.dao.DAOFactoryMaker;
 import com.avg.j2ee13.dao.GenericDAOFactory;
+import com.avg.j2ee13.dto.HelloDTO;
 import com.avg.j2ee13.util.localization.PropertiesConfiguration;
 import com.avg.j2ee13.util.localization.ServiceLocator;
 import org.jmock.MockObjectTestCase;
@@ -33,10 +34,22 @@ public class HelloWorldBOTest extends MockObjectTestCase {
         daoFactory = DAOFactoryMaker.getInstance().createDAOFactory(DAOFactoryMaker.FACTORY_FILE_STORE);
     }
 
-    public void test_transfer() {
+    public void test_storeMessage() {
         HelloWorldBO bo = new HelloWorldBO(daoFactory);
         try {
             bo.storeMessage("HelloWorldBOTest");
+        } catch (BOException e) {
+            fail(e.getMessage());
+        }
+        assertEquals(1, 1);
+
+    }
+
+    public void test_getMessage() {
+        HelloWorldBO bo = new HelloWorldBO(daoFactory);
+        try {
+            HelloDTO dto = bo.getMessage(2L);
+            System.out.println(dto);
         } catch (BOException e) {
             fail(e.getMessage());
         }

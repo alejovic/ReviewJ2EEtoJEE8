@@ -15,6 +15,7 @@ public class HelloDTO extends BaseDTO {
         this.message = message;
         this.dateOfCreation = dateOfCreation;
     }
+
     public HelloDTO(String message) {
         this.message = message;
     }
@@ -37,6 +38,7 @@ public class HelloDTO extends BaseDTO {
 
     public String toString() {
         return "HelloDTO{" +
+                "id='" + getId() + '\'' +
                 "message='" + message + '\'' +
                 ", dateOfCreation=" + dateOfCreation +
                 '}';

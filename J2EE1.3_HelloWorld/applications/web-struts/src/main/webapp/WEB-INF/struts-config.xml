@@ -17,7 +17,7 @@
     </global-forwards>
 
     <action-mappings>
-        <action path="/StartForward" forward="/start.jsp" />
+        <action path="/StartForward" forward="/start.jsp"/>
 
         <action path="/StartAction" type="com.avg.j2ee13.web.actions.StartAction">
             <forward name="fwd-success" path="/helloworld.jsp"/>
@@ -33,6 +33,6 @@
         </action>
     </action-mappings>
 
-    <message-resources parameter="helloworld-struts" />
+    <message-resources parameter="helloworld-struts"/>
 
 </struts-config>

@@ -16,7 +16,7 @@ public abstract class GenericSessionFacadeBean implements SessionBean {
     private SessionContext sessionContext;
 
     public void ejbCreate() {
-        log.info("GenericSessionFacadeBean.ejbCreate ->" +this.getClass());
+        log.info("GenericSessionFacadeBean.ejbCreate ->" + this.getClass());
         String path = "/mnt/data/workspace/DEV/ReviewJ2EEtoJEE8/J2EE1.3_HelloWorld/ear/src/main/resources/";
 
         if (System.getProperty(ServiceLocator.FILE_APP_CONFIGURATION) == null) {
@@ -38,11 +38,11 @@ public abstract class GenericSessionFacadeBean implements SessionBean {
     public void ejbPassivate() throws EJBException {
     }
 
-    public void setSessionContext(SessionContext sessionContext) {
-        this.sessionContext = sessionContext;
-    }
-
     public SessionContext getSessionContext() {
         return sessionContext;
+    }
+
+    public void setSessionContext(SessionContext sessionContext) {
+        this.sessionContext = sessionContext;
     }
 }

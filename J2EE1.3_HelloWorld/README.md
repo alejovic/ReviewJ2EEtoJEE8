@@ -36,7 +36,7 @@ The J2EE 1.3 Specification lists the following components:
 
 ## Hello World [J2EE 1.3]
 
-Based on the archetype https://maven.apache.org/archetypes/maven-archetype-j2ee-simple/ with slight changes,this is a 
+Based on the archetype https://maven.apache.org/archetypes/maven-archetype-j2ee-simple/ with slight changes,this is a
 J2EE example application that follows the J2EE Blueprints series to create a J2EE enterprise application.
 
 The purpose of this application is to demonstrate the capabilities of the J2EE platform and is written
@@ -58,6 +58,7 @@ How to develop flexible, scalable, cross-plaform enterprise applications.
 How to use the Java BluePrints guidelines and patterns.
 
 Illustrate basic usage of J2EE technology with current best practices, such as:
+
 - JSF 1.1
 - MyFaces 1.1.8
 - Struts
@@ -67,7 +68,8 @@ Illustrate basic usage of J2EE technology with current best practices, such as:
 The "Hello World" example application can be deployed in OC4J [oc4j_extended_101350] and JBoss [3.2.8]
 
 --
-ay que considerar el tamaño de la aplicación para realizar una división por subsistema o directamente dividir por capa la estructura de paquetes de la aplicación. Por lo tanto, Subsistema puede ser opcional.
+ay que considerar el tamaño de la aplicación para realizar una división por subsistema o directamente dividir por capa
+la estructura de paquetes de la aplicación. Por lo tanto, Subsistema puede ser opcional.
 
 Donde CAPA:
 

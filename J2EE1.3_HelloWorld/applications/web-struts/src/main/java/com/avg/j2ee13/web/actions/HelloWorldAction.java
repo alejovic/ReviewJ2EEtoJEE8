@@ -1,12 +1,10 @@
 package com.avg.j2ee13.web.actions;
 
 import com.avg.j2ee13.web.forms.HelloWorldForm;
-import com.avg.j2ee13.web.listeners.AppContextListener;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.*;
-import org.apache.struts.util.MessageResources;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

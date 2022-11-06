@@ -19,6 +19,7 @@ import java.sql.SQLException;
 public class HelloWorldServiceLocalBean extends GenericServiceLocalBean {
 
     private static final long serialVersionUID = -1L;
+
     public HelloDTO storeMessage(String message) {
         logger.info("HelloWorldSessionLocalBean.storeHello started");
         HelloDTO dto = new HelloDTO(message);

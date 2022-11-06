@@ -69,13 +69,13 @@
 
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
-<!--        <url-pattern>/faces/*</url-pattern>-->
+        <!--        <url-pattern>/faces/*</url-pattern>-->
         <url-pattern>*.jsp</url-pattern>
     </servlet-mapping>
-<!--    <servlet-mapping>-->
-<!--        <servlet-name>jsp</servlet-name>-->
-<!--        <url-pattern>*.jsf</url-pattern>-->
-<!--    </servlet-mapping>-->
+    <!--    <servlet-mapping>-->
+    <!--        <servlet-name>jsp</servlet-name>-->
+    <!--        <url-pattern>*.jsf</url-pattern>-->
+    <!--    </servlet-mapping>-->
     <servlet-mapping>
         <servlet-name>hello</servlet-name>
         <url-pattern>/hello</url-pattern>

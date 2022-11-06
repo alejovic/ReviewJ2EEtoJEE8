@@ -31,6 +31,17 @@ public class HelloWorldFacadeBeanTest extends MockObjectTestCase {
     private InitialContext context;
     private HelloWorldFacade remoteObject;
 
+    public static void main(String[] args) {
+        try {
+            HelloWorldFacadeBeanTest test = new HelloWorldFacadeBeanTest();
+            test.initContext(true);
+            test._testEJBRemote();
+            //test._testEJBLocal();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
     public void test_dummy() {
         assertEquals(1, 1);
     }
@@ -115,17 +126,6 @@ public class HelloWorldFacadeBeanTest extends MockObjectTestCase {
 
     public void test_sayHello() {
         assertEquals(1, 1);
-    }
-
-    public static void main(String[] args) {
-        try {
-            HelloWorldFacadeBeanTest test = new HelloWorldFacadeBeanTest();
-            test.initContext(true);
-            test._testEJBRemote();
-            //test._testEJBLocal();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
     }
 
 
