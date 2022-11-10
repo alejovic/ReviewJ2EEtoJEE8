@@ -1,5 +1,10 @@
 package com.avg.j2ee13.ejb.service;
 
+import com.avg.j2ee13.bo.BOException;
+import com.avg.j2ee13.bo.implementations.HelloWorldBO;
+import com.avg.j2ee13.dao.DAOException;
+import com.avg.j2ee13.dao.DAOFactoryMaker;
+import com.avg.j2ee13.dao.GenericDAOFactory;
 import com.avg.j2ee13.dto.HelloDTO;
 
 import java.sql.Connection;
@@ -19,14 +24,34 @@ import java.sql.SQLException;
 public class HelloWorldServiceLocalBean extends GenericServiceLocalBean {
 
     private static final long serialVersionUID = -1L;
+    private GenericDAOFactory daoFactory;
 
-    public HelloDTO storeMessage(String message) {
-        logger.info("HelloWorldSessionLocalBean.storeHello started");
-        HelloDTO dto = new HelloDTO(message);
-        return dto;
+    public void ejbCreate() throws BOException {
+        super.ejbCreate();
+        try {
+            daoFactory = DAOFactoryMaker.getInstance().createDAOFactory(DAOFactoryMaker.FACTORY_FILE_STORE);
+        } catch (DAOException e) {
+            throw new BOException(BOException.BO_ERROR_01, e.getMessage(), e);
+        }
     }
 
-    public HelloDTO getMessage(long id) {
+    public HelloDTO storeMessage(String message) throws BOException {
+        logger.info("HelloWorldSessionLocalBean.storeMessage started");
+        HelloWorldBO bo = new HelloWorldBO(daoFactory);
+        return bo.storeMessage(message);
+    }
+
+    public HelloDTO getMessage(long id) throws BOException {
+        return getMessageWithBO(id);
+    }
+
+    public HelloDTO getMessageWithBO(long id) throws BOException {
+        logger.info("HelloWorldSessionLocalBean.getMessageBO started");
+        HelloWorldBO bo = new HelloWorldBO(daoFactory);
+        return bo.getMessage(id);
+    }
+
+    public HelloDTO getMessageWithDataSource(long id) {
         final String QUERY = "select * from HELLOWORLD where id = ?";
         HelloDTO dto = null;
         Connection connection = null;

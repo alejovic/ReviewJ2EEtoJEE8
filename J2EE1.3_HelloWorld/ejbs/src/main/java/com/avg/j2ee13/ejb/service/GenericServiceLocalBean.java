@@ -1,5 +1,6 @@
 package com.avg.j2ee13.ejb.service;
 
+import com.avg.j2ee13.bo.BOException;
 import com.avg.j2ee13.util.localization.ServiceLocator;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -21,7 +22,7 @@ public abstract class GenericServiceLocalBean implements SessionBean {
     protected DataSource dataSource;
     protected ServiceLocator locator;
 
-    public void ejbCreate() {
+    public void ejbCreate() throws BOException {
         logger.info("GenericServiceLocalBean.ejbCreate stared.");
         try {
             locator = ServiceLocator.getInstance();

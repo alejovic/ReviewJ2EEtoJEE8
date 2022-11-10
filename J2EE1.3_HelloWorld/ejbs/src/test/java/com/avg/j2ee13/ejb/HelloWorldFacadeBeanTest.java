@@ -1,5 +1,6 @@
 package com.avg.j2ee13.ejb;
 
+import com.avg.j2ee13.bo.BOException;
 import com.avg.j2ee13.dto.HelloDTO;
 import com.avg.j2ee13.ejb.facade.HelloWorldFacade;
 import com.avg.j2ee13.ejb.facade.HelloWorldFacadeHome;
@@ -104,11 +105,11 @@ public class HelloWorldFacadeBeanTest extends MockObjectTestCase {
             String str = remoteObject.sayHello("HelloWorldFacadeBeanTest Remote");
             System.out.println(str);
         } catch (NamingException e) {
-            throw new RuntimeException(e.getMessage());
+            e.printStackTrace();
         } catch (RemoteException e) {
-            throw new RuntimeException(e.getMessage());
+            e.printStackTrace();
         } catch (CreateException e) {
-            throw new RuntimeException(e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -118,9 +119,11 @@ public class HelloWorldFacadeBeanTest extends MockObjectTestCase {
             HelloDTO dto = localObject.storeMessage("HelloWorldFacadeBeanTest Local");
             System.out.println(dto.getMessage());
         } catch (NamingException e) {
-            throw new RuntimeException(e.getMessage());
+            e.printStackTrace();
         } catch (CreateException e) {
-            throw new RuntimeException(e.getMessage());
+            e.printStackTrace();
+        } catch (BOException e) {
+            e.printStackTrace();
         }
     }
 

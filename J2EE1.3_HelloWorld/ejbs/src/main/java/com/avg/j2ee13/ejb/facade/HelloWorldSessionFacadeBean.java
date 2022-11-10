@@ -1,6 +1,6 @@
 package com.avg.j2ee13.ejb.facade;
 
-import com.avg.j2ee13.bo.interfaces.IHelloWorldBusiness;
+import com.avg.j2ee13.bo.BOException;
 import com.avg.j2ee13.dto.HelloDTO;
 import com.avg.j2ee13.ejb.service.HelloWorldLocal;
 import com.avg.j2ee13.ejb.service.HelloWorldLocalHome;
@@ -8,6 +8,7 @@ import com.avg.j2ee13.ejb.service.JNDILocalNames;
 
 import javax.ejb.CreateException;
 import javax.naming.InitialContext;
+import java.rmi.RemoteException;
 
 /**
  * @see ejb-jar.xml
@@ -18,7 +19,7 @@ import javax.naming.InitialContext;
  * type="Stateless"
  * transaction-type="Container"
  */
-public class HelloWorldSessionFacadeBean extends GenericSessionFacadeBean implements IHelloWorldBusiness {
+public class HelloWorldSessionFacadeBean extends GenericSessionFacadeBean {
 
     private HelloWorldLocal service;
 
@@ -43,18 +44,26 @@ public class HelloWorldSessionFacadeBean extends GenericSessionFacadeBean implem
         }
     }
 
-    public String sayHello(String name) {
+    public String sayHello(String name) throws RemoteException {
         log.info("Hello from Session Facade [EJB Remote Service] -> " + name);
-        HelloDTO dto = service.storeMessage(name);
-
-        HelloDTO dto2 = service.getMessage(1L);
-        return dto2.getMessage();
+        HelloDTO dto;
+        try {
+            dto = service.storeMessage(name);
+        } catch (BOException e) {
+            throw new RemoteException(e.getMessage(), e);
+        }
+        return dto.getId() + "";
     }
 
-    public String sayHello() {
+    public String sayHello() throws RemoteException {
         log.info("Hello from Session Facade [EJB Remote Service] -> default");
-        HelloDTO dto = service.getMessage(1L);
-        return dto.getMessage();
+        HelloDTO dto;
+        try {
+            dto = service.storeMessage("default");
+        } catch (BOException e) {
+            throw new RemoteException(e.getMessage(), e);
+        }
+        return dto.getId() + "";
     }
 
 }

@@ -1,5 +1,6 @@
 package com.avg.j2ee13.web.actions;
 
+import com.avg.j2ee13.client.ejb.HelloWorldDelegate;
 import com.avg.j2ee13.web.forms.HelloWorldForm;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.logging.Log;
@@ -33,7 +34,8 @@ public class HelloWorldAction extends Action {
             return (new ActionForward(mapping.getInput()));
         }
         // invoke delegate
-
+        HelloWorldDelegate delegate = new HelloWorldDelegate();
+        delegate.sayHello(message);
 
         ActionMessages actionMessages = new ActionMessages();
         actionMessages.add("message", new ActionMessage("app.message.success", message));

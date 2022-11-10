@@ -10,6 +10,10 @@
         <description>Custom parameter</description>
     </context-param>
 
+    <listener>
+        <listener-class>com.avg.j2ee13.web.listeners.AppContextListener</listener-class>
+    </listener>
+
     <servlet>
         <servlet-name>action</servlet-name>
         <servlet-class>

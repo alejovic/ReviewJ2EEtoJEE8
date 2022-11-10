@@ -1,4 +1,4 @@
-package com.avg.j2ee13.bo.interfaces;
+package com.avg.j2ee13.client.businessinterface;
 
 /**
  * BusinessService Interface

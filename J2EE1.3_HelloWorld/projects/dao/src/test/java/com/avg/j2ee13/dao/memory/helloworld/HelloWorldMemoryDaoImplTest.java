@@ -61,10 +61,9 @@ public class HelloWorldMemoryDaoImplTest extends MockObjectTestCase {
             for (int index = 0; index < dtos.size(); index++) {
                 logger.info(dtos.get(index).toString());
             }
-
+            Assert.assertEquals(1, 1);
         } catch (DAOException e) {
             logger.error(e);
-            throw new RuntimeException();
         }
 
     }
@@ -77,7 +76,6 @@ public class HelloWorldMemoryDaoImplTest extends MockObjectTestCase {
             Assert.assertEquals(1, 1);
         } catch (DAOException e) {
             logger.error(e);
-            throw new RuntimeException();
         }
 
     }

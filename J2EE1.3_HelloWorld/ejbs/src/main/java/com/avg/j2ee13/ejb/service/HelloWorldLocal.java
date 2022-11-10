@@ -10,14 +10,15 @@ package com.avg.j2ee13.ejb.service;
  * You declare the local component interface and its methods as public.
  */
 
+import com.avg.j2ee13.bo.BOException;
 import com.avg.j2ee13.dto.HelloDTO;
 
 /**
  * Local Component Interface for HelloWorld which defines internal Business Methods
  */
 public interface HelloWorldLocal extends javax.ejb.EJBLocalObject {
-    public HelloDTO storeMessage(String message);
+    public HelloDTO storeMessage(String message) throws BOException;
 
-    public HelloDTO getMessage(long id);
+    public HelloDTO getMessage(long id) throws BOException;
 
 }

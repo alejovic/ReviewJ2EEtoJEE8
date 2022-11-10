@@ -14,7 +14,7 @@
 
     <logic:present name="bean.HelloWorld" scope="request">
         <h2>
-            Hello <bean:write name="bean.HelloWorld" property="message"/>!
+            Hi <bean:write name="bean.HelloWorld" property="message"/>!
         </h2>
     </logic:present>
 
